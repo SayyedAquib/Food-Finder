@@ -20,9 +20,7 @@ function Search() {
   const { isSimilarResDishes, city, resId, itemId, resLocation } = useSelector(
     (state) => state.toogleSlice.similarResDish
   );
-  // console.log({ isSimilarResDishes, city, resId, itemId, resLocation });
   const dispatch = useDispatch();
-  // console.log(isSimilarResDishes);
   const filterOptions = ["Restaurant", "Dishes"];
 
   const [activeBtn, setActiveBtn] = useState("Dishes");
@@ -56,11 +54,8 @@ function Search() {
       }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=null&submitAction=ENTER&selectedPLTab=dish-add&restaurantMenuUrl=${encodedPath}-rest${resId}%3Fquery%3D${searchQuery}&restaurantIdOfAddedItem=${resId}&itemAdded=${itemId}`
     );
     let res = await data.json();
-    // console.log("res", res);
-    // console.log(res?.data?.cards);
-    // console.log(res?.data?.cards[1])
+
     setSelectedResDish(res?.data?.cards[1]);
-    // console.log(res?.data?.cards[2]?.card?.card?.cards)
     setSimilarResDishes(res?.data?.cards[2]?.card?.card?.cards);
     dispatch(resetSimilarResDish());
   }
@@ -106,7 +101,6 @@ function Search() {
     if (searchQuery === "") {
       return;
     }
-    // setSearchQuery("");
     fetchDishes();
     fetchResaturantData();
   }, [searchQuery]);
@@ -117,7 +111,6 @@ function Search() {
         <i className="fi fi-rr-angle-small-left text-2xl ml-2 mt-1 absolute top-1/2 -translate-y-1/2"></i>
         <i className="fi fi-rr-search absolute top-1/2 right-0 -translate-y-1/2 mr-5"></i>
         <input
-          // onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleSearchQuery}
           className="border-2 w-full pl-8 py-3 text-xl focus:outline-none"
           type="text"
@@ -180,5 +173,3 @@ function Search() {
 
 export default Search;
 
-//https://www.swiggy.com/dapi/restaurants/search/v3?lat=18.9690247&lng=72.8205292&str=pizza&trackingId=undefined&submitAction=ENTER&selectedPLTab=dish-add&restaurantMenuUrl=%2Fcity%2Fmumbai%2Ffrancescos-pizzeria-chowpatty-rest14751%3Fquery%3Dpizza&restaurantIdOfAddedItem=14751&itemAdded=78361058
-//https://www.swiggy.com/dapi/restaurants/search/v3?lat=18.9690247&lng=72.8205292&str=&trackingId=null&submitAction=ENTER&selectedPLTab=dish-add&restaurantMenuUrl=%2Fcity%2Fmumbai%2Ffrancescos-pizzeria-kemps-corner-mahalaxmi-malabar-hill-rest14751%3Fquery%3D&restaurantIdOfAddedItem=14751&itemAdded=78361058

@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-import { CartContext } from "../context/contextApi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, deleteItem } from "../utils/cartSlice";
 import toast from "react-hot-toast";
@@ -12,20 +10,9 @@ let nonVeg =
   "https://www.kindpng.com/picc/m/151-1515155_veg-icon-png-non-veg-symbol-png-transparent.png";
 
 function Cart() {
-  // const { cartData, setCartData } = useContext(CartContext);
-  // console.log(cartData);
-
-  const navigate = useNavigate();
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const resInfo = useSelector((state) => state.cartSlice.resInfo);
-  // console.log(resInfo);
   const dispatch = useDispatch();
-  // console.log(cartData);
-  // let totalPrice = 0;
-
-  // for(let i = 0 ; i < cartData.length ; i++ ){
-  //     totalPrice = totalPrice + cartData[i].price / 100 || cartData[i].defaultPrice / 100
-  // }
 
   let totalPrice = cartData.reduce(
     (acc, curVal) => acc + curVal.price / 100 || curVal.defaultPrice / 100,
@@ -36,7 +23,6 @@ function Cart() {
     if (cartData.length > 1) {
       let newArr = [...cartData];
       newArr.splice(i, 1);
-      // setCartData(newArr);
       dispatch(deleteItem(newArr));
       toast.success("Food removed");
     } else {
@@ -49,10 +35,8 @@ function Cart() {
 
   function handleClearCart() {
     dispatch(clearCart());
-    // setCartData([]);
-    // localStorage.setItem("cartData", JSON.stringify([]));
-    // localStorage.clear();
   }
+
   function handlePlaceOrder() {
     if (!userData) {
       toast.error("login krle bhai");
@@ -110,7 +94,6 @@ function Cart() {
               description = "",
               imageId,
             }) => {
-              // const [isMore, setIsMore] = useState(false);
 
               let trimDes = description.substring(0, 138) + "...";
               return (
@@ -145,29 +128,6 @@ function Cart() {
 
                       <div className="line-clamp-2">{description}</div>
 
-                      {/* {description.length > 140 ? (
-                                                <div>
-                                                    <span className="">
-                                                        {isMore
-                                                            ? description
-                                                            : trimDes}
-                                                    </span>
-                                                    <button
-                                                        className="font-bold"
-                                                        onClick={() =>
-                                                            setIsMore(!isMore)
-                                                        }
-                                                    >
-                                                        {isMore
-                                                            ? "less"
-                                                            : "more"}
-                                                    </button>
-                                                </div>
-                                            ) : (
-                                                <span className="">
-                                                    {description}
-                                                </span>
-                                            )} */}
                     </div>
                     <div className="w-[40%] md:w-[20%] relative h-full">
                       <img

@@ -38,7 +38,6 @@ function Dish({
 
   function handleSameRes() {
     if (cartResId == id || !cartResId) {
-      // dispatch(toggleIsSimilarResDishes());
       dispatch(
         setSimilarResDish({
           isSimilarResDishes: true,

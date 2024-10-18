@@ -24,12 +24,9 @@ function Head() {
     },
   ];
 
-  //    const {visible , setVisible} = useContext(Visibility)
-  //
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const userData = useSelector((state) => state.authSlice.userData);
 
-  //access data from redux store using useSelector
   const visible = useSelector((state) => state.toogleSlice.searchBarToogle);
   const loginVisible = useSelector((state) => state.toogleSlice.loginToggle);
   const dispatch = useDispatch();
@@ -39,7 +36,6 @@ function Head() {
   const { setCoord } = useContext(Coordinates);
 
   function handleVisibility() {
-    // setVisible(prev => !prev)
     dispatch(toogleSearchBar());
   }
   function handleLogin() {
@@ -57,7 +53,6 @@ function Head() {
 
   async function fetchLatAndLng(id) {
     if (id == "") return;
-    // console.log(id);
     handleVisibility();
     const res = await fetch(
       `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/misc/address-recommend?place_id=${id}`
@@ -67,7 +62,6 @@ function Head() {
       lat: data.data[0].geometry.location.lat,
       lng: data.data[0].geometry.location.lng,
     });
-    // console.log(data);
     setAddress(data.data[0].formatted_address);
   }
 

@@ -18,7 +18,6 @@ function useRestaurantsData() {
       }/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
     );
     const result = await data.json();
-    // console.log(result);
     setData(result.data);
     setTopResTitle(result?.data?.cards[1]?.card?.card?.header?.title);
     setOnlineTitle(result?.data?.cards[2]?.card?.card?.title);
