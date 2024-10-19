@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
 
-function TopRestaurant({ data = [], title }) {
+function OnYourMind({ data = [] }) {
   const [value, setValue] = useState(0);
 
   function handleNext() {
-    setValue((prev) => prev + 50);
+    value >= 124 ? "" : setValue((prev) => prev + 31);
   }
 
   function handlePrev() {
-    setValue((prev) => prev - 50);
+    value <= 0 ? "" : setValue((prev) => prev - 31);
   }
 
   return (
-    <div className="mt-14 w-full">
+    <div className="">
       <div className="flex justify-between mt-5">
-        <h1 className="font-bold text-2xl">{title}</h1>
+        <h1 className="font-bold text-2xl">What's on your mind?</h1>
         <div className="flex gap-3">
           <div
             onClick={handlePrev}
@@ -49,19 +48,22 @@ function TopRestaurant({ data = [], title }) {
       </div>
 
       <div
-        className={`flex mt-4 gap-5 w-full duration-300`}
         style={{ translate: `-${value}%` }}
+        className={`flex mt-4  duration-300 `}
       >
-        {data.map(({ info, cta: { link } }) => (
-          <div className="hover:scale-95 duration-300" key={info.id}>
-            <RestaurantCard {...info} link={link} />
-          </div>
+        {data.map((item) => (
+          <img
+            key={item.id}
+            className="w-40 "
+            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${item.imageId}`}
+            alt=""
+          />
         ))}
       </div>
 
-      <hr className="border mt-10" />
+      <hr className="border" />
     </div>
   );
 }
 
-export default TopRestaurant;
+export default OnYourMind;
