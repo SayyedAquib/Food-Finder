@@ -1,67 +1,20 @@
-import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import { initializeApp } from "firebase/app";
 
-function TopRestaurant({ data = [], title }) {
-  const [value, setValue] = useState(0);
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-  function handleNext() {
-    setValue((prev) => prev + 50);
-  }
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
+};
 
-  function handlePrev() {
-    setValue((prev) => prev - 50);
-  }
+const app = initializeApp(firebaseConfig);
 
-  return (
-    <div className="mt-14 w-full">
-      <div className="flex justify-between mt-5">
-        <h1 className="font-bold text-2xl">{title}</h1>
-        <div className="flex gap-3">
-          <div
-            onClick={handlePrev}
-            className={
-              ` cursor-pointer rounded-full w-9 h-9 flex justify-center items-center ` +
-              (value <= 0 ? "bg-gray-100" : "bg-gray-200")
-            }
-          >
-            <i
-              className={
-                `fi text-2xl mt-1 fi-rr-arrow-small-left ` +
-                (value <= 0 ? "text-gray-300" : "text-gray-800")
-              }
-            ></i>
-          </div>
-          <div
-            onClick={handleNext}
-            className={
-              ` cursor-pointer rounded-full w-9 h-9 flex justify-center items-center ` +
-              (value >= 124 ? "bg-gray-100" : "bg-gray-200")
-            }
-          >
-            <i
-              className={
-                `fi text-2xl mt-1 fi-rr-arrow-small-right ` +
-                (value >= 124 ? "text-gray-300" : "text-gray-800")
-              }
-            ></i>
-          </div>
-        </div>
-      </div>
+const auth = getAuth(app);
 
-      <div
-        className={`flex mt-4 gap-5 w-full duration-300`}
-        style={{ translate: `-${value}%` }}
-      >
-        {data.map(({ info, cta: { link } }) => (
-          <div className="hover:scale-95 duration-300" key={info.id}>
-            <RestaurantCard {...info} link={link} />
-          </div>
-        ))}
-      </div>
+const provider = new GoogleAuthProvider();
 
-      <hr className="border mt-10" />
-    </div>
-  );
-}
-
-export default TopRestaurant;
+export { auth, provider };

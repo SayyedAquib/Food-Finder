@@ -1,4 +1,3 @@
-import React from "react";
 import SigninBtn from "./SigninBtn";
 
 const Login = ({ handleLogin }) => {

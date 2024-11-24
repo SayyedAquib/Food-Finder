@@ -29,4 +29,5 @@ export {
   Shimmer,
   SigninBtn,
   TopRestaurant,
+  Login,
 }
