@@ -194,7 +194,7 @@ function Head() {
                     <div className="flex items-center gap-3" key={i}>
                       {userData ? (
                         <div className="w-10 h-10 rounded-full ">
-                          <img src={userData.photo} alt="" />
+                          <img className="rounded-full" src={userData.photo} alt="" />
                         </div>
                       ) : (
                         <i

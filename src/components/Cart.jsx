@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, deleteItem } from "../utils/cartSlice";
 import toast from "react-hot-toast";
 import { toggleLogin } from "../utils/toogleSlice";
+// import { veg, nonVeg } from "../utils/links";
 
 let veg =
   "https://www.pngkey.com/png/detail/261-2619381_chitr-veg-symbol-svg-veg-and-non-veg.png";
