@@ -5,7 +5,7 @@ import Breadcrumb from "./Breadcrumb";
 import RestaurantHeader from "./RestaurantHeader";
 import DiscountSection from "./DiscountSection";
 import MenuSection from "./MenuSection";
-import { MenuShimmer } from "./Shimmer";
+import { MenuShimmer } from "./index";
 
 const RestaurantMenu = () => {
   const { id } = useParams();

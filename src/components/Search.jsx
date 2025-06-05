@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import SearchRestaurant, { withHoc } from "./SearchRestaurant";
+import SearchRestaurant from "./SearchRestaurant";
+import {withHoc} from "./index";
 import { Coordinates } from "../context/contextApi";
 import Dish from "./Dish";
 import { useDispatch, useSelector } from "react-redux";

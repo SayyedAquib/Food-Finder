@@ -11,6 +11,7 @@ import Head from "./Head";
 import Login from "./Login";
 import MenuCard from "./MenuCard";
 import MenuSection from "./MenuSection";
+import MenuShimmer from "./MenuShimmer";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
 import OnYourMind from "./onYourMind";
 import OutletInfo from "./OutletInfo";
@@ -24,6 +25,7 @@ import SigninBtn from "./SigninBtn";
 import TopPickCard from "./TopPickCard";
 import TopPicks from "./TopPicks";
 import TopRestaurant from "./TopRestaurant";
+import withHoc from "./WithHoc";
 
 export {
   AddToCartBtn,
@@ -39,6 +41,7 @@ export {
   Login,
   MenuCard,
   MenuSection,
+  MenuShimmer,
   OnlineFoodDelivey,
   OnYourMind,
   OutletInfo,
@@ -52,4 +55,5 @@ export {
   TopPickCard,
   TopPicks,
   TopRestaurant,
+  withHoc,
 };

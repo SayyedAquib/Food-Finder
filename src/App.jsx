@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Coordinates } from "./context/contextApi";
 import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
-import Shimmer from "./components/Shimmer";
+import {MenuShimmer} from "./components/index";
 
 const Head = lazy(() => import("./components/Head"));
 const Body = lazy(() => import("./components/Body"));
@@ -27,7 +27,14 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Head />}>
               <Route path="/" element={<Body />} />
-              <Route path="/restaurantMenu/:id" element={<RestaurantMenu />} />
+              <Route
+                path="/restaurantMenu/:id"
+                element={
+                  <Suspense fallback={<MenuShimmer />}>
+                    <RestaurantMenu />
+                  </Suspense>
+                }
+              />
               <Route path="/cart" element={<Cart />} />
               <Route path="/search" element={<Search />} />
               <Route path="*" element={<h1>coming soon ......</h1>} />
@@ -37,6 +44,6 @@ const App = () => {
       </div>
     </Coordinates.Provider>
   );
-}
+};
 
 export default App;
