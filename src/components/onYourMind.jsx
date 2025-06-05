@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-function OnYourMind({ data = [] }) {
+const OnYourMind = ({ data = [] }) => {
   const [value, setValue] = useState(0);
 
-  function handleNext() {
+  const handleNext = () => {
     value >= 124 ? "" : setValue((prev) => prev + 31);
-  }
+  };
 
-  function handlePrev() {
+  const handlePrev = () => {
     value <= 0 ? "" : setValue((prev) => prev - 31);
   }
 

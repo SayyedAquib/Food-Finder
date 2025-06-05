@@ -5,13 +5,13 @@ import { addUserData, removeUserData } from "../utils/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toggleLogin } from "../utils/toogleSlice";
 
-function SigninBtn() {
+const SigninBtn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.authSlice.userData);
 
-  async function handleAuth() {
+  const handleAuth = async () => {
     let data = await signInWithPopup(auth, provider);
     const userData = {
       name: data.user.displayName,
@@ -20,13 +20,13 @@ function SigninBtn() {
     dispatch(addUserData(userData));
     dispatch(toggleLogin());
     navigate("/");
-  }
+  };
 
-  async function handleLogout() {
+  const handleLogout = async () => {
     await signOut(auth);
     dispatch(removeUserData());
     dispatch(toggleLogin());
-  }
+  };
 
   return (
     <>

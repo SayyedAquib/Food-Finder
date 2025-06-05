@@ -2,14 +2,14 @@ import { addToCart } from "../utils/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-function AddToCartBtn({ info, resInfo, handleIsDiffRes }) {
+const AddToCartBtn = ({ info, resInfo, handleIsDiffRes }) => {
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const getResInfoFromLocalStore = useSelector(
     (state) => state.cartSlice.resInfo
   );
   const dispatch = useDispatch();
 
-  function handleAddToCart() {
+  const handleAddToCart = () => {
     const isAdded = cartData.find((data) => data.id === info.id);
 
     if (!isAdded) {

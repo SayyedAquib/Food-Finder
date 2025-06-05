@@ -5,7 +5,7 @@ import Dish from "./Dish";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
 
-function Search() {
+const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
@@ -25,18 +25,18 @@ function Search() {
 
   const [activeBtn, setActiveBtn] = useState("Dishes");
 
-  function handleFilterBtn(filterName) {
+  const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? activeBtn : filterName);
-  }
+  };
 
-  function handleSearchQuery(e) {
+  const handleSearchQuery = (e) => {
     let val = e.target.value;
     if (e.keyCode == 13) {
       setSearchQuery(val);
       setSelectedResDish(null);
       setDishes([]);
     }
-  }
+  };
 
   useEffect(() => {
     if (isSimilarResDishes) {
@@ -44,7 +44,7 @@ function Search() {
     }
   }, [isSimilarResDishes]);
 
-  async function fetchSimilarResDishes() {
+  const fetchSimilarResDishes = async () => {
     let pathname = `/city/${city}/${resLocation}`;
     let encodedPath = encodeURIComponent(pathname);
 
@@ -60,7 +60,7 @@ function Search() {
     dispatch(resetSimilarResDish());
   }
 
-  async function fetchDishes() {
+  const fetchDishes = async () => {
     let data = await fetch(
       `${
         import.meta.env.VITE_BASE_URL
@@ -83,7 +83,7 @@ function Search() {
     setDishes(finalData);
   }
 
-  async function fetchResaturantData() {
+  const fetchResaturantData = async () => {
     let data = await fetch(
       `${
         import.meta.env.VITE_BASE_URL

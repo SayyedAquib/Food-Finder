@@ -5,13 +5,13 @@ import { setSimilarResDish, toggleDiffRes } from "../utils/toogleSlice";
 import { clearCart } from "../utils/cartSlice";
 import { Link } from "react-router-dom";
 
-function Dish({
+const Dish = ({
   data: {
     info,
     restaurant: { info: resInfo },
     hideRestaurantDetails = false,
   },
-}) {
+}) => {
   let { imageId = "", name, price, isVeg = 0, id: itemId } = info;
   console.log(resInfo);
   let {
@@ -26,16 +26,16 @@ function Dish({
   const { id: cartResId } = useSelector((state) => state.cartSlice.resInfo);
   const dispatch = useDispatch();
 
-  function handleIsDiffRes() {
+  const handleIsDiffRes = () => {
     dispatch(toggleDiffRes());
-  }
+  };
 
-  function handleClearCart() {
+  const handleClearCart = () => {
     dispatch(clearCart());
     handleIsDiffRes();
-  }
+  };
 
-  function handleSameRes() {
+  const handleSameRes = () => {
     if (cartResId == id || !cartResId) {
       dispatch(
         setSimilarResDish({

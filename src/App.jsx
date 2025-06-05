@@ -10,7 +10,7 @@ const Search = lazy(() => import("./components/Search"));
 const Cart = lazy(() => import("./components/Cart"));
 const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
 
-function App() {
+const App = () => {
   const [coord, setCoord] = useState({ lat: 28.5355161, lng: 77.3910265 });
 
   const visible = useSelector((state) => state.toogleSlice.searchBarToogle);

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Coordinates } from "../context/contextApi";
 
-function useRestaurantsData() {
+const useRestaurantsData = () => {
   const [topRestaurantData, setTopRestaurantData] = useState([]);
   const [topResTitle, setTopResTitle] = useState("");
   const [onlineTitle, setOnlineTitle] = useState("");

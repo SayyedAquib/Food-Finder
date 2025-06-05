@@ -1,4 +1,4 @@
-function Shimmer() {
+const Shimmer = () => {
     return (
         <div className="w-full">
             <div className="w-full text-white flex justify-center items-center gap-5 flex-col h-[350px] bg-slate-900">
@@ -29,7 +29,7 @@ function Shimmer() {
 
 export default Shimmer;
 
-export function MenuShimmer() {
+export const MenuShimmer = () => {
     return (
         <div className="w-full lg:w-[50%] mx-auto mt-10">
             <div className="w-full h-40 sm:h-80 rounded-xl animate"></div>

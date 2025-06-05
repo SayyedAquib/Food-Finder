@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Shimmer from "./Shimmer";
 import useRestaurantsData from "../hooks/useRestaurantsData";
 
-function Body() {
+const Body = () => {
   const [topRestaurantData, topResTitle, onlineTitle, onYourMindData, data] =
     useRestaurantsData();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);

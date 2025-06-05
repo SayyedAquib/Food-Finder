@@ -3,7 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useDispatch } from "react-redux";
 import { setFilterValue } from "../utils/filterSlice";
 
-function OnlineFoodDelivey({ data, title }) {
+const OnlineFoodDelivey = ({ data, title }) => {
   const filterOptions = [
     "Ratings 4.0+",
     "Rs. 300-Rs. 600",
@@ -15,9 +15,10 @@ function OnlineFoodDelivey({ data, title }) {
 
   const dispatch = useDispatch();
 
-  function handleFilterBtn(filterName) {
+  const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? null : filterName);
-  }
+  };
+  
   dispatch(setFilterValue(activeBtn));
 
   return (

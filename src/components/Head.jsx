@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toogleSearchBar } from "../utils/toogleSlice";
 import SigninBtn from "./SigninBtn";
 
-function Head() {
+const Head = () => {
   const navItems = [
     {
       name: "Search",
@@ -38,24 +38,25 @@ function Head() {
   const [address, setAddress] = useState("");
   const { setCoord } = useContext(Coordinates);
 
-  function handleVisibility() {
+  const handleVisibility = () => {
     // setVisible(prev => !prev)
     dispatch(toogleSearchBar());
-  }
-  function handleLogin() {
-    dispatch(toggleLogin());
-  }
+  };
 
-  async function searchResultFun(val) {
+  const handleLogin = () => {
+    dispatch(toggleLogin());
+  };
+
+  const searchResultFun = async (val) => {
     if (val == "") return;
     const res = await fetch(
       `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/misc/place-autocomplete?input=${val}`
     );
     const data = await res.json();
     setSearchResult(data.data);
-  }
+  };
 
-  async function fetchLatAndLng(id) {
+  const fetchLatAndLng = async (id) => {
     if (id == "") return;
     // console.log(id);
     handleVisibility();
@@ -194,7 +195,11 @@ function Head() {
                     <div className="flex items-center gap-3" key={i}>
                       {userData ? (
                         <div className="w-10 h-10 rounded-full ">
-                          <img className="rounded-full" src={userData.photo} alt="" />
+                          <img
+                            className="rounded-full"
+                            src={userData.photo}
+                            alt=""
+                          />
                         </div>
                       ) : (
                         <i
@@ -271,6 +276,6 @@ function Head() {
       </div>
     </>
   );
-}
+};
 
 export default Head;

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 
-function TopRestaurant({ data = [], title }) {
+const TopRestaurant = ({ data = [], title }) => {
   const [value, setValue] = useState(0);
 
-  function handleNext() {
+  const handleNext = () => {
     setValue((prev) => prev + 50);
-  }
+  };
 
-  function handlePrev() {
+  const handlePrev = () => {
     setValue((prev) => prev - 50);
-  }
+  };
 
   return (
     <div className="mt-14 w-full">

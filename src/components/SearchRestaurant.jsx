@@ -1,4 +1,4 @@
-function SearchRestaurant({
+const SearchRestaurant = ({
   data: {
     card: {
       card: {
@@ -16,7 +16,7 @@ function SearchRestaurant({
       },
     },
   },
-}) {
+}) => {
   return (
     <div className="bg-white m-4 p-4 flex gap-5 items-center md:max-w-fit ">
       <div className=" w-[30%] ">
@@ -39,11 +39,11 @@ function SearchRestaurant({
       </div>
     </div>
   );
-}
+};
 
 export default SearchRestaurant;
 
-export function withHoc(WrappedCom) {
+export const withHoc = (WrappedCom) => {
   return (prop) => {
     return (
       <div className="relative">

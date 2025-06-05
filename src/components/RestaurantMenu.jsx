@@ -18,7 +18,7 @@ const RestaurantMenu = () => {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
-  async function fetchMenu() {
+  const fetchMenu = async () => {
     const response = await fetch(
       `${
         import.meta.env.VITE_BASE_URL

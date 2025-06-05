@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function RestaurantCard(info) {
+const RestaurantCard = (info) => {
   return (
     <Link to={`/restaurantMenu/${info.link.split("/").at(-1)}`}>
       <div className="min-w-[295px] h-[182px] relative ">
