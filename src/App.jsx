@@ -23,7 +23,7 @@ function App() {
           " " + (visible || loginVisible ? "max-h-screen overflow-hidden" : " ")
         }
       >
-        <Suspense fallback={<Shimmer />}>
+        <Suspense fallback={<h1 className="text-center mt-64">Welcome</h1>}>
           <Routes>
             <Route path="/" element={<Head />}>
               <Route path="/" element={<Body />} />

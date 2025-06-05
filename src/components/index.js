@@ -13,6 +13,7 @@ import MenuCard from "./MenuCard";
 import MenuSection from "./MenuSection";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
 import OnYourMind from "./onYourMind";
+import OutletInfo from "./OutletInfo";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantHeader from "./RestaurantHeader";
 import RestaurantMenu from "./RestaurantMenu";
@@ -40,6 +41,7 @@ export {
   MenuSection,
   OnlineFoodDelivey,
   OnYourMind,
+  OutletInfo,
   RestaurantCard,
   RestaurantHeader,
   RestaurantMenu,
