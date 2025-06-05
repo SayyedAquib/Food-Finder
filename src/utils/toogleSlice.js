@@ -46,4 +46,5 @@ export const {
   setSimilarResDish,
   resetSimilarResDish,
 } = toogleSlice.actions;
+
 export default toogleSlice.reducer;

@@ -104,6 +104,7 @@ const Search = () => {
     fetchResaturantData();
   }, [searchQuery]);
 
+  
   return (
     <div className="w-full mt-10 md:w-[800px] mx-auto">
       <div className="w-full relative">
@@ -130,6 +131,25 @@ const Search = () => {
             >
               <p>{filterName}</p>
             </button>
+          ))}
+        </div>
+      )}
+
+      {dishes.length === 0 && restaurantData.length === 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#f4f5f7] p-4 rounded-md">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-lg shadow-sm p-4 flex gap-4 items-start"
+            >
+              <div className="w-20 h-20 bg-gray-300 rounded-md flex-shrink-0" />
+              <div className="flex flex-col gap-2 flex-grow">
+                <div className="w-3/4 h-4 bg-gray-300 rounded" />
+                <div className="w-1/2 h-4 bg-gray-300 rounded" />
+                <div className="w-full h-3 bg-gray-200 rounded" />
+                <div className="w-2/3 h-3 bg-gray-200 rounded" />
+              </div>
+            </div>
           ))}
         </div>
       )}
