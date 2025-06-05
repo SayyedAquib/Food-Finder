@@ -1,5 +1,4 @@
 const MenuShimmer = () => {
-  console.log("MenuShimmer rendered");
   return (
     <div className="w-full lg:w-[50%] mx-auto mt-10">
       <div className="w-full h-40 sm:h-80 rounded-xl animate"></div>

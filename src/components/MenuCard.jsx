@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DetailMenu from "./DetailMenu";
+import { DetailMenu } from "./index";
 
 const MenuCard = ({ card, resInfo }) => {
   const [isOpen, setIsOpen] = useState(!!card["@type"]);

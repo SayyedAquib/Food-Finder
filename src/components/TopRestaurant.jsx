@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import { RestaurantCard } from "./index";
 
 const TopRestaurant = ({ data = [], title }) => {
   const [value, setValue] = useState(0);
@@ -62,6 +62,6 @@ const TopRestaurant = ({ data = [], title }) => {
       <hr className="border mt-10" />
     </div>
   );
-}
+};
 
 export default TopRestaurant;

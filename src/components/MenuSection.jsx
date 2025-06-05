@@ -1,5 +1,4 @@
-import TopPicks from "./TopPicks";
-import MenuCard from "./MenuCard";
+import { TopPicks, MenuCard } from "./index";
 
 const MenuSection = ({ topPicksData, menuData, resInfo }) => (
   <>

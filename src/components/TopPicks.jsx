@@ -1,4 +1,4 @@
-import TopPickCard from "./TopPickCard";
+import { TopPickCard } from "./index";
 
 const TopPicks = ({ topPicksData }) => (
   <div className="w-full overflow-hidden">

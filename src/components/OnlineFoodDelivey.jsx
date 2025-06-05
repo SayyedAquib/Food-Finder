@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import { RestaurantCard } from "./index";
 import { useDispatch } from "react-redux";
 import { setFilterValue } from "../utils/filterSlice";
 
@@ -18,7 +18,7 @@ const OnlineFoodDelivey = ({ data, title }) => {
   const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? null : filterName);
   };
-  
+
   dispatch(setFilterValue(activeBtn));
 
   return (
@@ -49,6 +49,6 @@ const OnlineFoodDelivey = ({ data, title }) => {
       </div>
     </div>
   );
-}
+};
 
 export default OnlineFoodDelivey;

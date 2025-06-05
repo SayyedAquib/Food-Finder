@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
-import Breadcrumb from "./Breadcrumb";
-import RestaurantHeader from "./RestaurantHeader";
-import DiscountSection from "./DiscountSection";
-import MenuSection from "./MenuSection";
-import { MenuShimmer } from "./index";
+import {
+  Breadcrumb,
+  RestaurantHeader,
+  DiscountSection,
+  MenuSection,
+  MenuShimmer,
+} from "./index";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -49,7 +51,7 @@ const RestaurantMenu = () => {
         (data) => data?.card?.card?.itemCards || data?.card?.card?.categories
       ) || []
     );
-  }
+  };
 
   useEffect(() => {
     fetchMenu();

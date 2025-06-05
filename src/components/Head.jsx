@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toogleSearchBar } from "../utils/toogleSlice";
-import SigninBtn from "./SigninBtn";
+import { SigninBtn } from "./index";
 
 const Head = () => {
   const navItems = [
@@ -70,7 +70,7 @@ const Head = () => {
     });
     // console.log(data);
     setAddress(data.data[0].formatted_address);
-  }
+  };
 
   return (
     <>

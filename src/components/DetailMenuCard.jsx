@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddToCartBtn from "./AddToCartBtn";
+import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDiffRes } from "../utils/toogleSlice";
 import { clearCart } from "../utils/cartSlice";

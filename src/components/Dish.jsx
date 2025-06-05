@@ -1,5 +1,5 @@
 import { nonVeg, veg } from "../utils/links";
-import AddToCartBtn from "./AddToCartBtn";
+import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import { setSimilarResDish, toggleDiffRes } from "../utils/toogleSlice";
 import { clearCart } from "../utils/cartSlice";
@@ -47,7 +47,7 @@ const Dish = ({
         })
       );
     }
-  }
+  };
 
   return (
     <>
@@ -130,6 +130,6 @@ const Dish = ({
       )}
     </>
   );
-}
+};
 
 export default Dish;

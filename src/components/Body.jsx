@@ -1,8 +1,5 @@
-import OnYourMind from "./onYourMind";
-import TopRestaurant from "./TopRestaurant";
-import OnlineFoodDelivey from "./OnlineFoodDelivey";
+import { OnYourMind, TopRestaurant, OnlineFoodDelivey, Shimmer } from "./index";
 import { useSelector } from "react-redux";
-import Shimmer from "./Shimmer";
 import useRestaurantsData from "../hooks/useRestaurantsData";
 
 const Body = () => {
@@ -69,6 +66,6 @@ const Body = () => {
       )}
     </div>
   );
-}
+};
 
 export default Body;

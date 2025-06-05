@@ -1,4 +1,4 @@
-import SigninBtn from "./SigninBtn";
+import { SigninBtn } from "./index";
 
 const Login = ({ handleLogin }) => {
   return (
