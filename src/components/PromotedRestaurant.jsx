@@ -1,4 +1,4 @@
-const withHoc = (WrappedCom) => {
+const PromotedRestaurant = (WrappedCom) => {
   return (prop) => {
     return (
       <div className="relative">
@@ -11,4 +11,4 @@ const withHoc = (WrappedCom) => {
   };
 };
 
-export default withHoc;
+export default PromotedRestaurant;

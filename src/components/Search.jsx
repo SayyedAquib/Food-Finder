@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { withHoc, SearchRestaurant } from "./index";
+import { PromotedRestaurant, SearchRestaurant, Dish } from "./index";
 import { Coordinates } from "../context/contextApi";
-import Dish from "./Dish";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
 
@@ -15,7 +14,7 @@ const Search = () => {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
-  const PromotedRes = withHoc(SearchRestaurant);
+  const PromotedRes = PromotedRestaurant(SearchRestaurant);
 
   const { isSimilarResDishes, city, resId, itemId, resLocation } = useSelector(
     (state) => state.toogleSlice.similarResDish

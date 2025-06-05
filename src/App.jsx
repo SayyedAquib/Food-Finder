@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Coordinates } from "./context/contextApi";
 import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
-import {MenuShimmer} from "./components/index";
+import { CartShimmer, MenuShimmer, NotFound, SearchShimmer, Shimmer } from "./components/index";
 
 const Head = lazy(() => import("./components/Head"));
 const Body = lazy(() => import("./components/Body"));
@@ -23,24 +23,50 @@ const App = () => {
           " " + (visible || loginVisible ? "max-h-screen overflow-hidden" : " ")
         }
       >
-        <Suspense fallback={<h1 className="text-center mt-64">Welcome</h1>}>
-          <Routes>
-            <Route path="/" element={<Head />}>
-              <Route path="/" element={<Body />} />
-              <Route
-                path="/restaurantMenu/:id"
-                element={
-                  <Suspense fallback={<MenuShimmer />}>
-                    <RestaurantMenu />
-                  </Suspense>
-                }
-              />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="*" element={<h1>coming soon ......</h1>} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Shimmer />}>
+                <Head />
+              </Suspense>
+            }
+          >
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Shimmer />}>
+                  <Body />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/restaurantMenu/:id"
+              element={
+                <Suspense fallback={<MenuShimmer />}>
+                  <RestaurantMenu />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <Suspense fallback={<CartShimmer />}>
+                  <Cart />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <Suspense fallback={<SearchShimmer />}>
+                  <Search />
+                </Suspense>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </div>
     </Coordinates.Provider>
   );

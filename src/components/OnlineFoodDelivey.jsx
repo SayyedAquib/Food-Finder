@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RestaurantCard } from "./index";
 import { useDispatch } from "react-redux";
 import { setFilterValue } from "../utils/filterSlice";
@@ -19,7 +19,9 @@ const OnlineFoodDelivey = ({ data, title }) => {
     setActiveBtn(activeBtn === filterName ? null : filterName);
   };
 
-  dispatch(setFilterValue(activeBtn));
+  useEffect(() => {
+    dispatch(setFilterValue(activeBtn));
+  }, [activeBtn, dispatch]);
 
   return (
     <div>

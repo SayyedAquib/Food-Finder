@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, deleteItem } from "../utils/cartSlice";
 import toast from "react-hot-toast";
 import { toggleLogin } from "../utils/toogleSlice";
-// import { veg, nonVeg } from "../utils/links";
-
-let veg =
-  "https://www.pngkey.com/png/detail/261-2619381_chitr-veg-symbol-svg-veg-and-non-veg.png";
-let nonVeg =
-  "https://www.kindpng.com/picc/m/151-1515155_veg-icon-png-non-veg-symbol-png-transparent.png";
+import { veg, nonVeg } from "../utils/links";
 
 const Cart = () => {
   const cartData = useSelector((state) => state.cartSlice.cartItems);
