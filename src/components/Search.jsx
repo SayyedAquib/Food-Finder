@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchRestaurant, { withHoc } from "./SearchRestaurant";
 import { Coordinates } from "../context/contextApi";
 import Dish from "./Dish";

@@ -1,4 +1,3 @@
-import React from "react";
 import Discount from "./Discount";
 
 const DiscountSection = ({ discountData }) => (

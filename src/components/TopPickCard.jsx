@@ -1,5 +1,3 @@
-import React from "react";
-
 const TopPickCard = ({ creativeId, defaultPrice, price }) => (
   <div className="min-w-[400px] relative h-[405px]">
     <img

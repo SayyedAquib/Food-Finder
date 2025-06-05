@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { Coordinates } from "./context/contextApi";
-import React, { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
+import Shimmer from "./components/Shimmer";
 
 const Head = lazy(() => import("./components/Head"));
 const Body = lazy(() => import("./components/Body"));
@@ -22,7 +23,7 @@ function App() {
           " " + (visible || loginVisible ? "max-h-screen overflow-hidden" : " ")
         }
       >
-        <Suspense fallback="loading....">
+        <Suspense fallback={<Shimmer />}>
           <Routes>
             <Route path="/" element={<Head />}>
               <Route path="/" element={<Body />} />

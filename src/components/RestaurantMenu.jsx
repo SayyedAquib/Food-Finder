@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
 import Breadcrumb from "./Breadcrumb";

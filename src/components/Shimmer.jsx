@@ -1,6 +1,3 @@
-import { data } from "autoprefixer";
-import React from "react";
-
 function Shimmer() {
     return (
         <div className="w-full">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DetailMenu from "./DetailMenu";
 
 const MenuCard = ({ card, resInfo }) => {

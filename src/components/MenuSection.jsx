@@ -1,4 +1,3 @@
-import React from "react";
 import TopPicks from "./TopPicks";
 import MenuCard from "./MenuCard";
 

@@ -1,5 +1,4 @@
 import { signInWithPopup, signOut } from "firebase/auth";
-import React from "react";
 import { auth, provider } from "../config/firebaseAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserData, removeUserData } from "../utils/authSlice";

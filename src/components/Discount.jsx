@@ -1,5 +1,3 @@
-import React from "react";
-
 const Discount = ({
   data: {
     info: { header, offerLogo, couponCode },

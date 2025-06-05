@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
 import OnYourMind from "./onYourMind";
 import TopRestaurant from "./TopRestaurant";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
-import { Coordinates } from "../context/contextApi";
 import { useSelector } from "react-redux";
 import Shimmer from "./Shimmer";
 import useRestaurantsData from "../hooks/useRestaurantsData";

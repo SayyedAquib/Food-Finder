@@ -1,4 +1,3 @@
-import React from "react";
 import { nonVeg, veg } from "../utils/links";
 import AddToCartBtn from "./AddToCartBtn";
 import { useDispatch, useSelector } from "react-redux";

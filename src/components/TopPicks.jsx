@@ -1,4 +1,3 @@
-import React from "react";
 import TopPickCard from "./TopPickCard";
 
 const TopPicks = ({ topPicksData }) => (

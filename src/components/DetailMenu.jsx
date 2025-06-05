@@ -1,4 +1,3 @@
-import React from "react";
 import DetailMenuCard from "./DetailMenuCard";
 
 const DetailMenu = ({ itemCards, resInfo }) => (

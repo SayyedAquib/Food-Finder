@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 
 function TopRestaurant({ data = [], title }) {

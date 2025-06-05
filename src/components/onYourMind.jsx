@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 function OnYourMind({ data = [] }) {
   const [value, setValue] = useState(0);

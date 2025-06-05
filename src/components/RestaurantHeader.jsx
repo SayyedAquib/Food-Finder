@@ -1,5 +1,3 @@
-import React from "react";
-
 const RestaurantHeader = ({ resInfo }) => (
   <div className="w-full h-[206px] bg-gradient-to-t px-4 pb-4 from-slate-200/70 mt-3 rounded-[30px]">
     <div className="w-full border border-slate-200/70 rounded-[30px] h-full bg-white p-4">
