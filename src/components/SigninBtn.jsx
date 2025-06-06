@@ -12,7 +12,7 @@ const SigninBtn = () => {
   const userData = useSelector((state) => state.authSlice.userData);
 
   const handleAuth = async () => {
-    let data = await signInWithPopup(auth, provider);
+    const data = await signInWithPopup(auth, provider);
     const userData = {
       name: data.user.displayName,
       photo: data.user.photoURL,

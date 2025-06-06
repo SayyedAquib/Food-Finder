@@ -2,7 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import { Coordinates } from "./context/contextApi";
 import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
-import { CartShimmer, MenuShimmer, NotFound, SearchShimmer, Shimmer } from "./components/index";
+import {
+  CartShimmer,
+  MenuShimmer,
+  NotFound,
+  SearchShimmer,
+  Shimmer,
+} from "./components/index";
 
 const Head = lazy(() => import("./components/Head"));
 const Body = lazy(() => import("./components/Body"));

@@ -94,8 +94,9 @@ const Head = () => {
               type="text"
               className="border p-5 focus:outline-none focus:shadow-lg"
               onChange={(e) => searchResultFun(e.target.value)}
+              placeholder="Search for area, street name..."
             />
-            <div className="border p-5 ">
+            <div className="p-5 ">
               <ul>
                 {searchResult.map((data, index) => {
                   const isLast = index === searchResult.length - 1;

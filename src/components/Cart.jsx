@@ -10,14 +10,14 @@ const Cart = () => {
   const resInfo = useSelector((state) => state.cartSlice.resInfo);
   const dispatch = useDispatch();
 
-  let totalPrice = cartData.reduce(
+  const totalPrice = cartData.reduce(
     (acc, curVal) => acc + curVal.price / 100 || curVal.defaultPrice / 100,
     0
   );
 
   const handleRemoveFromCart = (i) => {
     if (cartData.length > 1) {
-      let newArr = [...cartData];
+      const newArr = [...cartData];
       newArr.splice(i, 1);
       dispatch(deleteItem(newArr));
       toast.success("Food removed");
@@ -44,13 +44,19 @@ const Cart = () => {
 
   if (cartData.length === 0) {
     return (
-      <div className="w-full">
-        <div className="w-[50%]  mx-auto">
-          <h1>kuch order krle bhai bhuka marega kya....</h1>
-          <Link to="/" className="bg-green-500 p-2 inline-block my-3">
-            Yaha se krle bhai order
-          </Link>
-        </div>
+      <div className="h-[80vh] flex flex-col items-center justify-center">
+        <img
+          className="w-72"
+          src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0"
+          alt="empty cart"
+        />
+        <h1 className="text-xl mt-4">Your cart is empty</h1>
+        <p className="text-gray-500">Please add some items to your cart</p>
+        <Link to="/">
+          <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg">
+            Browse Restaurants
+          </button>
+        </Link>
       </div>
     );
   }

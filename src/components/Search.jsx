@@ -29,7 +29,7 @@ const Search = () => {
   };
 
   const handleSearchQuery = (e) => {
-    let val = e.target.value;
+    const val = e.target.value;
     if (e.keyCode == 13) {
       setSearchQuery(val);
       setSelectedResDish(null);
@@ -44,15 +44,15 @@ const Search = () => {
   }, [isSimilarResDishes]);
 
   const fetchSimilarResDishes = async () => {
-    let pathname = `/city/${city}/${resLocation}`;
-    let encodedPath = encodeURIComponent(pathname);
+    const pathname = `/city/${city}/${resLocation}`;
+    const encodedPath = encodeURIComponent(pathname);
 
-    let data = await fetch(
+    const data = await fetch(
       `${
         import.meta.env.VITE_BASE_URL
       }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=null&submitAction=ENTER&selectedPLTab=dish-add&restaurantMenuUrl=${encodedPath}-rest${resId}%3Fquery%3D${searchQuery}&restaurantIdOfAddedItem=${resId}&itemAdded=${itemId}`
     );
-    let res = await data.json();
+    const res = await data.json();
 
     setSelectedResDish(res?.data?.cards[1]);
     setSimilarResDishes(res?.data?.cards[2]?.card?.card?.cards);
@@ -60,14 +60,14 @@ const Search = () => {
   }
 
   const fetchDishes = async () => {
-    let data = await fetch(
+    const data = await fetch(
       `${
         import.meta.env.VITE_BASE_URL
       }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0`
     );
-    let res = await data.json();
+    const res = await data.json();
     console.log(res);
-    let finalData = res?.data?.cards
+    const finalData = res?.data?.cards
       .find((data) => data?.groupedCard)
       .groupedCard?.cardGroupMap?.DISH?.cards.filter((data) =>
         data?.card?.card?.["@type"].includes("food.v2.Dish")
@@ -83,12 +83,12 @@ const Search = () => {
   }
 
   const fetchResaturantData = async () => {
-    let data = await fetch(
+    const data = await fetch(
       `${
         import.meta.env.VITE_BASE_URL
       }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0&selectedPLTab=RESTAURANT`
     );
-    let res = await data.json();
+    const res = await data.json();
     const finalData =
       (res?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards).filter(
         (data) => data?.card?.card?.info

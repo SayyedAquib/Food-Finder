@@ -12,9 +12,9 @@ const Dish = ({
     hideRestaurantDetails = false,
   },
 }) => {
-  let { imageId = "", name, price, isVeg = 0, id: itemId } = info;
+  const { imageId = "", name, price, isVeg = 0, id: itemId } = info;
   console.log(resInfo);
-  let {
+  const {
     id,
     name: resName,
     avgRating,

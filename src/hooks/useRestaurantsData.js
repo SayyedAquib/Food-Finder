@@ -37,17 +37,17 @@ const useRestaurantsData = () => {
         setTopResTitle(result.data.cards[1]?.card?.card?.header?.title || ""); // Provide a default value
         setOnlineTitle(result.data.cards[2]?.card?.card?.title || ""); // Provide a default value
 
-        let mainData = result.data.cards.find(
+        const mainData = result.data.cards.find(
           (data) => data?.card?.card?.id === "top_brands_for_you"
         )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
-        let mainData2 = result.data.cards.find(
+        const mainData2 = result.data.cards.find(
           (data) => data?.card?.card?.id === "restaurant_grid_listing"
         )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
         setTopRestaurantData(mainData || mainData2 || []); // Provide a default value
 
-        let data2 =
+        const data2 =
           result.data.cards.find(
             (data) => data?.card?.card?.id === "whats_on_your_mind"
           )?.card?.card?.imageGridCards?.info || []; // Provide a default value
