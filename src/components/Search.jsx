@@ -1,15 +1,19 @@
 import { useContext, useEffect, useState } from "react";
-import { PromotedRestaurant, SearchRestaurant, Dish } from "./index";
+import { PromotedRestaurant, SearchRestaurant, Dish, OnYourMind } from "./index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
+import Carousel from "./Carousel";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
   const [selectedResDish, setSelectedResDish] = useState(null);
   const [similarResDishes, setSimilarResDishes] = useState([]);
+  const [popularCuisines, setPopularCuisines] = useState([]);
+
   const {
     coord: { lat, lng },
   } = useContext(Coordinates);
@@ -24,18 +28,37 @@ const Search = () => {
 
   const [activeBtn, setActiveBtn] = useState("Dishes");
 
+  const fetchPopularCuisines = async () => {
+    try {
+      const data = await fetch(
+        "https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/landing/PRE_SEARCH?lat=18.52110&lng=73.85020"
+      );
+      const res = await data.json();
+
+      const cuisines = res?.data?.cards[1]?.card?.card
+
+      setPopularCuisines(cuisines);
+    } catch (error) {
+      console.error("Error fetching popular cuisines:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularCuisines();
+  }, []);
+
   const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? activeBtn : filterName);
   };
 
   const handleSearchQuery = (e) => {
-    const val = e.target.value;
-    if (e.keyCode == 13) {
-      setSearchQuery(val);
+    if (e.key === "Enter") {
+      setSearchQuery(e.target.value);
       setSelectedResDish(null);
       setDishes([]);
     }
   };
+  
 
   useEffect(() => {
     if (isSimilarResDishes) {
@@ -57,7 +80,7 @@ const Search = () => {
     setSelectedResDish(res?.data?.cards[1]);
     setSimilarResDishes(res?.data?.cards[2]?.card?.card?.cards);
     dispatch(resetSimilarResDish());
-  }
+  };
 
   const fetchDishes = async () => {
     const data = await fetch(
@@ -80,7 +103,7 @@ const Search = () => {
 
     console.log("finalData", finalData);
     setDishes(finalData);
-  }
+  };
 
   const fetchResaturantData = async () => {
     const data = await fetch(
@@ -94,17 +117,34 @@ const Search = () => {
         (data) => data?.card?.card?.info
       );
     setRestaurantData(finalData);
-  }
+  };
+
+  const fetchSearchSuggestions = async () => { 
+    try {
+      const data = await fetch(
+        `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/restaurants/search/suggest?lat=18.52110&lng=73.85020&str=${searchQuery}&trackingId=undefined&includeIMItem=true`
+      );
+      const res = await data.json();
+      
+      setSearchSuggestions(res?.data?.suggestions || []);
+    } catch (error) {
+      console.error("Error fetching search suggestions:", error);
+    }
+  };
 
   useEffect(() => {
-    if (searchQuery === "") {
-      return;
-    }
-    fetchDishes();
-    fetchResaturantData();
-  }, [searchQuery]);
+    if (searchQuery.trim() === "") return;
 
+    const timeoutId = setTimeout(() => {
+      fetchSearchSuggestions();
+      fetchDishes();
+      fetchResaturantData();
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
   
+
   return (
     <div className="w-full mt-10 md:w-[800px] mx-auto">
       <div className="w-full relative">
@@ -115,8 +155,12 @@ const Search = () => {
           className="border-2 w-full pl-8 py-3 text-xl focus:outline-none"
           type="text"
           placeholder="Search for restaurant and food"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+
+      {searchQuery.trim() === "" && <Carousel data={popularCuisines} />}
 
       {!selectedResDish && (
         <div className="my-7 flex flex-wrap gap-3">
@@ -188,7 +232,6 @@ const Search = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Search;
-
