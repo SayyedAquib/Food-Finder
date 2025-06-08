@@ -1,5 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { PromotedRestaurant, SearchRestaurant, Dish, OnYourMind } from "./index";
+import {
+  PromotedRestaurant,
+  SearchRestaurant,
+  Dish,
+  OnYourMind,
+} from "./index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
@@ -7,12 +12,12 @@ import Carousel from "./Carousel";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  // const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
   const [selectedResDish, setSelectedResDish] = useState(null);
   const [similarResDishes, setSimilarResDishes] = useState([]);
-  const [popularCuisines, setPopularCuisines] = useState([]);
+  // const [popularCuisines, setPopularCuisines] = useState([]);
 
   const {
     coord: { lat, lng },
@@ -35,7 +40,7 @@ const Search = () => {
       );
       const res = await data.json();
 
-      const cuisines = res?.data?.cards[1]?.card?.card
+      const cuisines = res?.data?.cards[1]?.card?.card || [];
 
       setPopularCuisines(cuisines);
     } catch (error) {
@@ -43,9 +48,9 @@ const Search = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPopularCuisines();
-  }, []);
+  // useEffect(() => {
+  //   fetchPopularCuisines();
+  // }, []);
 
   const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? activeBtn : filterName);
@@ -58,7 +63,6 @@ const Search = () => {
       setDishes([]);
     }
   };
-  
 
   useEffect(() => {
     if (isSimilarResDishes) {
@@ -113,19 +117,19 @@ const Search = () => {
     );
     const res = await data.json();
     const finalData =
-      (res?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards).filter(
+      res?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards?.filter(
         (data) => data?.card?.card?.info
       );
     setRestaurantData(finalData);
   };
 
-  const fetchSearchSuggestions = async () => { 
+  const fetchSearchSuggestions = async () => {
     try {
       const data = await fetch(
         `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/restaurants/search/suggest?lat=18.52110&lng=73.85020&str=${searchQuery}&trackingId=undefined&includeIMItem=true`
       );
       const res = await data.json();
-      
+
       setSearchSuggestions(res?.data?.suggestions || []);
     } catch (error) {
       console.error("Error fetching search suggestions:", error);
@@ -133,17 +137,16 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (searchQuery.trim() === "") return;
+    // if (searchQuery.trim() === "") return;
 
-    const timeoutId = setTimeout(() => {
-      fetchSearchSuggestions();
+    // const timeoutId = setTimeout(() => {
+      // fetchSearchSuggestions();
       fetchDishes();
       fetchResaturantData();
-    }, 500);
+    // }, 500);
 
-    return () => clearTimeout(timeoutId);
+    // return () => clearTimeout(timeoutId);
   }, [searchQuery]);
-  
 
   return (
     <div className="w-full mt-10 md:w-[800px] mx-auto">
@@ -160,7 +163,45 @@ const Search = () => {
         />
       </div>
 
-      {searchQuery.trim() === "" && <Carousel data={popularCuisines} />}
+      {/* {searchQuery.trim() === "" ? (
+        <Carousel data={popularCuisines} />
+      ) : (
+        <div className="w-full  mx-auto bg-white border border-gray-200 rounded-md shadow">
+          {searchSuggestions.map((item, index) => (
+            <div
+              key={index}
+              className={`flex items-center gap-3 px-4 py-3 cursor-pointer ${
+                item.highlighted ? "bg-blue-50" : "hover:bg-gray-50"
+                }`}
+              onClick={(e) => {
+                setSearchQuery(item.text)
+              }}
+              onFocus={(e) => {
+                setSearchQuery(item.text);
+                setSelectedResDish(null);
+                setDishes([]);
+              }}
+              onBlur={(e) => {
+                setSearchQuery("");
+                setSelectedResDish(null);
+                setDishes([]);
+              }}
+            >
+              <img
+                src={`https://media-assets.swiggy.com/swiggy/image/upload/${item.cloudinaryId}`}
+                alt={item.title}
+                className="w-12 h-12 rounded-md object-cover"
+              />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">
+                  {item.text}
+                </p>
+                <p className="text-xs text-gray-500">{item.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )} */}
 
       {!selectedResDish && (
         <div className="my-7 flex flex-wrap gap-3">
@@ -179,7 +220,7 @@ const Search = () => {
         </div>
       )}
 
-      {dishes.length === 0 && restaurantData.length === 0 && (
+      {dishes?.length === 0 && restaurantData?.length === 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#f4f5f7] p-4 rounded-md">
           {[...Array(6)].map((_, i) => (
             <div
@@ -219,7 +260,7 @@ const Search = () => {
             ))}
           </>
         ) : activeBtn === "Dishes" ? (
-          dishes.map((data, i) => <Dish key={i} data={data.card.card} />)
+          dishes?.map((data, i) => <Dish key={i} data={data.card.card} />)
         ) : (
           restaurantData.map((data, i) =>
             data?.card?.card?.info?.promoted ? (
