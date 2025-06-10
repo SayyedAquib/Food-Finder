@@ -12,7 +12,7 @@ import MenuSection from "./MenuSection";
 import MenuShimmer from "./MenuShimmer";
 import NotFound from "./NotFound";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
-import OnYourMind from "./onYourMind";
+import OnYourMind from "./OnYourMind";
 import OutletInfo from "./OutletInfo";
 import PromotedRestaurant from "./PromotedRestaurant";
 import RestaurantCard from "./RestaurantCard";
