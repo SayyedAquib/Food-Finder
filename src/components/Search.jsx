@@ -93,19 +93,12 @@ const Search = () => {
       }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0`
     );
     const res = await data.json();
-    console.log(res);
     const finalData = res?.data?.cards
       .find((data) => data?.groupedCard)
       .groupedCard?.cardGroupMap?.DISH?.cards.filter((data) =>
         data?.card?.card?.["@type"].includes("food.v2.Dish")
       );
 
-    console.log(
-      res?.data?.cards.find((data) => data?.groupedCard).groupedCard
-        ?.cardGroupMap?.DISH?.cards
-    );
-
-    console.log("finalData", finalData);
     setDishes(finalData);
   };
 
@@ -140,9 +133,9 @@ const Search = () => {
     // if (searchQuery.trim() === "") return;
 
     // const timeoutId = setTimeout(() => {
-      // fetchSearchSuggestions();
-      fetchDishes();
-      fetchResaturantData();
+    // fetchSearchSuggestions();
+    fetchDishes();
+    fetchResaturantData();
     // }, 500);
 
     // return () => clearTimeout(timeoutId);

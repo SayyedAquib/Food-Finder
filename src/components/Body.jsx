@@ -30,7 +30,6 @@ const Body = () => {
       })
     : []; // Default to an empty array if topRestaurantData is not an array
 
-  console.log(data)
   if (data.communication || data.tid === "") {
     return (
       <div className="flex mt-64 overflow-hidden justify-center items-center flex-col">

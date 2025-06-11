@@ -13,7 +13,6 @@ const Dish = ({
   },
 }) => {
   const { imageId = "", name, price, isVeg = 0, id: itemId } = info;
-  console.log(resInfo);
   const {
     id,
     name: resName,

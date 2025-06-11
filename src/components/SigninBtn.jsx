@@ -33,14 +33,14 @@ const SigninBtn = () => {
       {userData ? (
         <button
           onClick={handleLogout}
-          className="my-5 w-full text-2xl p-5 bg-[#fc8019] text-white"
+          className="my-5 w-full text-2xl p-5 bg-[#fc8019] text-white cursor-pointer"
         >
           Logout
         </button>
       ) : (
         <button
           onClick={handleAuth}
-          className="my-5 w-full text-2xl p-5 bg-[#fc8019] text-white"
+          className="my-5 w-full text-2xl p-5 bg-[#fc8019] text-white cursor-pointer"
         >
           Login with GOOGLE
         </button>

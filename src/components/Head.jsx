@@ -38,7 +38,6 @@ const Head = () => {
   const { setCoord } = useContext(Coordinates);
 
   const handleVisibility = () => {
-    // setVisible(prev => !prev)
     dispatch(toogleSearchBar());
   };
 
@@ -141,7 +140,7 @@ const Head = () => {
           }
         >
           <div className="flex flex-col gap-4 mt-3 w-full lg-[50%] mr-6">
-            <i className="fi fi-br-cross" onClick={handleVisibility}></i>
+            <i className="fi fi-br-cross cursor-pointer" onClick={handleVisibility}></i>
             <input
               type="text"
               className="border p-5 focus:outline-none focus:shadow-lg"
@@ -226,7 +225,7 @@ const Head = () => {
                 </div>
               </Link>
               <div
-                className="flex items-center gap-2 "
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={handleVisibility}
               >
                 <p className="flex items-center">
@@ -244,7 +243,11 @@ const Head = () => {
             <div className=" hidden md:flex items-center gap-2 md:gap-14">
               {navItems.map((data, i) =>
                 data.name == "Sign in" ? (
-                  <div onClick={handleLogin} key={data.path}>
+                  <div
+                    onClick={handleLogin}
+                    key={data.path}
+                    className="cursor-pointer"
+                  >
                     <div className="flex items-center gap-3" key={i}>
                       {userData ? (
                         <div className="w-10 h-10 rounded-full ">
