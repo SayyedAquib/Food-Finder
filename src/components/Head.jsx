@@ -24,8 +24,7 @@ const Head = () => {
     },
   ];
 
-  //    const {visible , setVisible} = useContext(Visibility)
-  //
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const userData = useSelector((state) => state.authSlice.userData);
 
@@ -47,29 +46,82 @@ const Head = () => {
     dispatch(toggleLogin());
   };
 
-  const searchResultFun = async (val) => {
-    if (val == "") return;
-    const res = await fetch(
-      `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/misc/place-autocomplete?input=${val}`
-    );
-    const data = await res.json();
-    setSearchResult(data.data);
+  const searchResultFun = async (query) => {
+    if (!query?.trim()) return;
+
+    try {
+      const response = await fetch(
+        `${baseUrl}/misc/place-autocomplete?input=${encodeURIComponent(
+          query.trim()
+        )}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data?.data) {
+        setSearchResult(data.data);
+      } else {
+        console.warn("Unexpected API response structure:", data);
+        setSearchResult([]);
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setSearchResult([]);
+    }
   };
 
-  const fetchLatAndLng = async (id) => {
-    if (id == "") return;
-    // console.log(id);
-    handleVisibility();
-    const res = await fetch(
-      `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/misc/address-recommend?place_id=${id}`
-    );
-    const data = await res.json();
-    setCoord({
-      lat: data.data[0].geometry.location.lat,
-      lng: data.data[0].geometry.location.lng,
-    });
-    // console.log(data);
-    setAddress(data.data[0].formatted_address);
+  const fetchLatAndLng = async (placeId) => {
+    if (!placeId?.trim()) return;
+
+    try {
+      handleVisibility();
+
+      const response = await fetch(
+        `${baseUrl}/misc/address-recommend?place_id=${encodeURIComponent(
+          placeId.trim()
+        )}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!data?.data?.[0]) {
+        throw new Error("Invalid API response: missing location data");
+      }
+
+      const locationData = data.data[0];
+      const geometry = locationData.geometry?.location;
+
+      if (!geometry?.lat || !geometry?.lng) {
+        throw new Error("Invalid coordinates in API response");
+      }
+
+      const coordinates = {
+        lat: geometry.lat,
+        lng: geometry.lng,
+      };
+
+      const formattedAddress = locationData.formatted_address;
+
+      if (!formattedAddress) {
+        console.warn("No formatted address found for place ID:", placeId);
+      }
+
+      setCoord(coordinates);
+      setAddress(formattedAddress || "Address not available");
+    } catch (error) {
+      console.error("Error fetching location details:", error);
+
+      setCoord({ lat: null, lng: null });
+      setAddress("");
+    }
   };
 
   return (

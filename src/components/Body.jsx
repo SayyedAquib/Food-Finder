@@ -30,6 +30,7 @@ const Body = () => {
       })
     : []; // Default to an empty array if topRestaurantData is not an array
 
+  console.log(data)
   if (data.communication || data.tid === "") {
     return (
       <div className="flex mt-64 overflow-hidden justify-center items-center flex-col">
@@ -38,7 +39,7 @@ const Body = () => {
           src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
           alt=""
         />
-        <h1>Location unserviceable</h1>
+        <h1 className="text-lg font-bold">{data?.cards[0]?.card?.card?.title}</h1>
       </div>
     );
   }
