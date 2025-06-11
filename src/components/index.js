@@ -6,6 +6,7 @@ import DetailMenuCard from "./DetailMenuCard";
 import Discount from "./Discount";
 import DiscountSection from "./DiscountSection";
 import Dish from "./Dish";
+import Footer from "./Footer";
 import Login from "./Login";
 import MenuCard from "./MenuCard";
 import MenuSection from "./MenuSection";
@@ -34,6 +35,7 @@ export {
   Discount,
   DiscountSection,
   Dish,
+  Footer,
   Login,
   MenuCard,
   MenuSection,

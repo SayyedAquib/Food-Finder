@@ -1,4 +1,4 @@
-import { OnYourMind, TopRestaurant, OnlineFoodDelivey, Shimmer } from "./index";
+import { OnYourMind, TopRestaurant, OnlineFoodDelivey, Shimmer, Footer } from "./index";
 import { useSelector } from "react-redux";
 import useRestaurantsData from "../hooks/useRestaurantsData";
 
@@ -64,6 +64,7 @@ const Body = () => {
       ) : (
         <Shimmer />
       )}
+      <Footer />
     </div>
   );
 };
