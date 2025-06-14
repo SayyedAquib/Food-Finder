@@ -37,6 +37,6 @@ const RestaurantCard = (info) => {
       </div>
     </Link>
   );
-}
+};
 
 export default RestaurantCard;

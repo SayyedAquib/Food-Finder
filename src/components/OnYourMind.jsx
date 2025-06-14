@@ -9,7 +9,7 @@ const OnYourMind = ({ data = [] }) => {
 
   const handlePrev = () => {
     value <= 0 ? "" : setValue((prev) => prev - 31);
-  }
+  };
 
   return (
     <div className="">
@@ -64,6 +64,6 @@ const OnYourMind = ({ data = [] }) => {
       <hr className="border" />
     </div>
   );
-}
+};
 
 export default OnYourMind;

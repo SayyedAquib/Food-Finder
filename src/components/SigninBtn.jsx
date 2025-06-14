@@ -47,6 +47,6 @@ const SigninBtn = () => {
       )}
     </>
   );
-}
+};
 
 export default SigninBtn;

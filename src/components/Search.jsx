@@ -1,23 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import {
-  PromotedRestaurant,
-  SearchRestaurant,
-  Dish,
-  OnYourMind,
-} from "./index";
+import { PromotedRestaurant, SearchRestaurant, Dish } from "./index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
-import Carousel from "./Carousel";
 
 const Search = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [searchQuery, setSearchQuery] = useState("");
-  // const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
   const [selectedResDish, setSelectedResDish] = useState(null);
   const [similarResDishes, setSimilarResDishes] = useState([]);
-  // const [popularCuisines, setPopularCuisines] = useState([]);
 
   const {
     coord: { lat, lng },
@@ -33,25 +26,6 @@ const Search = () => {
 
   const [activeBtn, setActiveBtn] = useState("Dishes");
 
-  const fetchPopularCuisines = async () => {
-    try {
-      const data = await fetch(
-        "https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/landing/PRE_SEARCH?lat=18.52110&lng=73.85020"
-      );
-      const res = await data.json();
-
-      const cuisines = res?.data?.cards[1]?.card?.card || [];
-
-      setPopularCuisines(cuisines);
-    } catch (error) {
-      console.error("Error fetching popular cuisines:", error);
-    }
-  };
-
-  // useEffect(() => {
-  //   fetchPopularCuisines();
-  // }, []);
-
   const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? activeBtn : filterName);
   };
@@ -66,79 +40,301 @@ const Search = () => {
 
   useEffect(() => {
     if (isSimilarResDishes) {
-      fetchSimilarResDishes();
+      fetchSimilarRestaurantDishes();
     }
   }, [isSimilarResDishes]);
 
-  const fetchSimilarResDishes = async () => {
-    const pathname = `/city/${city}/${resLocation}`;
-    const encodedPath = encodeURIComponent(pathname);
+  const fetchSimilarRestaurantDishes = async () => {
+    const requiredParams = {
+      lat,
+      lng,
+      searchQuery,
+      city,
+      resLocation,
+      resId,
+      itemId,
+    };
+    const missingParams = Object.entries(requiredParams)
+      .filter(([key, value]) => !value)
+      .map(([key]) => key);
 
-    const data = await fetch(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=null&submitAction=ENTER&selectedPLTab=dish-add&restaurantMenuUrl=${encodedPath}-rest${resId}%3Fquery%3D${searchQuery}&restaurantIdOfAddedItem=${resId}&itemAdded=${itemId}`
-    );
-    const res = await data.json();
-
-    setSelectedResDish(res?.data?.cards[1]);
-    setSimilarResDishes(res?.data?.cards[2]?.card?.card?.cards);
-    dispatch(resetSimilarResDish());
-  };
-
-  const fetchDishes = async () => {
-    const data = await fetch(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0`
-    );
-    const res = await data.json();
-    const finalData = res?.data?.cards
-      .find((data) => data?.groupedCard)
-      .groupedCard?.cardGroupMap?.DISH?.cards.filter((data) =>
-        data?.card?.card?.["@type"].includes("food.v2.Dish")
+    if (missingParams.length > 0) {
+      console.error(
+        "Missing required parameters for similar dishes fetch:",
+        missingParams
       );
+      return;
+    }
 
-    setDishes(finalData);
-  };
-
-  const fetchResaturantData = async () => {
-    const data = await fetch(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/restaurants/search/v3?lat=${lat}&lng=${lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0&selectedPLTab=RESTAURANT`
-    );
-    const res = await data.json();
-    const finalData =
-      res?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards?.filter(
-        (data) => data?.card?.card?.info
-      );
-    setRestaurantData(finalData);
-  };
-
-  const fetchSearchSuggestions = async () => {
     try {
-      const data = await fetch(
-        `https://cors-by-codethread-for-swiggy.vercel.app/cors/dapi/restaurants/search/suggest?lat=18.52110&lng=73.85020&str=${searchQuery}&trackingId=undefined&includeIMItem=true`
-      );
-      const res = await data.json();
+      const restaurantPath = `/city/${city}/${resLocation}`;
+      const restaurantMenuUrl = `${restaurantPath}-rest${resId}%3Fquery%3D${encodeURIComponent(
+        searchQuery
+      )}`;
 
-      setSearchSuggestions(res?.data?.suggestions || []);
+      const searchUrl = new URL(`${BASE_URL}/restaurants/search/v3`);
+      const searchParams = {
+        lat: lat.toString(),
+        lng: lng.toString(),
+        str: searchQuery,
+        trackingId: "null",
+        submitAction: "ENTER",
+        selectedPLTab: "dish-add",
+        restaurantMenuUrl: restaurantMenuUrl,
+        restaurantIdOfAddedItem: resId.toString(),
+        itemAdded: itemId.toString(),
+      };
+
+      Object.entries(searchParams).forEach(([key, value]) => {
+        searchUrl.searchParams.set(key, value);
+      });
+
+      const response = await fetch(searchUrl.toString());
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!result?.data?.cards) {
+        throw new Error("Invalid API response structure");
+      }
+
+      const cards = result.data.cards;
+
+      const selectedDish = extractSelectedRestaurantDish(cards);
+      setSelectedResDish(selectedDish);
+
+      const similarDishes = extractSimilarRestaurantDishes(cards);
+      setSimilarResDishes(similarDishes);
+
+      dispatch(resetSimilarResDish());
     } catch (error) {
-      console.error("Error fetching search suggestions:", error);
+      console.error("Error fetching similar restaurant dishes:", error);
+
+      setSelectedResDish(null);
+      setSimilarResDishes([]);
+    }
+  };
+
+  const extractSelectedRestaurantDish = (cards) => {
+    try {
+      const selectedDishCard = cards[1];
+
+      if (!selectedDishCard) {
+        console.warn("No selected restaurant dish found in API response");
+        return null;
+      }
+
+      return selectedDishCard;
+    } catch (error) {
+      console.warn("Error extracting selected restaurant dish:", error);
+      return null;
+    }
+  };
+
+  const extractSimilarRestaurantDishes = (cards) => {
+    try {
+      const similarDishesCard = cards[2];
+
+      if (!similarDishesCard?.card?.card?.cards) {
+        console.warn("No similar restaurant dishes found in API response");
+        return [];
+      }
+
+      const dishes = similarDishesCard.card.card.cards;
+
+      if (!Array.isArray(dishes)) {
+        console.warn("Similar dishes data is not an array:", dishes);
+        return [];
+      }
+
+      return dishes;
+    } catch (error) {
+      console.warn("Error extracting similar restaurant dishes:", error);
+      return [];
+    }
+  };
+
+  const fetchDishesFromSearch = async () => {
+    if (!searchQuery.trim() || searchQuery.split("").length <= 1) return;
+
+    if (!lat || !lng) {
+      console.error("Missing required parameters for dishes search:", {
+        lat,
+        lng,
+      });
+      setDishes([]);
+      return;
+    }
+
+    try {
+      const dishSearchUrl = new URL(`${BASE_URL}/restaurants/search/v3`);
+      const searchParams = {
+        lat: lat.toString(),
+        lng: lng.toString(),
+        str: searchQuery.trim(),
+        trackingId: generateTrackingId(),
+        submitAction: "ENTER",
+        queryUniqueId: generateQueryId(),
+      };
+
+      Object.entries(searchParams).forEach(([key, value]) => {
+        dishSearchUrl.searchParams.set(key, value);
+      });
+
+      const response = await fetch(dishSearchUrl.toString());
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!result?.data?.cards) {
+        throw new Error("Invalid API response structure");
+      }
+
+      const dishData = extractDishesFromResponse(result.data.cards);
+      setDishes(dishData);
+    } catch (error) {
+      console.error("Error fetching dishes from search:", error);
+
+      setDishes([]);
+    }
+  };
+
+  const extractDishesFromResponse = (cards) => {
+    try {
+      const groupedCard = cards.find((card) => card?.groupedCard);
+
+      if (!groupedCard?.groupedCard?.cardGroupMap?.DISH?.cards) {
+        console.warn("No dish data found in API response");
+        return [];
+      }
+
+      const dishCards = groupedCard.groupedCard.cardGroupMap.DISH.cards;
+
+      const validDishes = dishCards.filter((card) => {
+        const cardType = card?.card?.card?.["@type"];
+        return cardType && cardType.includes("food.v2.Dish");
+      });
+
+      if (validDishes.length === 0) {
+        console.warn("No valid dishes found in response");
+        return [];
+      }
+
+      return validDishes;
+    } catch (error) {
+      console.warn("Error extracting dishes from response:", error);
+      return [];
+    }
+  };
+
+  const generateTrackingId = () => {
+    return "xxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".replace(/[x]/g, () => {
+      return ((Math.random() * 16) | 0).toString(16);
+    });
+  };
+
+  const generateQueryId = () => {
+    return "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".replace(/[x]/g, () => {
+      return ((Math.random() * 16) | 0).toString(16);
+    });
+  };
+
+  const fetchRestaurantSearchData = async () => {
+    if (!searchQuery.trim() || searchQuery.split("").length <= 1) return;
+
+    if (!lat || !lng) {
+      console.error("Missing required parameters for restaurant search:", {
+        lat,
+        lng,
+      });
+      setRestaurantData([]);
+      return;
+    }
+
+    try {
+      const restaurantSearchUrl = new URL(`${BASE_URL}/restaurants/search/v3`);
+      const searchParams = {
+        lat: lat.toString(),
+        lng: lng.toString(),
+        str: searchQuery.trim(),
+        trackingId: generateTrackingId(),
+        submitAction: "ENTER",
+        queryUniqueId: generateQueryId(),
+        selectedPLTab: "RESTAURANT",
+      };
+
+      Object.entries(searchParams).forEach(([key, value]) => {
+        restaurantSearchUrl.searchParams.set(key, value);
+      });
+
+      const response = await fetch(restaurantSearchUrl.toString());
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!result?.data?.cards) {
+        throw new Error("Invalid API response structure");
+      }
+
+      const restaurantData = extractRestaurantsFromResponse(result.data.cards);
+      setRestaurantData(restaurantData);
+    } catch (error) {
+      console.error("Error fetching restaurant search data:", error);
+
+      setRestaurantData([]);
+    }
+  };
+
+  const extractRestaurantsFromResponse = (cards) => {
+    try {
+      if (!Array.isArray(cards) || cards.length === 0) {
+        console.warn("No cards found in API response");
+        return [];
+      }
+
+      const restaurantCard = cards[0];
+
+      if (!restaurantCard?.groupedCard?.cardGroupMap?.RESTAURANT?.cards) {
+        console.warn("No restaurant data found in API response structure");
+        return [];
+      }
+
+      const restaurantCards =
+        restaurantCard.groupedCard.cardGroupMap.RESTAURANT.cards;
+
+      if (!Array.isArray(restaurantCards)) {
+        console.warn("Restaurant cards is not an array:", restaurantCards);
+        return [];
+      }
+
+      const validRestaurants = restaurantCards.filter((card) => {
+        return card?.card?.card?.info;
+      });
+
+      if (validRestaurants.length === 0) {
+        console.warn("No valid restaurants found in response");
+        return [];
+      }
+
+      return validRestaurants;
+    } catch (error) {
+      console.warn("Error extracting restaurants from response:", error);
+      return [];
     }
   };
 
   useEffect(() => {
-    // if (searchQuery.trim() === "") return;
-
-    // const timeoutId = setTimeout(() => {
-    // fetchSearchSuggestions();
-    fetchDishes();
-    fetchResaturantData();
-    // }, 500);
-
-    // return () => clearTimeout(timeoutId);
+    fetchDishesFromSearch();
+    fetchRestaurantSearchData();
   }, [searchQuery]);
 
   return (
@@ -155,46 +351,6 @@ const Search = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-
-      {/* {searchQuery.trim() === "" ? (
-        <Carousel data={popularCuisines} />
-      ) : (
-        <div className="w-full  mx-auto bg-white border border-gray-200 rounded-md shadow">
-          {searchSuggestions.map((item, index) => (
-            <div
-              key={index}
-              className={`flex items-center gap-3 px-4 py-3 cursor-pointer ${
-                item.highlighted ? "bg-blue-50" : "hover:bg-gray-50"
-                }`}
-              onClick={(e) => {
-                setSearchQuery(item.text)
-              }}
-              onFocus={(e) => {
-                setSearchQuery(item.text);
-                setSelectedResDish(null);
-                setDishes([]);
-              }}
-              onBlur={(e) => {
-                setSearchQuery("");
-                setSelectedResDish(null);
-                setDishes([]);
-              }}
-            >
-              <img
-                src={`https://media-assets.swiggy.com/swiggy/image/upload/${item.cloudinaryId}`}
-                alt={item.title}
-                className="w-12 h-12 rounded-md object-cover"
-              />
-              <div>
-                <p className="text-sm font-semibold text-gray-800">
-                  {item.text}
-                </p>
-                <p className="text-xs text-gray-500">{item.subtitle}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )} */}
 
       {!selectedResDish && (
         <div className="my-7 flex flex-wrap gap-3">
@@ -236,9 +392,13 @@ const Search = () => {
         {selectedResDish ? (
           <>
             <div>
-              <p className="p-4">Item added to cart</p>
+              <p className="p-4 text-lg font-semibold text-gray-700 mt-6">
+                Item added to cart
+              </p>
               <Dish data={selectedResDish.card.card} />
-              <p className="p-4">More dishes from this restaurant</p>
+              <p className="p-4 text-lg font-semibold text-gray-700 mt-6">
+                More dishes from this restaurant
+              </p>
             </div>
             <br />
 

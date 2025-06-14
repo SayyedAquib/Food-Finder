@@ -1,4 +1,10 @@
-import { OnYourMind, TopRestaurant, OnlineFoodDelivey, Shimmer, Footer } from "./index";
+import {
+  OnYourMind,
+  TopRestaurant,
+  OnlineFoodDelivey,
+  Shimmer,
+  Footer,
+} from "./index";
 import { useSelector } from "react-redux";
 import useRestaurantsData from "../hooks/useRestaurantsData";
 
@@ -38,7 +44,9 @@ const Body = () => {
           src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
           alt=""
         />
-        <h1 className="text-lg font-bold">{data?.cards[0]?.card?.card?.title}</h1>
+        <h1 className="text-lg font-bold">
+          {data?.cards[0]?.card?.card?.title}
+        </h1>
       </div>
     );
   }

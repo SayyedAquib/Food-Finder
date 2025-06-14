@@ -17,7 +17,6 @@ const SearchRestaurant = ({
     },
   },
 }) => {
-
   return (
     <div className="bg-white m-4 p-4 flex gap-5 items-center md:max-w-fit ">
       <div className=" w-[30%] ">

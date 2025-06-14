@@ -24,7 +24,7 @@ const Head = () => {
     },
   ];
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const userData = useSelector((state) => state.authSlice.userData);
 
@@ -140,7 +140,10 @@ const Head = () => {
           }
         >
           <div className="flex flex-col gap-4 mt-3 w-full lg-[50%] mr-6">
-            <i className="fi fi-br-cross cursor-pointer" onClick={handleVisibility}></i>
+            <i
+              className="fi fi-br-cross cursor-pointer"
+              onClick={handleVisibility}
+            ></i>
             <input
               type="text"
               className="border p-5 focus:outline-none focus:shadow-lg"
