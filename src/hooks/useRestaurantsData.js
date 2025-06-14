@@ -1,18 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Coordinates } from "../context/contextApi";
+import { useDispatch, useSelector } from "react-redux";
+import { restaurantData } from "../utils/restaurantSlice";
 
+const restaurantCache = new Map();
 const useRestaurantsData = () => {
-  const [topRestaurantData, setTopRestaurantData] = useState([]);
-  const [topResTitle, setTopResTitle] = useState("");
-  const [onlineTitle, setOnlineTitle] = useState("");
-  const [onYourMindData, setOnYourMindData] = useState([]);
-  const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const { topRestaurantData, topResTitle, onlineTitle, onYourMindData, data } =
+    useSelector((state) => state.restaurantSlice);
 
   const {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
   const fetchRestaurantData = async () => {
+    const key = `${lat},${lng}`;
+    if (restaurantCache.has(key)) {
+      dispatch(restaurantData(restaurantCache.get(key)));
+      console.log("Using cached data for key:", key);
+      return;
+    }
+
     try {
       const baseUrl = import.meta.env.VITE_BASE_URL;
       const url = `${baseUrl}/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
@@ -28,12 +36,6 @@ const useRestaurantsData = () => {
         return;
       }
 
-      setData(result.data);
-
-      // Extract titles
-      setTopResTitle(cards[1]?.card?.card?.header?.title || "");
-      setOnlineTitle(cards[2]?.card?.card?.title || "");
-
       // Extract top restaurant data
       const topBrands = cards.find(
         (item) => item?.card?.card?.id === "top_brands_for_you"
@@ -43,14 +45,21 @@ const useRestaurantsData = () => {
         (item) => item?.card?.card?.id === "restaurant_grid_listing"
       )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
-      setTopRestaurantData(topBrands || restaurantGrid || []);
-
       // Extract "What's on your mind" data
       const whatsOnMind = cards.find(
         (item) => item?.card?.card?.id === "whats_on_your_mind"
       )?.card?.card?.imageGridCards?.info;
 
-      setOnYourMindData(whatsOnMind || []);
+      const payload = {
+        topRestaurantData: topBrands || restaurantGrid || [],
+        topResTitle: cards[1]?.card?.card?.header?.title || "",
+        onlineTitle: cards[2]?.card?.card?.title || "",
+        onYourMindData: whatsOnMind || [],
+        data: result.data,
+      };
+
+      restaurantCache.set(key, payload);
+      dispatch(restaurantData(payload));
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
     }
