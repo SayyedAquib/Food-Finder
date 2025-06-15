@@ -4,7 +4,7 @@ import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toogleSearchBar } from "../utils/toogleSlice";
 import { SigninBtn } from "./index";
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL, BASE_URL } from "../utils/constants";
 
 const Head = () => {
   const navItems = [
@@ -25,7 +25,6 @@ const Head = () => {
     },
   ];
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const cartData = useSelector((state) => state.cartSlice.cartItems);
   const userData = useSelector((state) => state.authSlice.userData);
 

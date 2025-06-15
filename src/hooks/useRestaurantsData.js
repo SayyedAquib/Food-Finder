@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { restaurantData } from "../utils/restaurantSlice";
-import { CACHE } from "../utils/constants";
+import { CACHE, BASE_URL } from "../utils/constants";
 
 const useRestaurantsData = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,7 @@ const useRestaurantsData = () => {
     }
 
     try {
-      const baseUrl = import.meta.env.VITE_BASE_URL;
-      const url = `${baseUrl}/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
+      const url = `${BASE_URL}/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
 
       const response = await fetch(url);
       if (!response.ok) throw new Error("Failed to fetch restaurant data");

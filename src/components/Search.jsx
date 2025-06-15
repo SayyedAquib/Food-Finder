@@ -3,9 +3,9 @@ import { PromotedRestaurant, SearchRestaurant, Dish } from "./index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../utils/toogleSlice";
+import { BASE_URL } from "../utils/constants";
 
 const Search = () => {
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [searchQuery, setSearchQuery] = useState("");
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);

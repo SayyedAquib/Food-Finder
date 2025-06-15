@@ -10,7 +10,7 @@ import {
 } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import { setMenuData } from "../utils/restaurantMenuSlice";
-import { CACHE } from "../utils/constants";
+import { CACHE, BASE_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const RestaurantMenu = () => {
         throw new Error("Invalid restaurant ID format");
       }
 
-      const menuUrl = new URL(`${import.meta.env.VITE_BASE_URL}/menu/pl`);
+      const menuUrl = new URL(`${BASE_URL}/menu/pl`);
       menuUrl.searchParams.set("page-type", "REGULAR_MENU");
       menuUrl.searchParams.set("complete-menu", "true");
       menuUrl.searchParams.set("lat", lat.toString());
