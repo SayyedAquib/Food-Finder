@@ -1,3 +1,5 @@
+import { IMAGE_URL } from "../utils/constants";
+
 const Carousel = ({ data }) => {
   const items = data?.gridElements?.infoWithStyle?.info || [];
   const title = data?.header?.title;
@@ -12,7 +14,7 @@ const Carousel = ({ data }) => {
         {items.map(({ imageId }, index) => (
           <div key={index} className="min-w-[100px]">
             <img
-              src={`https://media-assets.swiggy.com/swiggy/image/upload/${imageId}`}
+              src={`${IMAGE_URL}${imageId}`}
               alt={`carousel-item-${index}`}
               className="rounded-lg w-full object-cover"
             />

@@ -8,19 +8,30 @@ import {
   MenuSection,
   MenuShimmer,
 } from "./index";
+import { useDispatch, useSelector } from "react-redux";
+import { setMenuData } from "../utils/restaurantMenuSlice";
+import { CACHE } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
   const mainId = id.split("-").at(-1);
-  const [resInfo, setResInfo] = useState({});
-  const [menuData, setMenuData] = useState([]);
-  const [discountData, setDiscountData] = useState([]);
-  const [topPicksData, setTopPicksData] = useState(null);
+
+  const dispatch = useDispatch();
+  const { resInfo, menuData, discountData, topPicksData } = useSelector(
+    (state) => state.restaurantMenuSlice
+  );
+
   const {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
   const fetchRestaurantMenu = async () => {
+    if (CACHE.has(`${lat}-${lng}-${mainId}`)) {
+      const cachedData = CACHE.get(`${lat}-${lng}-${mainId}`);
+      dispatch(setMenuData(cachedData));
+      return;
+    }
+
     if (!lat || !lng || !mainId) {
       console.error("Missing required parameters for menu fetch:", {
         lat,
@@ -63,21 +74,22 @@ const RestaurantMenu = () => {
       const cards = result.data.cards;
 
       const restaurantInfo = extractRestaurantInfo(cards);
-      setResInfo(restaurantInfo);
 
       const discountInfo = extractDiscountInfo(cards);
-      setDiscountData(discountInfo);
 
       const { topPicks, menuItems } = extractMenuData(cards);
-      setTopPicksData(topPicks);
-      setMenuData(menuItems);
+
+      const payload = {
+        resInfo: restaurantInfo,
+        discountData: discountInfo,
+        topPicksData: topPicks,
+        menuData: menuItems,
+      };
+
+      dispatch(setMenuData(payload));
+      CACHE.set(`${lat}-${lng}-${mainId}`, payload);
     } catch (error) {
       console.error("Error fetching restaurant menu:", error);
-
-      setResInfo(null);
-      setDiscountData([]);
-      setTopPicksData(null);
-      setMenuData([]);
     }
   };
 

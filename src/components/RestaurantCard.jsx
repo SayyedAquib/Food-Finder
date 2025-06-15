@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { IMAGE_URL } from "../utils/constants";
 
 const RestaurantCard = (info) => {
   return (
@@ -7,10 +8,9 @@ const RestaurantCard = (info) => {
         <img
           className="w-full h-full  rounded-2xl object-cover "
           src={
-            "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-            info?.cloudinaryImageId
+            `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${info?.cloudinaryImageId}`
           }
-          alt=""
+          alt={info?.name}
         />
         <div className="bg-gradient-to-t from-black from-1% to-transparent to-40%  rounded-2xl w-full h-full  absolute top-0"></div>
         <p className="absolute bottom-0 text-white text-2xl ml-2 mb-1 font-bold">

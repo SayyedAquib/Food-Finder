@@ -1,9 +1,9 @@
-import { nonVeg, veg } from "../utils/links";
 import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import { setSimilarResDish, toggleDiffRes } from "../utils/toogleSlice";
 import { clearCart } from "../utils/cartSlice";
 import { Link } from "react-router-dom";
+import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
 const Dish = ({
   data: {
@@ -72,7 +72,7 @@ const Dish = ({
         <div className="my-3 md:max-w-fit flex justify-between">
           <div className="w-[50%]  md:w-[168px] flex flex-col gap-1">
             <div className="w-5 h-5">
-              {isVeg ? <img src={veg} alt="" /> : <img src={nonVeg} alt="" />}
+              {isVeg ? <img src={VEG} alt="Vegetarian" /> : <img src={NON_VEG} alt="Non-Vegetarian" />}
             </div>
             <p className="text-lg font-semibold">{name}</p>
             <p className="">
@@ -87,11 +87,8 @@ const Dish = ({
           <div className="w-[40%] md:w-[40%] relative h-full">
             <img
               className="rounded-xl object-cover aspect-square"
-              src={
-                "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
-                imageId
-              }
-              alt=""
+              src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`}
+              alt={name}
             />
             <div onClick={handleSameRes}>
               <AddToCartBtn

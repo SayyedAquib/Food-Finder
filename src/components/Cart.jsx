@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, deleteItem } from "../utils/cartSlice";
 import toast from "react-hot-toast";
 import { toggleLogin } from "../utils/toogleSlice";
-import { veg, nonVeg } from "../utils/links";
+import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
 const Cart = () => {
   const cartData = useSelector((state) => state.cartSlice.cartItems);
@@ -47,7 +47,7 @@ const Cart = () => {
       <div className="h-[80vh] flex flex-col items-center justify-center">
         <img
           className="w-72"
-          src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0"
+          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0`}
           alt="empty cart"
         />
         <h1 className="text-xl mt-4">Your cart is empty</h1>
@@ -68,11 +68,8 @@ const Cart = () => {
           <div className="my-10 flex gap-5">
             <img
               className="rounded-xl w-40 aspect-square"
-              src={
-                "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
-                resInfo.cloudinaryImageId
-              }
-              alt=""
+              src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${resInfo.cloudinaryImageId}`}
+              alt={resInfo.name}
             />
             <div>
               <p className="text-5xl border-b-2 border-black pb-3 ">
@@ -107,10 +104,14 @@ const Cart = () => {
                     className="w-5 rounded-sm"
                     src={
                       itemAttribute && itemAttribute.vegClassifier === "VEG"
-                        ? veg
-                        : nonVeg
+                        ? VEG
+                        : NON_VEG
                     }
-                    alt=""
+                    alt={
+                      itemAttribute?.vegClassifier === "VEG"
+                        ? "Vegetarian"
+                        : "Non-Vegetarian"
+                    }
                   />
                   <h2 className="font-bold text-lg">{name}</h2>
                   <p className="font-bold text-lg">
@@ -129,11 +130,8 @@ const Cart = () => {
                 <div className="w-[40%] md:w-[20%] relative h-full">
                   <img
                     className="rounded-xl aspect-square"
-                    src={
-                      "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
-                      imageId
-                    }
-                    alt=""
+                    src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`}
+                    alt={name}
                   />
                   <button
                     onClick={() => handleRemoveFromCart(index)}

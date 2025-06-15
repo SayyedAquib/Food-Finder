@@ -1,3 +1,5 @@
+import { IMAGE_URL } from "../utils/constants";
+
 const SearchRestaurant = ({
   data: {
     card: {
@@ -23,10 +25,9 @@ const SearchRestaurant = ({
         <img
           className="aspect-square rounded-lg"
           src={
-            "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/" +
-            cloudinaryImageId
+            `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/${cloudinaryImageId}`
           }
-          alt=""
+          alt={`${name} restaurant image`}
         />
       </div>
       <div className="w-[60%]">

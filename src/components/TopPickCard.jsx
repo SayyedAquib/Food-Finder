@@ -1,9 +1,11 @@
+import { IMAGE_URL } from "../utils/constants";
+
 const TopPickCard = ({ creativeId, defaultPrice, price }) => (
   <div className="min-w-[400px] relative h-[405px]">
     <img
       className="w-full h-full"
-      src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/${creativeId}`}
-      alt=""
+      src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_292,h_300/${creativeId}`}
+      alt="Top Pick Item"
     />
     <div className="absolute bottom-4 text-white flex justify-between w-full px-5">
       <p>₹{defaultPrice / 100 || price / 100}</p>

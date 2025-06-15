@@ -1,3 +1,5 @@
+import { IMAGE_URL } from "../utils/constants";
+
 const Shimmer = () => {
   return (
     <div className="w-full">
@@ -5,8 +7,8 @@ const Shimmer = () => {
         <div className="relative flex items-start">
           <img
             className="w-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/icecream_wwomsa"
-            alt=""
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/icecream_wwomsa`}
+            alt="Loading Icon"
           />
           <span className="loader "></span>
         </div>

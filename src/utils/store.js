@@ -4,6 +4,7 @@ import cartSlice from "./cartSlice";
 import filterSlice from "./filterSlice";
 import authSlice from "./authSlice";
 import restaurantSlice from "./restaurantSlice";
+import restaurantMenuSlice from "./restaurantMenuSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     filterSlice,
     authSlice,
     restaurantSlice,
+    restaurantMenuSlice,
   },
 });
 

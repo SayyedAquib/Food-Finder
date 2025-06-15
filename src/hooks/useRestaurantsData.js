@@ -2,8 +2,8 @@ import { useContext, useEffect } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { restaurantData } from "../utils/restaurantSlice";
+import { CACHE } from "../utils/constants";
 
-const restaurantCache = new Map();
 const useRestaurantsData = () => {
   const dispatch = useDispatch();
   const { topRestaurantData, topResTitle, onlineTitle, onYourMindData, data } =
@@ -15,9 +15,8 @@ const useRestaurantsData = () => {
 
   const fetchRestaurantData = async () => {
     const key = `${lat},${lng}`;
-    if (restaurantCache.has(key)) {
-      dispatch(restaurantData(restaurantCache.get(key)));
-      console.log("Using cached data for key:", key);
+    if (CACHE.has(key)) {
+      dispatch(restaurantData(CACHE.get(key)));
       return;
     }
 
@@ -58,7 +57,7 @@ const useRestaurantsData = () => {
         data: result.data,
       };
 
-      restaurantCache.set(key, payload);
+      CACHE.set(key, payload);
       dispatch(restaurantData(payload));
     } catch (error) {
       console.error("Error fetching restaurant data:", error);

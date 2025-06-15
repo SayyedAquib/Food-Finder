@@ -3,7 +3,7 @@ import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDiffRes } from "../utils/toogleSlice";
 import { clearCart } from "../utils/cartSlice";
-import { veg, nonVeg } from "../utils/links";
+import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
 const DetailMenuCard = ({ info, resInfo }) => {
   const {
@@ -35,8 +35,12 @@ const DetailMenuCard = ({ info, resInfo }) => {
         <div className="w-[55%] md:w-[70%]">
           <img
             className="w-5 rounded-sm"
-            src={itemAttribute?.vegClassifier === "VEG" ? veg : nonVeg}
-            alt=""
+            src={itemAttribute?.vegClassifier === "VEG" ? VEG : NON_VEG}
+            alt={
+              itemAttribute?.vegClassifier === "VEG"
+                ? "Vegetarian"
+                : "Non-Vegetarian"
+            }
           />
           <h2 className="font-bold text-lg">{name}</h2>
           <p className="font-bold text-lg">
@@ -67,8 +71,8 @@ const DetailMenuCard = ({ info, resInfo }) => {
         <div className="w-[40%] md:w-[20%] relative h-full">
           <img
             className="rounded -xl aspect-square"
-            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`}
-            alt=""
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`}
+            alt={name}
           />
           <AddToCartBtn
             info={info}

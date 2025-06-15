@@ -1,3 +1,4 @@
+import { IMAGE_URL } from "../utils/constants";
 import { SigninBtn } from "./index";
 
 const Login = ({ handleLogin }) => {
@@ -14,8 +15,8 @@ const Login = ({ handleLogin }) => {
           </h2>
           <img
             className="w-28"
-            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
-            alt=""
+            src={`${IMAGE_URLL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
+            alt="Login"
           />
         </div>
 

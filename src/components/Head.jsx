@@ -4,6 +4,7 @@ import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toogleSearchBar } from "../utils/toogleSlice";
 import { SigninBtn } from "./index";
+import { IMAGE_URL } from "../utils/constants";
 
 const Head = () => {
   const navItems = [
@@ -50,7 +51,7 @@ const Head = () => {
 
     try {
       const response = await fetch(
-        `${baseUrl}/misc/place-autocomplete?input=${encodeURIComponent(
+        `${BASE_URL}/misc/place-autocomplete?input=${encodeURIComponent(
           query.trim()
         )}`
       );
@@ -201,8 +202,8 @@ const Head = () => {
               </h2>
               <img
                 className="w-28"
-                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
-                alt=""
+                src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
+                alt="LOGIN"
               />
             </div>
 
@@ -223,7 +224,7 @@ const Head = () => {
                 <div className="w-20">
                   <img
                     src="https://1000logos.net/wp-content/uploads/2021/05/Swiggy-emblem.png"
-                    alt=""
+                    alt="Swiggy Logo"
                   />
                 </div>
               </Link>
@@ -257,7 +258,7 @@ const Head = () => {
                           <img
                             className="rounded-full"
                             src={userData.photo}
-                            alt=""
+                            alt="User Avatar"
                           />
                         </div>
                       ) : (
@@ -300,7 +301,7 @@ const Head = () => {
                     <div className="flex items-center gap-3" key={i}>
                       {userData ? (
                         <div className="w-10 h-10 rounded-full ">
-                          <img src={userData.photo} alt="" />
+                          <img src={userData.photo} alt="User Avatar" />
                         </div>
                       ) : (
                         <i

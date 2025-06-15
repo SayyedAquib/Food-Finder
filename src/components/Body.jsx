@@ -7,6 +7,7 @@ import {
 } from "./index";
 import { useSelector } from "react-redux";
 import useRestaurantsData from "../hooks/useRestaurantsData";
+import { IMAGE_URL } from "../utils/constants";
 
 const Body = () => {
   const [topRestaurantData, topResTitle, onlineTitle, onYourMindData, data] =
@@ -41,8 +42,8 @@ const Body = () => {
       <div className="flex mt-64 overflow-hidden justify-center items-center flex-col">
         <img
           className="w-72"
-          src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
-          alt=""
+          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png`}
+          alt="unserviceable location"
         />
         <h1 className="text-lg font-bold">
           {data?.cards[0]?.card?.card?.title}
