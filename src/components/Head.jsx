@@ -80,7 +80,7 @@ const Head = () => {
       handleVisibility();
 
       const response = await fetch(
-        `${baseUrl}/misc/address-recommend?place_id=${encodeURIComponent(
+        `${BASE_URL}/misc/address-recommend?place_id=${encodeURIComponent(
           placeId.trim()
         )}`
       );
@@ -164,9 +164,7 @@ const Head = () => {
                             {data.structured_formatting.secondary_text}
                           </p>
                           {!isLast && (
-                            <p className="opacity-35">
-                              ---------------------------------------------
-                            </p>
+                            <hr className="my-2 border-gray-300 border-dashed" />
                           )}
                         </li>
                       </div>

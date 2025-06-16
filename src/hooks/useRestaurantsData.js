@@ -1,13 +1,24 @@
 import { useContext, useEffect } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
-import { restaurantData } from "../utils/restaurantSlice";
+import {
+  fetchStart,
+  fetchSuccess,
+  fetchFailure,
+} from "../utils/restaurantSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
 
 const useRestaurantsData = () => {
   const dispatch = useDispatch();
-  const { topRestaurantData, topResTitle, onlineTitle, onYourMindData, data } =
-    useSelector((state) => state.restaurantSlice);
+  const {
+    topRestaurantData,
+    topResTitle,
+    onlineTitle,
+    onYourMindData,
+    data,
+    status,
+    error,
+  } = useSelector((state) => state.restaurantSlice);
 
   const {
     coord: { lat, lng },
@@ -16,11 +27,12 @@ const useRestaurantsData = () => {
   const fetchRestaurantData = async () => {
     const key = `${lat},${lng}`;
     if (CACHE.has(key)) {
-      dispatch(restaurantData(CACHE.get(key)));
+      dispatch(fetchSuccess(CACHE.get(key)));
       return;
     }
 
     try {
+      dispatch(fetchStart());
       const url = `${BASE_URL}/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
 
       const response = await fetch(url);
@@ -57,9 +69,10 @@ const useRestaurantsData = () => {
       };
 
       CACHE.set(key, payload);
-      dispatch(restaurantData(payload));
+      dispatch(fetchSuccess(payload));
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
+      dispatch(fetchFailure(error.message));
     }
   };
 
@@ -67,7 +80,15 @@ const useRestaurantsData = () => {
     if (lat && lng) fetchRestaurantData();
   }, [lat, lng]);
 
-  return [topRestaurantData, topResTitle, onlineTitle, onYourMindData, data];
+  return [
+    topRestaurantData,
+    topResTitle,
+    onlineTitle,
+    onYourMindData,
+    data,
+    status,
+    error,
+  ];
 };
 
 export default useRestaurantsData;

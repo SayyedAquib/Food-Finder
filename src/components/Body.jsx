@@ -10,11 +10,16 @@ import useRestaurantsData from "../hooks/useRestaurantsData";
 import { IMAGE_URL } from "../utils/constants";
 
 const Body = () => {
-  const [topRestaurantData, topResTitle, onlineTitle, onYourMindData, data] =
-    useRestaurantsData();
+  const [
+    topRestaurantData,
+    topResTitle,
+    onlineTitle,
+    onYourMindData,
+    data,
+    status,
+  ] = useRestaurantsData();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);
 
-  // Ensure topRestaurantData is an array before filtering
   const filteredData = Array.isArray(topRestaurantData)
     ? topRestaurantData.filter((item) => {
         if (!filterVal) return true;
@@ -28,16 +33,16 @@ const Body = () => {
               item?.info?.costForTwo?.slice(1, 4) <= "600"
             );
           case "Offers":
-            return; // Handle this case appropriately
+            return; //TODO: Implement offers filter logic
           case "Less than Rs. 300":
             return item?.info?.costForTwo?.slice(1, 4) < "300";
           default:
             return true;
         }
       })
-    : []; // Default to an empty array if topRestaurantData is not an array
+    : [];
 
-  if (data.communication || data.tid === "") {
+  if (data?.communication || data?.tid === "") {
     return (
       <div className="flex mt-64 overflow-hidden justify-center items-center flex-col">
         <img
@@ -50,6 +55,10 @@ const Body = () => {
         </h1>
       </div>
     );
+  }
+
+  if (status === "loading") {
+    return <Shimmer />;
   }
 
   return (

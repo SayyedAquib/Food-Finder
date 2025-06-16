@@ -15,7 +15,7 @@ const Login = ({ handleLogin }) => {
           </h2>
           <img
             className="w-28"
-            src={`${IMAGE_URLL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
             alt="Login"
           />
         </div>
