@@ -1,37 +1,47 @@
 import { Link } from "react-router-dom";
 import { IMAGE_URL } from "../utils/constants";
 
-const RestaurantCard = (info) => {
+const RestaurantCard = ({
+  link,
+  cloudinaryImageId,
+  name,
+  cuisines,
+  avgRating,
+  sla,
+  locality,
+  aggregatedDiscountInfoV3,
+}) => {
+  
+  const restaurantId = link.split("/").at(-1);
+  const imageSrc = `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`;
+  const discountText = aggregatedDiscountInfoV3
+    ? `${aggregatedDiscountInfoV3.header} ${aggregatedDiscountInfoV3.subHeader}`
+    : "";
+
   return (
-    <Link to={`/restaurantMenu/${info.link.split("/").at(-1)}`}>
-      <div className="min-w-[295px] h-[182px] relative ">
+    <Link to={`/restaurantMenu/${restaurantId}`}>
+      <div className="min-w-[295px] h-[182px] relative">
         <img
-          className="w-full h-full  rounded-2xl object-cover "
-          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${info?.cloudinaryImageId}`}
-          alt={info?.name}
+          className="w-full h-full rounded-2xl object-cover"
+          src={imageSrc}
+          alt={name}
         />
-        <div className="bg-gradient-to-t from-black from-1% to-transparent to-40%  rounded-2xl w-full h-full  absolute top-0"></div>
+        <div className="bg-gradient-to-t from-black from-1% to-transparent to-40% rounded-2xl w-full h-full absolute top-0"></div>
         <p className="absolute bottom-0 text-white text-2xl ml-2 mb-1 font-bold">
-          {info?.aggregatedDiscountInfoV3
-            ? info?.aggregatedDiscountInfoV3?.header +
-              " " +
-              info?.aggregatedDiscountInfoV3?.subHeader
-            : ""}
+          {discountText}
         </p>
       </div>
       <div className="mt-3">
-        <h2 className="text-lg font-semibold ">{info?.name}</h2>
+        <h2 className="text-lg font-semibold">{name}</h2>
         <p className="flex items-center gap-1 text-base font-semibold">
-          {" "}
-          <i className="fi fi-ss-circle-star mt-1 text-green-600 text-lg"></i>{" "}
-          {info?.avgRating} . <span>{info?.sla?.slaString}</span>
+          <i className="fi fi-ss-circle-star mt-1 text-green-600 text-lg"></i>
+          {avgRating} <span className="mx-1">.</span>{" "}
+          <span>{sla?.slaString}</span>
         </p>
-        <p className="line-clamp-1 text-black/60 font-medium">
-          {info.cuisines.join(", ")}
+        <p className="line-clamp-1 text-black/60 font-medium w-[295px]">
+          {cuisines.join(", ")}
         </p>
-        <p className="line-clamp-1 text-black/60 font-medium">
-          {info.locality}
-        </p>
+        <p className="line-clamp-1 text-black/60 font-medium">{locality}</p>
       </div>
     </Link>
   );

@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { Coordinates } from "./context/contextApi";
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Coordinates } from "./context/contextApi";
+import { lazy } from "react";
 import {
   BodyShimmer,
   MenuShimmer,
@@ -9,69 +10,49 @@ import {
   SearchShimmer,
 } from "./components";
 import NotFound from "./pages/NotFound";
+import Loadable from "./utils/loadable";
 
-const Home = lazy(() => import("./pages/Home"));
-const Body = lazy(() => import("./components/Body"));
-const Search = lazy(() => import("./pages/Search"));
-const Cart = lazy(() => import("./pages/Cart"));
-const RestaurantMenu = lazy(() => import("./pages/RestaurantMenu"));
+const Home = Loadable(
+  lazy(() => import("./pages/Home")),
+  BodyShimmer
+);
+const Body = Loadable(
+  lazy(() => import("./components/Body")),
+  BodyShimmer
+);
+const Search = Loadable(
+  lazy(() => import("./pages/Search")),
+  SearchShimmer
+);
+const Cart = Loadable(
+  lazy(() => import("./pages/Cart")),
+  CartShimmer
+);
+const RestaurantMenu = Loadable(
+  lazy(() => import("./pages/RestaurantMenu")),
+  MenuShimmer
+);
 
 const App = () => {
   const [coord, setCoord] = useState({ lat: 18.5211061, lng: 73.8502 });
 
-  const visible = useSelector((state) => state.toggleSlice.searchBarToggle);
-  const loginVisible = useSelector((state) => state.toggleSlice.loginToggle);
+  const { searchBarToggle: isSearchOpen, loginToggle: isLoginOpen } =
+    useSelector((state) => state.toggleSlice);
+
+  const isOverlayActive = isSearchOpen || isLoginOpen;
 
   return (
     <Coordinates.Provider value={{ coord, setCoord }}>
-      <div
-        className={
-          " " + (visible || loginVisible ? "max-h-screen overflow-hidden" : " ")
-        }
-      >
+      <div className={isOverlayActive ? "max-h-screen overflow-hidden" : ""}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<BodyShimmer />}>
-                <Home />
-              </Suspense>
-            }
-          >
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<BodyShimmer />}>
-                  <Body />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/restaurantMenu/:id"
-              element={
-                <Suspense fallback={<MenuShimmer />}>
-                  <RestaurantMenu />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/cart"
-              element={
-                <Suspense fallback={<CartShimmer />}>
-                  <Cart />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <Suspense fallback={<SearchShimmer />}>
-                  <Search />
-                </Suspense>
-              }
-            />
+          <Route path="/" element={<Home />}>
+            <Route index element={<Body />} />
+            <Route path="restaurantMenu/:id" element={<RestaurantMenu />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="search" element={<Search />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Coordinates.Provider>

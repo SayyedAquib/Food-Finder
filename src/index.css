@@ -8,6 +8,16 @@
   box-sizing: border-box;
 }
 
+/* hide-scrollbar class */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
 .filterBtn {
   border: 1px solid rgb(191, 191, 191);
   padding: 10px 20px;
