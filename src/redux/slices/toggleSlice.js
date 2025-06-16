@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toogleSlice = createSlice({
-  name: "toogleSlice",
+const toggleSlice = createSlice({
+  name: "toggleSlice",
   initialState: {
-    searchBarToogle: false,
+    searchBarToggle: false,
     loginToggle: false,
     isDiffRes: false,
     similarResDish: {
@@ -15,8 +15,8 @@ const toogleSlice = createSlice({
     },
   },
   reducers: {
-    toogleSearchBar: (state, action) => {
-      state.searchBarToogle = !state.searchBarToogle;
+    toggleSearchBar: (state, action) => {
+      state.searchBarToggle = !state.searchBarToggle;
     },
     toggleLogin: (state) => {
       state.loginToggle = !state.loginToggle;
@@ -40,11 +40,11 @@ const toogleSlice = createSlice({
 });
 
 export const {
-  toogleSearchBar,
+  toggleSearchBar,
   toggleLogin,
   toggleDiffRes,
   setSimilarResDish,
   resetSimilarResDish,
-} = toogleSlice.actions;
+} = toggleSlice.actions;
 
-export default toogleSlice.reducer;
+export default toggleSlice.reducer;

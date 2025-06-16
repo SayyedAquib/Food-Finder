@@ -1,6 +1,6 @@
 import AddToCartBtn from "./AddToCartBtn";
 import Breadcrumb from "./Breadcrumb";
-import CartShimmer from "./CartShimmer";
+import CartShimmer from "./shimmer/CartShimmer";
 import DetailMenu from "./DetailMenu";
 import DetailMenuCard from "./DetailMenuCard";
 import Discount from "./Discount";
@@ -10,8 +10,8 @@ import Footer from "./Footer";
 import Login from "./Login";
 import MenuCard from "./MenuCard";
 import MenuSection from "./MenuSection";
-import MenuShimmer from "./MenuShimmer";
-import NotFound from "./NotFound";
+import MenuShimmer from "./shimmer/MenuShimmer";
+import NotFound from "../pages/NotFound";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
 import OnYourMind from "./OnYourMind";
 import OutletInfo from "./OutletInfo";
@@ -19,8 +19,8 @@ import PromotedRestaurant from "./PromotedRestaurant";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantHeader from "./RestaurantHeader";
 import SearchRestaurant from "./SearchRestaurant";
-import SearchShimmer from "./SearchShimmer";
-import Shimmer from "./Shimmer";
+import SearchShimmer from "./shimmer/SearchShimmer";
+import BodyShimmer from "./shimmer/BodyShimmer";
 import SigninBtn from "./SigninBtn";
 import TopPickCard from "./TopPickCard";
 import TopPicks from "./TopPicks";
@@ -49,7 +49,7 @@ export {
   RestaurantHeader,
   SearchRestaurant,
   SearchShimmer,
-  Shimmer,
+  BodyShimmer,
   SigninBtn,
   TopPickCard,
   TopPicks,

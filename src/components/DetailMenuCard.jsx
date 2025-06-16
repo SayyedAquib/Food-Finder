@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDiffRes } from "../utils/toogleSlice";
-import { clearCart } from "../utils/cartSlice";
+import { toggleDiffRes } from "../redux/slices/toggleSlice";
+import { clearCart } from "../redux/slices/cartSlice";
 import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
 const DetailMenuCard = ({ info, resInfo }) => {
@@ -17,7 +17,7 @@ const DetailMenuCard = ({ info, resInfo }) => {
     description = "",
     imageId,
   } = info;
-  const isDiffRes = useSelector((state) => state.toogleSlice.isDiffRes);
+  const isDiffRes = useSelector((state) => state.toggleSlice.isDiffRes);
   const dispatch = useDispatch();
 
   const handleIsDiffRes = () => dispatch(toggleDiffRes());

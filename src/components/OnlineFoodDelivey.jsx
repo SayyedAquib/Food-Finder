@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RestaurantCard } from "./index";
 import { useDispatch } from "react-redux";
-import { setFilterValue } from "../utils/filterSlice";
+import { setFilterValue } from "../redux/slices/filterSlice";
 
 const OnlineFoodDelivey = ({ data, title }) => {
   const filterOptions = [

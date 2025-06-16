@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleLogin, toogleSearchBar } from "../utils/toogleSlice";
+import { toggleLogin, toggleSearchBar } from "../redux/slices/toggleSlice";
 import { SigninBtn } from "./index";
 import { IMAGE_URL, BASE_URL } from "../utils/constants";
 
@@ -29,8 +29,8 @@ const Head = () => {
   const userData = useSelector((state) => state.authSlice.userData);
 
   //access data from redux store using useSelector
-  const visible = useSelector((state) => state.toogleSlice.searchBarToogle);
-  const loginVisible = useSelector((state) => state.toogleSlice.loginToggle);
+  const visible = useSelector((state) => state.toggleSlice.searchBarToggle);
+  const loginVisible = useSelector((state) => state.toggleSlice.loginToggle);
   const dispatch = useDispatch();
 
   const [searchResult, setSearchResult] = useState([]);
@@ -38,7 +38,7 @@ const Head = () => {
   const { setCoord } = useContext(Coordinates);
 
   const handleVisibility = () => {
-    dispatch(toogleSearchBar());
+    dispatch(toggleSearchBar());
   };
 
   const handleLogin = () => {
@@ -328,8 +328,6 @@ const Head = () => {
             </div>
           </div>
         </div>
-
-        <Outlet />
       </div>
     </>
   );

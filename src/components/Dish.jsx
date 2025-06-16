@@ -1,7 +1,7 @@
 import { AddToCartBtn } from "./index";
 import { useDispatch, useSelector } from "react-redux";
-import { setSimilarResDish, toggleDiffRes } from "../utils/toogleSlice";
-import { clearCart } from "../utils/cartSlice";
+import { setSimilarResDish, toggleDiffRes } from "../redux/slices/toggleSlice";
+import { clearCart } from "../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
@@ -21,7 +21,7 @@ const Dish = ({
     slugs: { city, restaurant: resLocation },
   } = resInfo;
 
-  const isDiffRes = useSelector((state) => state.toogleSlice.isDiffRes);
+  const isDiffRes = useSelector((state) => state.toggleSlice.isDiffRes);
   const { id: cartResId } = useSelector((state) => state.cartSlice.resInfo);
   const dispatch = useDispatch();
 
@@ -72,7 +72,11 @@ const Dish = ({
         <div className="my-3 md:max-w-fit flex justify-between">
           <div className="w-[50%]  md:w-[168px] flex flex-col gap-1">
             <div className="w-5 h-5">
-              {isVeg ? <img src={VEG} alt="Vegetarian" /> : <img src={NON_VEG} alt="Non-Vegetarian" />}
+              {isVeg ? (
+                <img src={VEG} alt="Vegetarian" />
+              ) : (
+                <img src={NON_VEG} alt="Non-Vegetarian" />
+              )}
             </div>
             <p className="text-lg font-semibold">{name}</p>
             <p className="">

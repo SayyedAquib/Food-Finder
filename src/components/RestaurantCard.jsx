@@ -7,9 +7,7 @@ const RestaurantCard = (info) => {
       <div className="min-w-[295px] h-[182px] relative ">
         <img
           className="w-full h-full  rounded-2xl object-cover "
-          src={
-            `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${info?.cloudinaryImageId}`
-          }
+          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${info?.cloudinaryImageId}`}
           alt={info?.name}
         />
         <div className="bg-gradient-to-t from-black from-1% to-transparent to-40%  rounded-2xl w-full h-full  absolute top-0"></div>

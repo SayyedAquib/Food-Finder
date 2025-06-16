@@ -1,9 +1,9 @@
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, provider } from "../config/firebaseAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { addUserData, removeUserData } from "../utils/authSlice";
+import { addUserData, removeUserData } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { toggleLogin } from "../utils/toogleSlice";
+import { toggleLogin } from "../redux/slices/toggleSlice";
 
 const SigninBtn = () => {
   const dispatch = useDispatch();

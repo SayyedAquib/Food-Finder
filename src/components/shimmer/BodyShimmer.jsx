@@ -1,6 +1,6 @@
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL } from "../../utils/constants";
 
-const Shimmer = () => {
+const BodyShimmer = () => {
   return (
     <div className="w-full">
       <div className="w-full text-white flex justify-center items-center gap-5 flex-col h-[350px] bg-slate-900">
@@ -30,4 +30,4 @@ const Shimmer = () => {
   );
 };
 
-export default Shimmer;
+export default BodyShimmer;

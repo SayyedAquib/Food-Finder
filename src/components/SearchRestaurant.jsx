@@ -24,9 +24,7 @@ const SearchRestaurant = ({
       <div className=" w-[30%] ">
         <img
           className="aspect-square rounded-lg"
-          src={
-            `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/${cloudinaryImageId}`
-          }
+          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/${cloudinaryImageId}`}
           alt={`${name} restaurant image`}
         />
       </div>

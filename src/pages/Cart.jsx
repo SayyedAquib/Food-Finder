@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, deleteItem } from "../utils/cartSlice";
+import { clearCart, deleteItem } from "../redux/slices/cartSlice";
 import toast from "react-hot-toast";
-import { toggleLogin } from "../utils/toogleSlice";
+import { toggleLogin } from "../redux/slices/toggleSlice";
 import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
 
 const Cart = () => {

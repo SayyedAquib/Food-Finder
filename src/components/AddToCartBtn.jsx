@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../utils/cartSlice";
+import { addToCart } from "../redux/slices/cartSlice";
 import toast from "react-hot-toast";
 
 const AddToCartBtn = ({ info, resInfo, handleIsDiffRes }) => {

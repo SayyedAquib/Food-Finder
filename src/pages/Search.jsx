@@ -1,8 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { PromotedRestaurant, SearchRestaurant, Dish } from "./index";
+import {
+  PromotedRestaurant,
+  SearchRestaurant,
+  Dish,
+} from "../components/index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
-import { resetSimilarResDish } from "../utils/toogleSlice";
+import { resetSimilarResDish } from "../redux/slices/toggleSlice";
 import { BASE_URL } from "../utils/constants";
 
 const Search = () => {
@@ -19,7 +23,7 @@ const Search = () => {
   const PromotedRes = PromotedRestaurant(SearchRestaurant);
 
   const { isSimilarResDishes, city, resId, itemId, resLocation } = useSelector(
-    (state) => state.toogleSlice.similarResDish
+    (state) => state.toggleSlice.similarResDish
   );
   const dispatch = useDispatch();
   const filterOptions = ["Restaurant", "Dishes"];

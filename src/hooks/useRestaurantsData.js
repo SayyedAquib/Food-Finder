@@ -5,7 +5,7 @@ import {
   fetchStart,
   fetchSuccess,
   fetchFailure,
-} from "../utils/restaurantSlice";
+} from "../redux/slices/restaurantSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
 
 const useRestaurantsData = () => {

@@ -7,9 +7,9 @@ import {
   DiscountSection,
   MenuSection,
   MenuShimmer,
-} from "./index";
+} from "../components/index";
 import { useDispatch, useSelector } from "react-redux";
-import { setMenuData } from "../utils/restaurantMenuSlice";
+import { setMenuData } from "../redux/slices/restaurantMenuSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {

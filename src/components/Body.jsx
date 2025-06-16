@@ -2,7 +2,7 @@ import {
   OnYourMind,
   TopRestaurant,
   OnlineFoodDelivey,
-  Shimmer,
+  BodyShimmer,
   Footer,
 } from "./index";
 import { useSelector } from "react-redux";
@@ -58,7 +58,7 @@ const Body = () => {
   }
 
   if (status === "loading") {
-    return <Shimmer />;
+    return <BodyShimmer />;
   }
 
   return (
@@ -80,7 +80,7 @@ const Body = () => {
           />
         </div>
       ) : (
-        <Shimmer />
+        <BodyShimmer />
       )}
       <Footer />
     </div>

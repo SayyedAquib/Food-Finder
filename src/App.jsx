@@ -3,24 +3,24 @@ import { Coordinates } from "./context/contextApi";
 import { lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  CartShimmer,
+  BodyShimmer,
   MenuShimmer,
-  NotFound,
+  CartShimmer,
   SearchShimmer,
-  Shimmer,
-} from "./components/index";
+} from "./components";
+import NotFound from "./pages/NotFound";
 
-const Head = lazy(() => import("./components/Head"));
+const Home = lazy(() => import("./pages/Home"));
 const Body = lazy(() => import("./components/Body"));
-const Search = lazy(() => import("./components/Search"));
-const Cart = lazy(() => import("./components/Cart"));
-const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
+const Search = lazy(() => import("./pages/Search"));
+const Cart = lazy(() => import("./pages/Cart"));
+const RestaurantMenu = lazy(() => import("./pages/RestaurantMenu"));
 
 const App = () => {
   const [coord, setCoord] = useState({ lat: 18.5211061, lng: 73.8502 });
 
-  const visible = useSelector((state) => state.toogleSlice.searchBarToogle);
-  const loginVisible = useSelector((state) => state.toogleSlice.loginToggle);
+  const visible = useSelector((state) => state.toggleSlice.searchBarToggle);
+  const loginVisible = useSelector((state) => state.toggleSlice.loginToggle);
 
   return (
     <Coordinates.Provider value={{ coord, setCoord }}>
@@ -33,15 +33,15 @@ const App = () => {
           <Route
             path="/"
             element={
-              <Suspense fallback={<Shimmer />}>
-                <Head />
+              <Suspense fallback={<BodyShimmer />}>
+                <Home />
               </Suspense>
             }
           >
             <Route
               path="/"
               element={
-                <Suspense fallback={<Shimmer />}>
+                <Suspense fallback={<BodyShimmer />}>
                   <Body />
                 </Suspense>
               }
