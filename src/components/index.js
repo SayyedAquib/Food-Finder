@@ -8,6 +8,7 @@ import DiscountSection from "./DiscountSection";
 import Dish from "./Dish";
 import Footer from "./Footer";
 import Login from "./Login";
+import Logo from "./Logo";
 import MenuCard from "./MenuCard";
 import MenuSection from "./MenuSection";
 import MenuShimmer from "./shimmer/MenuShimmer";
@@ -37,6 +38,7 @@ export {
   Dish,
   Footer,
   Login,
+  Logo,
   MenuCard,
   MenuSection,
   MenuShimmer,

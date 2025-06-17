@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toggleSearchBar } from "../redux/slices/toggleSlice";
-import { SigninBtn } from "./index";
+import { Logo, SigninBtn } from "./index";
 import { IMAGE_URL, BASE_URL } from "../utils/constants";
 
 const Head = () => {
@@ -217,14 +217,7 @@ const Head = () => {
         <div className="w-full sticky bg-white z-20 top-0 shadow-md h-24 flex justify-center items-center">
           <div className="w-full sm:w-[90%] lg:w-[80%]  flex justify-between">
             <div className="flex items-center">
-              <Link to={"/"}>
-                <div className="w-20">
-                  <img
-                    src="https://1000logos.net/wp-content/uploads/2021/05/Swiggy-emblem.png"
-                    alt="Swiggy Logo"
-                  />
-                </div>
-              </Link>
+              <Logo />
               <div
                 className="flex items-center gap-2 cursor-pointer"
                 onClick={handleVisibility}
