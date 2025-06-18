@@ -26,6 +26,8 @@ import SigninBtn from "./SigninBtn";
 import TopPickCard from "./TopPickCard";
 import TopPicks from "./TopPicks";
 import TopRestaurant from "./TopRestaurant";
+import EmptyCart from "./cart/EmptyCart";
+import CartItem from "./cart/CartItem";
 
 export {
   AddToCartBtn,
@@ -56,4 +58,6 @@ export {
   TopPickCard,
   TopPicks,
   TopRestaurant,
+  EmptyCart,
+  CartItem
 };

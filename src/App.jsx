@@ -24,8 +24,8 @@ const Search = Loadable(
   lazy(() => import("./pages/Search")),
   SearchShimmer
 );
-const Cart = Loadable(
-  lazy(() => import("./pages/Cart")),
+const CartPage = Loadable(
+  lazy(() => import("./pages/CartPage")),
   CartShimmer
 );
 const RestaurantMenu = Loadable(
@@ -48,7 +48,7 @@ const App = () => {
           <Route path="/" element={<Home />}>
             <Route index element={<Body />} />
             <Route path="restaurantMenu/:id" element={<RestaurantMenu />} />
-            <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<CartPage />} />
             <Route path="search" element={<Search />} />
             <Route path="*" element={<NotFound />} />
           </Route>
