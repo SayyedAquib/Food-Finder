@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../redux/slices/toggleSlice";
 import { BASE_URL } from "../utils/constants";
 
-const Search = () => {
+const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
@@ -432,4 +432,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

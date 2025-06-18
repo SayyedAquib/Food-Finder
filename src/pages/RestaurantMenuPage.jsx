@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMenuData } from "../redux/slices/restaurantMenuSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
 
-const RestaurantMenu = () => {
+const RestaurantMenuPage = () => {
   const { id } = useParams();
   const mainId = id.split("-").at(-1);
 
@@ -168,4 +168,4 @@ const RestaurantMenu = () => {
   );
 };
 
-export default RestaurantMenu;
+export default RestaurantMenuPage;

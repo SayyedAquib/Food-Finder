@@ -9,27 +9,27 @@ import {
   CartShimmer,
   SearchShimmer,
 } from "./components";
-import NotFound from "./pages/NotFound";
 import Loadable from "./utils/loadable";
+import NotFoundPage from "./pages/NotFoundPage";
 
-const Home = Loadable(
-  lazy(() => import("./pages/Home")),
+const HomePage = Loadable(
+  lazy(() => import("./pages/HomePage")),
   BodyShimmer
 );
 const Body = Loadable(
   lazy(() => import("./components/Body")),
   BodyShimmer
 );
-const Search = Loadable(
-  lazy(() => import("./pages/Search")),
+const SearchPage = Loadable(
+  lazy(() => import("./pages/SearchPage")),
   SearchShimmer
 );
 const CartPage = Loadable(
   lazy(() => import("./pages/CartPage")),
   CartShimmer
 );
-const RestaurantMenu = Loadable(
-  lazy(() => import("./pages/RestaurantMenu")),
+const RestaurantMenuPage = Loadable(
+  lazy(() => import("./pages/RestaurantMenuPage")),
   MenuShimmer
 );
 
@@ -45,14 +45,14 @@ const App = () => {
     <Coordinates.Provider value={{ coord, setCoord }}>
       <div className={isOverlayActive ? "max-h-screen overflow-hidden" : ""}>
         <Routes>
-          <Route path="/" element={<Home />}>
+          <Route path="/" element={<HomePage />}>
             <Route index element={<Body />} />
-            <Route path="restaurantMenu/:id" element={<RestaurantMenu />} />
+            <Route path="restaurantMenu/:id" element={<RestaurantMenuPage />} />
             <Route path="cart" element={<CartPage />} />
-            <Route path="search" element={<Search />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="search" element={<SearchPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </Coordinates.Provider>
