@@ -28,6 +28,7 @@ import TopPicks from "./TopPicks";
 import TopRestaurant from "./TopRestaurant";
 import EmptyCart from "./cart/EmptyCart";
 import CartItem from "./cart/CartItem";
+import Carousel from "./Carousel";
 
 export {
   AddToCartBtn,
@@ -59,5 +60,6 @@ export {
   TopPicks,
   TopRestaurant,
   EmptyCart,
-  CartItem
+  CartItem,
+  Carousel
 };

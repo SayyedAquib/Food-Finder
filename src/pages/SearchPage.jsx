@@ -1,20 +1,33 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
   PromotedRestaurant,
   SearchRestaurant,
   Dish,
+  Carousel,
 } from "../components/index";
 import { Coordinates } from "../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSimilarResDish } from "../redux/slices/toggleSlice";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, CACHE, IMAGE_URL } from "../utils/constants";
+import {
+  extractDishesFromResponse,
+  extractRestaurantsFromResponse,
+  extractSelectedRestaurantDish,
+  extractSimilarRestaurantDishes,
+  generateQueryId,
+  generateTrackingId,
+} from "../utils/helper";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [popularCuisines, setPopularCuisines] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
   const [selectedResDish, setSelectedResDish] = useState(null);
   const [similarResDishes, setSimilarResDishes] = useState([]);
+  const [visible, setVisible] = useState(true);
 
   const {
     coord: { lat, lng },
@@ -28,7 +41,7 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const filterOptions = ["Restaurant", "Dishes"];
 
-  const [activeBtn, setActiveBtn] = useState("Dishes");
+  const [activeBtn, setActiveBtn] = useState("");
 
   const handleFilterBtn = (filterName) => {
     setActiveBtn(activeBtn === filterName ? activeBtn : filterName);
@@ -47,6 +60,96 @@ const SearchPage = () => {
       fetchSimilarRestaurantDishes();
     }
   }, [isSimilarResDishes]);
+
+  const fetchPopularCuisines = async () => {
+    try {
+      const param = new URLSearchParams({
+        lat: lat.toString(),
+        lng: lng.toString(),
+        trackingId: generateTrackingId(),
+        includeIMItem: "true",
+      });
+
+      const data = await fetch(`${BASE_URL}/landing/PRE_SEARCH?${param}`);
+      const res = await data.json();
+
+      const cuisines = res?.data?.cards[1]?.card?.card;
+
+      setPopularCuisines(cuisines);
+    } catch (error) {
+      console.error("Error fetching popular cuisines:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularCuisines();
+  }, []);
+
+  const fetchSuggestions = useCallback(
+    async (query, signal) => {
+      const trimmedQuery = query.trim();
+
+      if (trimmedQuery.length <= 1) {
+        setSearchSuggestions([]);
+        return;
+      }
+
+      const cachedSuggestions = CACHE.get(trimmedQuery);
+      if (cachedSuggestions) {
+        setSearchSuggestions(cachedSuggestions);
+        return;
+      }
+
+      try {
+        const params = new URLSearchParams({
+          lat: lat.toString(),
+          lng: lng.toString(),
+          str: trimmedQuery,
+          trackingId: generateTrackingId(),
+          includeIMItem: "true",
+        });
+
+        const response = await fetch(
+          `${BASE_URL}/restaurants/search/suggest?${params}`,
+          {
+            signal,
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const { data } = await response.json();
+        const suggestions = data?.suggestions ?? [];
+
+        setSearchSuggestions(suggestions);
+        CACHE.set(trimmedQuery, suggestions);
+      } catch (error) {
+        console.error("Failed to fetch search suggestions:", error.message);
+        setSearchSuggestions([]);
+      }
+    },
+    [lat, lng]
+  );
+
+  useEffect(() => {
+    if (!searchQuery?.trim()) {
+      setSearchSuggestions([]);
+      return;
+    }
+
+    const abortController = new AbortController();
+
+    const timeoutId = setTimeout(() => {
+      fetchSuggestions(searchQuery, abortController.signal);
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+      abortController.abort();
+    };
+  }, [searchQuery, fetchSuggestions]);
 
   const fetchSimilarRestaurantDishes = async () => {
     const requiredParams = {
@@ -81,7 +184,7 @@ const SearchPage = () => {
         lat: lat.toString(),
         lng: lng.toString(),
         str: searchQuery,
-        trackingId: "null",
+        trackingId: generateTrackingId(),
         submitAction: "ENTER",
         selectedPLTab: "dish-add",
         restaurantMenuUrl: restaurantMenuUrl,
@@ -119,45 +222,6 @@ const SearchPage = () => {
 
       setSelectedResDish(null);
       setSimilarResDishes([]);
-    }
-  };
-
-  const extractSelectedRestaurantDish = (cards) => {
-    try {
-      const selectedDishCard = cards[1];
-
-      if (!selectedDishCard) {
-        console.warn("No selected restaurant dish found in API response");
-        return null;
-      }
-
-      return selectedDishCard;
-    } catch (error) {
-      console.warn("Error extracting selected restaurant dish:", error);
-      return null;
-    }
-  };
-
-  const extractSimilarRestaurantDishes = (cards) => {
-    try {
-      const similarDishesCard = cards[2];
-
-      if (!similarDishesCard?.card?.card?.cards) {
-        console.warn("No similar restaurant dishes found in API response");
-        return [];
-      }
-
-      const dishes = similarDishesCard.card.card.cards;
-
-      if (!Array.isArray(dishes)) {
-        console.warn("Similar dishes data is not an array:", dishes);
-        return [];
-      }
-
-      return dishes;
-    } catch (error) {
-      console.warn("Error extracting similar restaurant dishes:", error);
-      return [];
     }
   };
 
@@ -209,46 +273,6 @@ const SearchPage = () => {
     }
   };
 
-  const extractDishesFromResponse = (cards) => {
-    try {
-      const groupedCard = cards.find((card) => card?.groupedCard);
-
-      if (!groupedCard?.groupedCard?.cardGroupMap?.DISH?.cards) {
-        console.warn("No dish data found in API response");
-        return [];
-      }
-
-      const dishCards = groupedCard.groupedCard.cardGroupMap.DISH.cards;
-
-      const validDishes = dishCards.filter((card) => {
-        const cardType = card?.card?.card?.["@type"];
-        return cardType && cardType.includes("food.v2.Dish");
-      });
-
-      if (validDishes.length === 0) {
-        console.warn("No valid dishes found in response");
-        return [];
-      }
-
-      return validDishes;
-    } catch (error) {
-      console.warn("Error extracting dishes from response:", error);
-      return [];
-    }
-  };
-
-  const generateTrackingId = () => {
-    return "xxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".replace(/[x]/g, () => {
-      return ((Math.random() * 16) | 0).toString(16);
-    });
-  };
-
-  const generateQueryId = () => {
-    return "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".replace(/[x]/g, () => {
-      return ((Math.random() * 16) | 0).toString(16);
-    });
-  };
-
   const fetchRestaurantSearchData = async () => {
     if (!searchQuery.trim() || searchQuery.split("").length <= 1) return;
 
@@ -298,48 +322,10 @@ const SearchPage = () => {
     }
   };
 
-  const extractRestaurantsFromResponse = (cards) => {
-    try {
-      if (!Array.isArray(cards) || cards.length === 0) {
-        console.warn("No cards found in API response");
-        return [];
-      }
-
-      const restaurantCard = cards[0];
-
-      if (!restaurantCard?.groupedCard?.cardGroupMap?.RESTAURANT?.cards) {
-        console.warn("No restaurant data found in API response structure");
-        return [];
-      }
-
-      const restaurantCards =
-        restaurantCard.groupedCard.cardGroupMap.RESTAURANT.cards;
-
-      if (!Array.isArray(restaurantCards)) {
-        console.warn("Restaurant cards is not an array:", restaurantCards);
-        return [];
-      }
-
-      const validRestaurants = restaurantCards.filter((card) => {
-        return card?.card?.card?.info;
-      });
-
-      if (validRestaurants.length === 0) {
-        console.warn("No valid restaurants found in response");
-        return [];
-      }
-
-      return validRestaurants;
-    } catch (error) {
-      console.warn("Error extracting restaurants from response:", error);
-      return [];
-    }
-  };
-
   useEffect(() => {
     fetchDishesFromSearch();
     fetchRestaurantSearchData();
-  }, [searchQuery]);
+  }, [activeBtn]);
 
   return (
     <div className="w-full mt-10 md:w-[800px] mx-auto">
@@ -347,16 +333,52 @@ const SearchPage = () => {
         <i className="fi fi-rr-angle-small-left text-2xl ml-2 mt-1 absolute top-1/2 -translate-y-1/2"></i>
         <i className="fi fi-rr-search absolute top-1/2 right-0 -translate-y-1/2 mr-5"></i>
         <input
-          onKeyDown={handleSearchQuery}
           className="border-2 w-full pl-8 py-3 text-xl focus:outline-none"
           type="text"
           placeholder="Search for restaurant and food"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setVisible(true);
+          }}
         />
       </div>
 
-      {!selectedResDish && (
+      {searchQuery.trim() === "" && <Carousel data={popularCuisines} />}
+
+      {searchSuggestions.length > 0 && visible && (
+        <div className="my-7 flex flex-col gap-2">
+          {searchSuggestions.map((suggestion, i) => (
+            <Link
+              onClick={() => {
+                setSearchQuery(suggestion.text);
+                setVisible(false);
+                setActiveBtn("Dishes");                
+              }}
+              key={i}
+              href="#"
+              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-100 transition"
+            >
+              <div className="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+                <img
+                  src={`${IMAGE_URL}${suggestion.cloudinaryId}`}
+                  alt={suggestion.text}
+                  className="object-cover w-full h-full rounded"
+                />
+              </div>
+
+              <div>
+                <p className="text-base font-semibold text-gray-900">
+                  {suggestion.text}
+                </p>
+                <p className="text-sm text-gray-500">{suggestion.type}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {!selectedResDish && !visible && (
         <div className="my-7 flex flex-wrap gap-3">
           {filterOptions.map((filterName, i) => (
             <button
@@ -369,25 +391,6 @@ const SearchPage = () => {
             >
               <p>{filterName}</p>
             </button>
-          ))}
-        </div>
-      )}
-
-      {dishes?.length === 0 && restaurantData?.length === 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#f4f5f7] p-4 rounded-md">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-lg shadow-sm p-4 flex gap-4 items-start"
-            >
-              <div className="w-20 h-20 bg-gray-300 rounded-md flex-shrink-0" />
-              <div className="flex flex-col gap-2 flex-grow">
-                <div className="w-3/4 h-4 bg-gray-300 rounded" />
-                <div className="w-1/2 h-4 bg-gray-300 rounded" />
-                <div className="w-full h-3 bg-gray-200 rounded" />
-                <div className="w-2/3 h-3 bg-gray-200 rounded" />
-              </div>
-            </div>
           ))}
         </div>
       )}
