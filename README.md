@@ -29,11 +29,13 @@ A modern restaurant discovery and food delivery application built with React and
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/food-finder.git
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 # or
@@ -41,6 +43,7 @@ yarn install
 ```
 
 3. Start the development server
+
 ```bash
 npm run dev
 # or
@@ -77,6 +80,7 @@ Visit the live application at [https://aquibs-food-finder.vercel.app/](https://a
 ## 👨‍💻 Author
 
 **Aquib Sayyed**
+
 - Twitter: [@Sayyed_Aquibb](https://twitter.com/Sayyed_Aquibb)
 
 ## 📄 License

@@ -61,5 +61,5 @@ export {
   TopRestaurant,
   EmptyCart,
   CartItem,
-  Carousel
+  Carousel,
 };

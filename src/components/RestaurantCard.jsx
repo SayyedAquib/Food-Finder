@@ -11,7 +11,6 @@ const RestaurantCard = ({
   locality,
   aggregatedDiscountInfoV3,
 }) => {
-  
   const restaurantId = link.split("/").at(-1);
   const imageSrc = `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`;
   const discountText = aggregatedDiscountInfoV3

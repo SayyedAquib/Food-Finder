@@ -353,7 +353,7 @@ const SearchPage = () => {
               onClick={() => {
                 setSearchQuery(suggestion.text);
                 setVisible(false);
-                setActiveBtn("Dishes");                
+                setActiveBtn("Dishes");
               }}
               key={i}
               href="#"
