@@ -1,9 +1,12 @@
-import { AddToCartBtn } from "./index";
+import { AddToCartBtn } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { setSimilarResDish, toggleDiffRes } from "../redux/slices/toggleSlice";
-import { clearCart } from "../redux/slices/cartSlice";
+import {
+  setSimilarResDish,
+  toggleDiffRes,
+} from "../../redux/slices/toggleSlice";
+import { clearCart } from "../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
-import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
+import { VEG, NON_VEG, IMAGE_URL } from "../../utils/constants";
 
 const Dish = ({
   data: {

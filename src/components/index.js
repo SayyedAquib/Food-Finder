@@ -1,11 +1,11 @@
-import AddToCartBtn from "./AddToCartBtn";
+import AddToCartBtn from "./cart/AddToCartBtn";
 import Breadcrumb from "./Breadcrumb";
 import CartShimmer from "./shimmer/CartShimmer";
 import DetailMenu from "./DetailMenu";
 import DetailMenuCard from "./DetailMenuCard";
 import Discount from "./Discount";
 import DiscountSection from "./DiscountSection";
-import Dish from "./Dish";
+import Dish from "./search/Dish";
 import Footer from "./Footer";
 import Login from "./Login";
 import Logo from "./Logo";
@@ -16,10 +16,10 @@ import NotFound from "../pages/NotFoundPage";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
 import OnYourMind from "./OnYourMind";
 import OutletInfo from "./OutletInfo";
-import PromotedRestaurant from "./PromotedRestaurant";
+import PromotedRestaurant from "./search/PromotedRestaurant";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantHeader from "./RestaurantHeader";
-import SearchRestaurant from "./SearchRestaurant";
+import SearchRestaurant from "./search/SearchRestaurant";
 import SearchShimmer from "./shimmer/SearchShimmer";
 import BodyShimmer from "./shimmer/BodyShimmer";
 import SigninBtn from "./SigninBtn";
@@ -28,7 +28,11 @@ import TopPicks from "./TopPicks";
 import TopRestaurant from "./TopRestaurant";
 import EmptyCart from "./cart/EmptyCart";
 import CartItem from "./cart/CartItem";
-import Carousel from "./Carousel";
+import Carousel from "./search/Carousel";
+import SearchInput from "./search/SearchInput";
+import SearchSuggestions from "./search/SearchSuggestions";
+import FilterButtons from "./search/FilterButtons";
+import SearchResults from "./search/SearchResults";
 
 export {
   AddToCartBtn,
@@ -62,4 +66,8 @@ export {
   EmptyCart,
   CartItem,
   Carousel,
+  SearchInput,
+  SearchSuggestions,
+  FilterButtons,
+  SearchResults
 };

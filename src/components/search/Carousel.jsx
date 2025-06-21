@@ -1,4 +1,4 @@
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL } from "../../utils/constants";
 
 const Carousel = ({ data }) => {
   const items = data?.gridElements?.infoWithStyle?.info || [];
