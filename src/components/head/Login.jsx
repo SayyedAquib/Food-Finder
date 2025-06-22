@@ -1,5 +1,5 @@
-import { IMAGE_URL } from "../utils/constants";
-import { SigninBtn } from "./index";
+import { IMAGE_URL } from "../../utils/constants";
+import { SigninBtn } from "../index";
 
 const Login = ({ handleLogin }) => {
   return (

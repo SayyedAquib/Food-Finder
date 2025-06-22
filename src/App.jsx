@@ -17,7 +17,7 @@ const HomePage = Loadable(
   BodyShimmer
 );
 const Body = Loadable(
-  lazy(() => import("./components/Body")),
+  lazy(() => import("./components/body/Body")),
   BodyShimmer
 );
 const SearchPage = Loadable(

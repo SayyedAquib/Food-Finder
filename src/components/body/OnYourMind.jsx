@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL } from "../../utils/constants";
 
 const OnYourMind = ({ data = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

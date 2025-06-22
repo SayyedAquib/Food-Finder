@@ -3,10 +3,10 @@ import {
   TopRestaurant,
   OnlineFoodDelivey,
   BodyShimmer,
-} from "./index";
+  NoRestaurant,
+} from "../index";
 import { useSelector } from "react-redux";
-import useRestaurantsData from "../hooks/useRestaurantsData";
-import { IMAGE_URL } from "../utils/constants";
+import useRestaurantsData from "../../hooks/useRestaurantsData";
 
 const Body = () => {
   const [
@@ -42,18 +42,7 @@ const Body = () => {
     : [];
 
   if (data?.communication || data?.tid === "") {
-    return (
-      <div className="flex mt-64 overflow-hidden justify-center items-center flex-col">
-        <img
-          className="w-72"
-          src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png`}
-          alt="unserviceable location"
-        />
-        <h1 className="text-lg font-bold">
-          {data?.cards[0]?.card?.card?.title}
-        </h1>
-      </div>
-    );
+    return <NoRestaurant data={data?.cards[0]?.card?.card?.title} />;
   }
 
   if (status === "loading") {

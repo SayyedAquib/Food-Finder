@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL } from "../../utils/constants";
 
 const RestaurantCard = ({
   link,

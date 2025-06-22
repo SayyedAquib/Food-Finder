@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Coordinates } from "../context/contextApi";
+import { Coordinates } from "../../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleLogin, toggleSearchBar } from "../redux/slices/toggleSlice";
-import { Logo, SigninBtn } from "./index";
-import { IMAGE_URL, BASE_URL } from "../utils/constants";
+import { toggleLogin, toggleSearchBar } from "../../redux/slices/toggleSlice";
+import { Logo, SigninBtn } from "../index";
+import { IMAGE_URL, BASE_URL } from "../../utils/constants";
 
 const Head = () => {
   const navItems = [
@@ -34,7 +34,7 @@ const Head = () => {
   const dispatch = useDispatch();
 
   const [searchResult, setSearchResult] = useState([]);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("Pune, Maharashtra, India");
   const { setCoord } = useContext(Coordinates);
 
   const handleVisibility = () => {

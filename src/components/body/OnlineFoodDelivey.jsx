@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { RestaurantCard } from "./index";
+import { RestaurantCard } from "../index";
 import { useDispatch } from "react-redux";
-import { setFilterValue } from "../redux/slices/filterSlice";
+import { setFilterValue } from "../../redux/slices/filterSlice";
 
 const OnlineFoodDelivey = ({ data, title }) => {
   const filterOptions = [
     "Ratings 4.0+",
     "Rs. 300-Rs. 600",
-    "Offers",
+    // "Offers",
     "Less than Rs. 300",
   ];
 

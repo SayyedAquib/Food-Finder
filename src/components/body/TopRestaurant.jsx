@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { RestaurantCard } from "./index";
+import { RestaurantCard } from "../index";
 
 const TopRestaurant = ({ data = [], title }) => {
   const scrollRef = useRef(null);

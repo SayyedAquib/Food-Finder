@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Head from "../components/Head";
+import Head from "../components/head/Head";
 import { Footer } from "../components/index";
 
 const HomePage = () => {
