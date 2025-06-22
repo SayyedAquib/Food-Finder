@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { AddToCartBtn } from "./index";
+import { AddToCartBtn } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDiffRes } from "../redux/slices/toggleSlice";
-import { clearCart } from "../redux/slices/cartSlice";
-import { VEG, NON_VEG, IMAGE_URL } from "../utils/constants";
+import { toggleDiffRes } from "../../redux/slices/toggleSlice";
+import { clearCart } from "../../redux/slices/cartSlice";
+import { VEG, NON_VEG, IMAGE_URL } from "../../utils/constants";
 
 const DetailMenuCard = ({ info, resInfo }) => {
   const {

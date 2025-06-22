@@ -1,4 +1,4 @@
-import { DetailMenuCard } from "./index";
+import { DetailMenuCard } from "../index";
 
 const DetailMenu = ({ itemCards, resInfo }) => (
   <div className="my-5">

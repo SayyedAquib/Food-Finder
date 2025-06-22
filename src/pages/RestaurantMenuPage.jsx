@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setMenuData } from "../redux/slices/restaurantMenuSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
+import { extractDiscountInfo, extractMenuData, extractRestaurantInfo } from "../utils/helper";
 
 const RestaurantMenuPage = () => {
   const { id } = useParams();
@@ -90,57 +91,6 @@ const RestaurantMenuPage = () => {
       CACHE.set(`${lat}-${lng}-${mainId}`, payload);
     } catch (error) {
       console.error("Error fetching restaurant menu:", error);
-    }
-  };
-
-  const extractRestaurantInfo = (cards) => {
-    try {
-      return (
-        cards.find((card) =>
-          card?.card?.card?.["@type"]?.includes("food.v2.Restaurant")
-        )?.card?.card?.info || null
-      );
-    } catch (error) {
-      console.warn("Error extracting restaurant info:", error);
-      return null;
-    }
-  };
-
-  const extractDiscountInfo = (cards) => {
-    try {
-      return (
-        cards.find((card) =>
-          card?.card?.card?.["@type"]?.includes("v2.GridWidget")
-        )?.card?.card?.gridElements?.infoWithStyle?.offers || []
-      );
-    } catch (error) {
-      console.warn("Error extracting discount info:", error);
-      return [];
-    }
-  };
-
-  const extractMenuData = (cards) => {
-    try {
-      const menuCard = cards.find((card) => card?.groupedCard);
-
-      if (!menuCard?.groupedCard?.cardGroupMap?.REGULAR?.cards) {
-        return { topPicks: null, menuItems: [] };
-      }
-
-      const regularCards = menuCard.groupedCard.cardGroupMap.REGULAR.cards;
-
-      const topPicks =
-        regularCards.find((card) => card?.card?.card?.title === "Top Picks") ||
-        null;
-
-      const menuItems = regularCards.filter(
-        (card) => card?.card?.card?.itemCards || card?.card?.card?.categories
-      );
-
-      return { topPicks, menuItems };
-    } catch (error) {
-      console.warn("Error extracting menu data:", error);
-      return { topPicks: null, menuItems: [] };
     }
   };
 

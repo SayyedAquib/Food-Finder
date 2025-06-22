@@ -1,30 +1,30 @@
 import AddToCartBtn from "./cart/AddToCartBtn";
-import Breadcrumb from "./Breadcrumb";
+import Breadcrumb from "./restaurant/Breadcrumb";
 import CartShimmer from "./shimmer/CartShimmer";
-import DetailMenu from "./DetailMenu";
-import DetailMenuCard from "./DetailMenuCard";
-import Discount from "./Discount";
-import DiscountSection from "./DiscountSection";
+import DetailMenu from "./restaurant/DetailMenu";
+import DetailMenuCard from "./restaurant/DetailMenuCard";
+import Discount from "./restaurant/Discount";
+import DiscountSection from "./restaurant/DiscountSection";
 import Dish from "./search/Dish";
 import Footer from "./Footer";
 import Login from "./Login";
 import Logo from "./Logo";
-import MenuCard from "./MenuCard";
-import MenuSection from "./MenuSection";
+import MenuCard from "./restaurant/MenuCard";
+import MenuSection from "./restaurant/MenuSection";
 import MenuShimmer from "./shimmer/MenuShimmer";
 import NotFound from "../pages/NotFoundPage";
 import OnlineFoodDelivey from "./OnlineFoodDelivey";
 import OnYourMind from "./OnYourMind";
-import OutletInfo from "./OutletInfo";
+import OutletInfo from "./restaurant/OutletInfo";
 import PromotedRestaurant from "./search/PromotedRestaurant";
 import RestaurantCard from "./RestaurantCard";
-import RestaurantHeader from "./RestaurantHeader";
+import RestaurantHeader from "./restaurant/RestaurantHeader";
 import SearchRestaurant from "./search/SearchRestaurant";
 import SearchShimmer from "./shimmer/SearchShimmer";
 import BodyShimmer from "./shimmer/BodyShimmer";
 import SigninBtn from "./SigninBtn";
-import TopPickCard from "./TopPickCard";
-import TopPicks from "./TopPicks";
+import TopPickCard from "./restaurant/TopPickCard";
+import TopPicks from "./restaurant/TopPicks";
 import TopRestaurant from "./TopRestaurant";
 import EmptyCart from "./cart/EmptyCart";
 import CartItem from "./cart/CartItem";
@@ -69,5 +69,5 @@ export {
   SearchInput,
   SearchSuggestions,
   FilterButtons,
-  SearchResults
+  SearchResults,
 };

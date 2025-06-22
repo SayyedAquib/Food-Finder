@@ -117,3 +117,54 @@ export const extractRestaurantsFromResponse = (cards) => {
     return [];
   }
 };
+
+export const extractRestaurantInfo = (cards) => {
+  try {
+    return (
+      cards.find((card) =>
+        card?.card?.card?.["@type"]?.includes("food.v2.Restaurant")
+      )?.card?.card?.info || null
+    );
+  } catch (error) {
+    console.warn("Error extracting restaurant info:", error);
+    return null;
+  }
+};
+
+export const extractDiscountInfo = (cards) => {
+  try {
+    return (
+      cards.find((card) =>
+        card?.card?.card?.["@type"]?.includes("v2.GridWidget")
+      )?.card?.card?.gridElements?.infoWithStyle?.offers || []
+    );
+  } catch (error) {
+    console.warn("Error extracting discount info:", error);
+    return [];
+  }
+};
+
+export const extractMenuData = (cards) => {
+  try {
+    const menuCard = cards.find((card) => card?.groupedCard);
+
+    if (!menuCard?.groupedCard?.cardGroupMap?.REGULAR?.cards) {
+      return { topPicks: null, menuItems: [] };
+    }
+
+    const regularCards = menuCard.groupedCard.cardGroupMap.REGULAR.cards;
+
+    const topPicks =
+      regularCards.find((card) => card?.card?.card?.title === "Top Picks") ||
+      null;
+
+    const menuItems = regularCards.filter(
+      (card) => card?.card?.card?.itemCards || card?.card?.card?.categories
+    );
+
+    return { topPicks, menuItems };
+  } catch (error) {
+    console.warn("Error extracting menu data:", error);
+    return { topPicks: null, menuItems: [] };
+  }
+};

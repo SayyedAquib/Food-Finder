@@ -1,4 +1,4 @@
-import { IMAGE_URL } from "../utils/constants";
+import { IMAGE_URL } from "../../utils/constants";
 
 const TopPickCard = ({ creativeId, defaultPrice, price }) => (
   <div className="min-w-[400px] relative h-[405px]">

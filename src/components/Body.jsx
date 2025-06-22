@@ -3,7 +3,6 @@ import {
   TopRestaurant,
   OnlineFoodDelivey,
   BodyShimmer,
-  Footer,
 } from "./index";
 import { useSelector } from "react-redux";
 import useRestaurantsData from "../hooks/useRestaurantsData";
@@ -65,13 +64,11 @@ const Body = () => {
     <div className="w-full ">
       {topRestaurantData?.length ? (
         <div className="w-full px-10 sm:w-[90%] lg:w-[80%] mx-auto mt-3 overflow-hidden">
-          {onYourMindData.length ? (
+          {onYourMindData.length && (
             <>
               <OnYourMind data={onYourMindData} />
               <TopRestaurant data={topRestaurantData} title={topResTitle} />
             </>
-          ) : (
-            ""
           )}
 
           <OnlineFoodDelivey
@@ -82,7 +79,6 @@ const Body = () => {
       ) : (
         <BodyShimmer />
       )}
-      <Footer />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { OutletInfo } from "./index";
+import { OutletInfo } from "../index";
 
 const RestaurantHeader = ({ resInfo }) => (
   <div className="w-full h-[206px] bg-gradient-to-t px-4 pb-4 from-slate-200/70 mt-3 rounded-[30px]">

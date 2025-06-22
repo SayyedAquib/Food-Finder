@@ -1,4 +1,4 @@
-import { Discount } from "./index";
+import { Discount } from "../index";
 
 const DiscountSection = ({ discountData }) => (
   <div className="w-full overflow-hidden">
