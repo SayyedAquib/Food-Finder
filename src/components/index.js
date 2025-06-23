@@ -7,7 +7,6 @@ import Discount from "./restaurant/Discount";
 import DiscountSection from "./restaurant/DiscountSection";
 import Dish from "./search/Dish";
 import Footer from "./body/Footer";
-import Login from "./head/Login";
 import Logo from "./head/Logo";
 import MenuCard from "./restaurant/MenuCard";
 import MenuSection from "./restaurant/MenuSection";
@@ -34,6 +33,10 @@ import SearchSuggestions from "./search/SearchSuggestions";
 import FilterButtons from "./search/FilterButtons";
 import SearchResults from "./search/SearchResults";
 import NoRestaurant from "./body/NoRestaurant";
+import LoginOverlay from "./head/LoginOverlay";
+import NavItems from "./head/NavItems";
+import SearchOverlay from "./head/SearchOverlay";
+import Navbar from "./head/Navbar";
 
 export {
   AddToCartBtn,
@@ -45,7 +48,6 @@ export {
   DiscountSection,
   Dish,
   Footer,
-  Login,
   Logo,
   MenuCard,
   MenuSection,
@@ -72,4 +74,8 @@ export {
   FilterButtons,
   SearchResults,
   NoRestaurant,
+  LoginOverlay,
+  NavItems,
+  SearchOverlay,
+  Navbar,
 };
