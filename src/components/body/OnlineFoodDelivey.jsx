@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { RestaurantCard } from "../index";
+import { RestaurantCard, FilterButton } from "../index";
 import { useDispatch } from "react-redux";
 import { setFilterValue } from "../../redux/slices/filterSlice";
 
-const OnlineFoodDelivey = ({ data, title }) => {
+const OnlineFoodDelivery = ({ data, title }) => {
   const filterOptions = [
     "Ratings 4.0+",
     "Rs. 300-Rs. 600",
-    // "Offers",
     "Less than Rs. 300",
   ];
 
   const [activeBtn, setActiveBtn] = useState(null);
-
   const dispatch = useDispatch();
 
   const handleFilterBtn = (filterName) => {
@@ -28,17 +26,13 @@ const OnlineFoodDelivey = ({ data, title }) => {
       <h1 className="font-bold my-7 text-2xl">{title}</h1>
       <div className="my-7 flex flex-wrap gap-3">
         {filterOptions.map((filterName, i) => (
-          <button
+          <FilterButton
             key={i}
-            onClick={() => handleFilterBtn(filterName)}
-            className={
-              "filterBtn flex gap-2 " +
-              (activeBtn === filterName ? "active" : "")
-            }
-          >
-            <p>{filterName}</p>
-            <i className="fi text-sm mt-1 fi-br-cross hidden"></i>
-          </button>
+            filterName={filterName}
+            isActive={activeBtn === filterName}
+            onClick={handleFilterBtn}
+            showCrossIcon={true}
+          />
         ))}
       </div>
 
@@ -53,4 +47,4 @@ const OnlineFoodDelivey = ({ data, title }) => {
   );
 };
 
-export default OnlineFoodDelivey;
+export default OnlineFoodDelivery;

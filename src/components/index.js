@@ -38,6 +38,7 @@ import NavItems from "./head/NavItems";
 import SearchOverlay from "./head/SearchOverlay";
 import Navbar from "./head/Navbar";
 import CartConflictModal from "./cart/CartConflictModal";
+import FilterButton from "./search/FilterButton";
 
 export {
   AddToCartBtn,
@@ -80,4 +81,5 @@ export {
   SearchOverlay,
   Navbar,
   CartConflictModal,
+  FilterButton,
 };

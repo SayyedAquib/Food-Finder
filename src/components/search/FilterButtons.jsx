@@ -1,3 +1,5 @@
+import { FilterButton } from "../index";
+
 const FilterButtons = ({
   activeBtn,
   handleFilterBtn,
@@ -11,15 +13,12 @@ const FilterButtons = ({
   return (
     <div className="my-7 flex flex-wrap gap-3">
       {filterOptions.map((filterName, i) => (
-        <button
+        <FilterButton
           key={i}
-          onClick={() => handleFilterBtn(filterName)}
-          className={
-            "filterBtn flex gap-2 " + (activeBtn === filterName ? "active" : "")
-          }
-        >
-          <p>{filterName}</p>
-        </button>
+          filterName={filterName}
+          isActive={activeBtn === filterName}
+          onClick={handleFilterBtn}
+        />
       ))}
     </div>
   );
