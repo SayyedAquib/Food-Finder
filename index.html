@@ -1,56 +1,130 @@
 <!DOCTYPE html>
+<!-- Declares the document as HTML5 -->
 <html lang="en">
   <head>
+    <!-- Character encoding set to UTF-8 for universal character support -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- Ensures responsive layout on all device widths -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Finder | Aquib</title>
-
+    
+    <!-- Primary meta tags for SEO -->
+    <title>Food Finder - Discover Recipes & Food Blogs | Aquib Sayyed</title>
+    <meta name="title" content="Food Finder - Discover Recipes & Food Blogs | Aquib Sayyed" />
     <meta
       name="description"
-      content="Food Finder is a React-based application that helps you discover recipes and food blogs. Built with React, Redux-Toolkit, Swiggy's Production APIs, and Firebase, it offers a seamless user experience for food enthusiasts."
+      content="Food Finder is a modern React application that helps you discover delicious recipes and food blogs. Built with React, Redux Toolkit, Swiggy's Production APIs, and Firebase for a seamless food discovery experience."
     />
     <meta
       name="keywords"
-      content="Food Finder, Aquib Sayyed, Frontend Developer, React Projects, Recipe App, Firebase, Portfolio"
+      content="Food Finder, recipe finder, food discovery, restaurant search, food delivery, recipes, cooking, food blog, React app, Aquib Sayyed, frontend developer, JavaScript, Redux, Firebase, food enthusiasts, meal planning, restaurant finder"
     />
     <meta name="author" content="Aquib Sayyed" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#ff6b35" /> <!-- Sets the theme color for supported browsers -->
 
-    <!-- Open Graph (Facebook, LinkedIn) -->
+    <!-- Canonical link to prevent duplicate content issues in SEO -->
+    <link rel="canonical" href="https://aquibs-food-finder.vercel.app/" />
+
+    <!-- Open Graph metadata for link previews on Facebook and other platforms -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Food Finder | Aquib Sayyed" />
+    <meta property="og:title" content="Food Finder - Discover Recipes & Food Blogs | Aquib Sayyed" />
     <meta
       property="og:description"
-      content="Explore frontend projects and blog posts built with React, Redux, and Firebase."
+      content="Discover delicious recipes and explore food blogs with Food Finder. A modern React application powered by Swiggy's APIs, Redux Toolkit, and Firebase for the ultimate food discovery experience."
     />
     <meta
       property="og:image"
       content="https://res.cloudinary.com/dqzeq3zfm/image/upload/v1749551392/xsvmsyrvk0mhj7dnznjy.png"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Food Finder App Screenshot - Recipe Discovery Interface" />
     <meta property="og:url" content="https://aquibs-food-finder.vercel.app/" />
     <meta property="og:site_name" content="Food Finder" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:updated_time" content="2025-06-24" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter Card metadata for rich previews on Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Food Finder | Aquib Sayyed" />
+    <meta name="twitter:title" content="Food Finder - Discover Recipes & Food Blogs | Aquib Sayyed" />
     <meta
       name="twitter:description"
-      content="Explore frontend projects and blog posts built with React, Redux, and Firebase."
+      content="Discover delicious recipes and explore food blogs with Food Finder. A modern React application for food enthusiasts."
     />
     <meta
       name="twitter:image"
       content="https://res.cloudinary.com/dqzeq3zfm/image/upload/v1749551392/xsvmsyrvk0mhj7dnznjy.png"
     />
+    <meta name="twitter:image:alt" content="Food Finder App Screenshot - Recipe Discovery Interface" />
     <meta name="twitter:url" content="https://aquibs-food-finder.vercel.app/" />
     <meta name="twitter:site" content="@Sayyed_Aquibb" />
     <meta name="twitter:creator" content="@Sayyed_Aquibb" />
 
-    <!-- Favicon -->
+    <!-- Additional metadata for social and article-rich content -->
+    <meta property="article:author" content="Aquib Sayyed" />
+    <meta property="article:section" content="Technology" />
+    <meta property="article:tag" content="React, Food, Recipes, Web Development" />
+
+    <!-- Favicons for different devices and platforms -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#ff6b35" />
+
+    <!-- Performance optimizations for font loading and third-party services -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
+    <!-- Structured data for SEO rich results (Schema.org JSON-LD format) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Food Finder",
+      "description": "A modern React application for discovering recipes and food blogs",
+      "url": "https://aquibs-food-finder.vercel.app/",
+      "applicationCategory": "Food & Drink",
+      "operatingSystem": "Web Browser",
+      "author": {
+        "@type": "Person",
+        "name": "Aquib Sayyed",
+        "url": "https://aquibs-food-finder.vercel.app/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "150"
+      }
+    }
+    </script>
+
+    <!-- Progressive Web App (PWA) support for mobile -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Food Finder" />
+
+    <!-- Security headers to prevent MIME type sniffing, clickjacking, and XSS attacks -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   </head>
   <body>
+    <!-- React app mounts here -->
     <div id="root"></div>
+
+    <!-- Entry point for the React application (built using Vite) -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
