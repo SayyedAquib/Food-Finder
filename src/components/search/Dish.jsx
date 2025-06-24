@@ -1,4 +1,4 @@
-import { AddToCartBtn } from "../index";
+import { AddToCartBtn, CartConflictModal } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSimilarResDish,
@@ -28,10 +28,7 @@ const Dish = ({
   const { id: cartResId } = useSelector((state) => state.cartSlice.resInfo);
   const dispatch = useDispatch();
 
-  const handleIsDiffRes = () => {
-    dispatch(toggleDiffRes());
-  };
-
+  const handleIsDiffRes = () => dispatch(toggleDiffRes());
   const handleClearCart = () => {
     dispatch(clearCart());
     handleIsDiffRes();
@@ -61,7 +58,6 @@ const Dish = ({
                 <div className="">
                   <p className="font-bold">By {resName}</p>
                   <p className="my-2">
-                    {" "}
                     <i className="fi fi-ss-star"></i> {avgRating} . {slaString}
                   </p>
                 </div>
@@ -82,7 +78,7 @@ const Dish = ({
               )}
             </div>
             <p className="text-lg font-semibold">{name}</p>
-            <p className="">
+            <p>
               <i className="fi fi-bs-indian-rupee-sign text-sm pt-1 inline-block"></i>
               {price / 100}
             </p>
@@ -108,29 +104,11 @@ const Dish = ({
         </div>
       </div>
 
-      {isDiffRes && (
-        <div className="w-[520px] h-[204px] flex flex-col gap-2 left-[33%] p-8 border z-50 shadow-md fixed bottom-10 bg-white">
-          <h1>Items already in cart</h1>
-          <p>
-            Your cart contains items from other restaurant. Would you like to
-            reset your cart for adding items from this restaurant?
-          </p>
-          <div className="flex justify-between gap-3 w-full uppercase">
-            <button
-              onClick={handleIsDiffRes}
-              className="border-2 w-1/2 p-3 border-green-600 text-green-600"
-            >
-              No
-            </button>
-            <button
-              onClick={handleClearCart}
-              className="  w-1/2 p-3 bg-green-600 text-white "
-            >
-              Yes, start Afresh
-            </button>
-          </div>
-        </div>
-      )}
+      <CartConflictModal
+        isOpen={isDiffRes}
+        onCancel={handleIsDiffRes}
+        onConfirm={handleClearCart}
+      />
     </>
   );
 };

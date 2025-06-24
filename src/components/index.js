@@ -37,6 +37,7 @@ import LoginOverlay from "./head/LoginOverlay";
 import NavItems from "./head/NavItems";
 import SearchOverlay from "./head/SearchOverlay";
 import Navbar from "./head/Navbar";
+import CartConflictModal from "./cart/CartConflictModal";
 
 export {
   AddToCartBtn,
@@ -78,4 +79,5 @@ export {
   NavItems,
   SearchOverlay,
   Navbar,
+  CartConflictModal,
 };
