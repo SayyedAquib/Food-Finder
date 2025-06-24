@@ -12,7 +12,7 @@ import MenuCard from "./restaurant/MenuCard";
 import MenuSection from "./restaurant/MenuSection";
 import MenuShimmer from "./shimmer/MenuShimmer";
 import NotFound from "../pages/NotFoundPage";
-import OnlineFoodDelivey from "./body/OnlineFoodDelivey";
+import OnlineFoodDelivery from "./body/OnlineFoodDelivery";
 import OnYourMind from "./body/OnYourMind";
 import OutletInfo from "./restaurant/OutletInfo";
 import PromotedRestaurant from "./search/PromotedRestaurant";
@@ -55,7 +55,7 @@ export {
   MenuSection,
   MenuShimmer,
   NotFound,
-  OnlineFoodDelivey,
+  OnlineFoodDelivery,
   OnYourMind,
   OutletInfo,
   PromotedRestaurant,

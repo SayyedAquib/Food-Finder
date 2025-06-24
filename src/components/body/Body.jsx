@@ -1,7 +1,7 @@
 import {
   OnYourMind,
   TopRestaurant,
-  OnlineFoodDelivey,
+  OnlineFoodDelivery,
   BodyShimmer,
   NoRestaurant,
 } from "../index";
@@ -60,7 +60,7 @@ const Body = () => {
             </>
           )}
 
-          <OnlineFoodDelivey
+          <OnlineFoodDelivery
             data={filterVal ? filteredData : topRestaurantData}
             title={onlineTitle}
           />
