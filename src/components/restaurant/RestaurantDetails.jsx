@@ -1,6 +1,6 @@
 import { OutletInfo } from "../index";
 
-const RestaurantHeader = ({ resInfo }) => (
+const RestaurantDetails = ({ resInfo }) => (
   <div className="w-full h-[206px] bg-gradient-to-t px-4 pb-4 from-slate-200/70 mt-3 rounded-[30px]">
     <div className="w-full border border-slate-200/70 rounded-[30px] h-full bg-white p-4">
       <div className="flex items-center gap-1 font-semibold">
@@ -17,4 +17,4 @@ const RestaurantHeader = ({ resInfo }) => (
   </div>
 );
 
-export default RestaurantHeader;
+export default RestaurantDetails;

@@ -16,8 +16,8 @@ import OnlineFoodDelivery from "./body/OnlineFoodDelivery";
 import OnYourMind from "./body/OnYourMind";
 import OutletInfo from "./restaurant/OutletInfo";
 import PromotedRestaurant from "./search/PromotedRestaurant";
-import RestaurantCard from "./body/RestaurantCard";
-import RestaurantHeader from "./restaurant/RestaurantHeader";
+import RestaurantCard from "./restaurant/RestaurantCard";
+import RestaurantDetails from "./restaurant/RestaurantDetails";
 import SearchRestaurant from "./search/SearchRestaurant";
 import SearchShimmer from "./shimmer/SearchShimmer";
 import BodyShimmer from "./shimmer/BodyShimmer";
@@ -39,6 +39,12 @@ import SearchOverlay from "./head/SearchOverlay";
 import Navbar from "./head/Navbar";
 import CartConflictModal from "./cart/CartConflictModal";
 import FilterButton from "./search/FilterButton";
+import Card from "./shared/Card";
+import ImageCard from "./shared/ImageCard";
+import LinkWrapper from "./shared/LinkWrapper";
+import PriceDisplay from "./shared/PriceDisplay";
+import RatingDisplay from "./shared/RatingDisplay";
+import VegIndicator from "./shared/VegIndicator";
 
 export {
   AddToCartBtn,
@@ -60,7 +66,7 @@ export {
   OutletInfo,
   PromotedRestaurant,
   RestaurantCard,
-  RestaurantHeader,
+  RestaurantDetails,
   SearchRestaurant,
   SearchShimmer,
   BodyShimmer,
@@ -82,4 +88,10 @@ export {
   Navbar,
   CartConflictModal,
   FilterButton,
+  Card,
+  ImageCard,
+  LinkWrapper,
+  PriceDisplay,
+  RatingDisplay,
+  VegIndicator,
 };

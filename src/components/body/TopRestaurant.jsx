@@ -1,6 +1,17 @@
 import { useRef, useState, useEffect } from "react";
 import { RestaurantCard } from "../index";
 
+function throttle(fn, wait) {
+  let lastTime = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - lastTime >= wait) {
+      lastTime = now;
+      fn(...args);
+    }
+  };
+}
+
 const TopRestaurant = ({ data = [], title }) => {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -11,10 +22,11 @@ const TopRestaurant = ({ data = [], title }) => {
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
-
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 5);
+    const left = scrollLeft > 0;
+    const right = scrollLeft + clientWidth < scrollWidth - 5;
+    setCanScrollLeft((prev) => (prev !== left ? left : prev));
+    setCanScrollRight((prev) => (prev !== right ? right : prev));
   };
 
   const handleNext = () => {
@@ -34,6 +46,17 @@ const TopRestaurant = ({ data = [], title }) => {
       el.addEventListener("scroll", handleScroll);
       return () => el.removeEventListener("scroll", handleScroll);
     }
+  }, []);
+
+  // Throttle the scroll handler to run at most every 100ms
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const throttledScroll = throttle(handleScroll, 100);
+    el.addEventListener("scroll", throttledScroll);
+    // Call once to initialize
+    throttledScroll();
+    return () => el.removeEventListener("scroll", throttledScroll);
   }, []);
 
   return (

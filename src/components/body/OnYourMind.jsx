@@ -129,11 +129,7 @@ const OnYourMind = ({ data = [] }) => {
                   className="w-full max-w-32 sm:max-w-36 md:max-w-40 mx-auto group-hover:scale-105 transition-transform duration-200"
                   src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_288,h_360/${item.imageId}`}
                   alt={item?.action?.text || "Food category"}
-                  onClick={() => {
-                    if (item.action?.link) {
-                      window.open(item.action.link, "_blank");
-                    }
-                  }}
+                  fetchpriority="high"
                 />
               </div>
             </div>

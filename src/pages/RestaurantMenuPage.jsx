@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Coordinates } from "../context/contextApi";
 import {
   Breadcrumb,
-  RestaurantHeader,
+  RestaurantDetails,
   DiscountSection,
   MenuSection,
   MenuShimmer,
@@ -103,7 +103,7 @@ const RestaurantMenuPage = () => {
       {menuData.length ? (
         <div className="w-[95%] md:w-[800px] mx-auto pt-8">
           <Breadcrumb resInfo={resInfo} />
-          <RestaurantHeader resInfo={resInfo} />
+          <RestaurantDetails resInfo={resInfo} />
           <DiscountSection discountData={discountData} />
           <MenuSection
             topPicksData={topPicksData}

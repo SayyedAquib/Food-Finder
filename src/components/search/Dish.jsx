@@ -6,8 +6,14 @@ import {
   toggleDiffRes,
 } from "../../redux/slices/toggleSlice";
 import { clearCart } from "../../redux/slices/cartSlice";
-import { Link } from "react-router-dom";
-import { VEG, NON_VEG, IMAGE_URL } from "../../utils/constants";
+import {
+  ImageCard,
+  RatingDisplay,
+  PriceDisplay,
+  VegIndicator,
+  Card,
+  LinkWrapper,
+} from "../index";
 
 const Dish = React.memo(
   ({
@@ -29,11 +35,6 @@ const Dish = React.memo(
     const isDiffRes = useSelector((state) => state.toggleSlice.isDiffRes);
     const { id: cartResId } = useSelector((state) => state.cartSlice.resInfo);
     const dispatch = useDispatch();
-
-    const imageSrc = useMemo(
-      () => `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`,
-      [imageId]
-    );
 
     const displayPrice = useMemo(() => price / 100, [price]);
 
@@ -66,52 +67,42 @@ const Dish = React.memo(
       }
     }, [cartResId, id, dispatch, city, resLocation, itemId]);
 
-    return (
+    const RestaurantHeader = () => (
       <>
-        <div className="bg-white rounded-2xl p-4 m-4">
-          {!hideRestaurantDetails && (
-            <>
-              <Link to={restaurantLink}>
-                <div className="flex justify-between text-sm opacity-50">
-                  <div className="">
-                    <p className="font-bold">By {resName}</p>
-                    <p className="my-2">
-                      <i className="fi fi-ss-star"></i> {avgRating} .{" "}
-                      {slaString}
-                    </p>
-                  </div>
-                  <i className="fi fi-rr-arrow-small-right text-2xl"></i>
-                </div>
-              </Link>
-              <hr className="border-dotted" />
-            </>
-          )}
-
-          <div className="my-3 md:max-w-fit flex justify-between">
-            <div className="w-[50%]  md:w-[168px] flex flex-col gap-1">
-              <div className="w-5 h-5">
-                {isVeg ? (
-                  <img src={VEG} alt="Vegetarian" />
-                ) : (
-                  <img src={NON_VEG} alt="Non-Vegetarian" />
-                )}
-              </div>
-              <p className="text-lg font-semibold">{name}</p>
-              <p>
-                <i className="fi fi-bs-indian-rupee-sign text-sm pt-1 inline-block"></i>
-                {displayPrice}
-              </p>
-              <button className="px-4 py-1 w-max rounded-3xl border">
-                More Details
-              </button>
-            </div>
-
-            <div className="w-[40%] md:w-[40%] relative h-full">
-              <img
-                className="rounded-xl object-cover aspect-square"
-                src={imageSrc}
-                alt={name}
+        <LinkWrapper to={restaurantLink}>
+          <div className="flex justify-between text-sm opacity-50">
+            <div>
+              <p className="font-bold">By {resName}</p>
+              <RatingDisplay
+                rating={avgRating}
+                additionalInfo={slaString}
+                className="my-2"
               />
+            </div>
+            <i className="fi fi-rr-arrow-small-right text-2xl"></i>
+          </div>
+        </LinkWrapper>
+        <hr className="border-dotted" />
+      </>
+    );
+
+    const DishContent = () => (
+      <div className="my-3 md:max-w-fit flex justify-between">
+        <div className="w-[50%] md:w-[168px] flex flex-col gap-1">
+          <VegIndicator isVeg={isVeg} />
+          <p className="text-lg font-semibold">{name}</p>
+          <PriceDisplay price={displayPrice} />
+          <button className="px-4 py-1 w-max rounded-3xl border">
+            More Details
+          </button>
+        </div>
+
+        <div className="w-[40%] md:w-[40%] relative h-full">
+          <ImageCard
+            imageId={imageId}
+            alt={name}
+            className="rounded-xl"
+            overlayContent={
               <div onClick={handleSameRes}>
                 <AddToCartBtn
                   info={info}
@@ -119,9 +110,18 @@ const Dish = React.memo(
                   handleIsDiffRes={handleIsDiffRes}
                 />
               </div>
-            </div>
-          </div>
+            }
+          />
         </div>
+      </div>
+    );
+
+    return (
+      <>
+        <Card>
+          {!hideRestaurantDetails && <RestaurantHeader />}
+          <DishContent />
+        </Card>
 
         <CartConflictModal
           isOpen={isDiffRes}
