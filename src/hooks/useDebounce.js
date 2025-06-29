@@ -5,7 +5,7 @@ const useDebounce = (callback, deps, delay = 300) => {
 
   useEffect(() => {
     if (controllerRef.current) {
-      controllerRef.current.abort(); // Cancel previous request
+      controllerRef.current.abort();
     }
 
     controllerRef.current = new AbortController();
@@ -18,10 +18,9 @@ const useDebounce = (callback, deps, delay = 300) => {
     return () => {
       clearTimeout(handler);
       if (controllerRef.current) {
-        controllerRef.current.abort(); // Cancel if deps change
+        controllerRef.current.abort();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...deps, delay]);
 };
 

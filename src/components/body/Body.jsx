@@ -2,9 +2,9 @@ import {
   OnYourMind,
   TopRestaurant,
   OnlineFoodDelivery,
-  BodyShimmer,
   NoRestaurant,
-} from "../index";
+} from "./index";
+import { BodyShimmer } from "../shimmer/index";
 import { useSelector } from "react-redux";
 import useRestaurantsData from "../../hooks/useRestaurantsData";
 

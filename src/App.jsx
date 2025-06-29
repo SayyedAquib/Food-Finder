@@ -8,7 +8,7 @@ import {
   MenuShimmer,
   CartShimmer,
   SearchShimmer,
-} from "./components";
+} from "./components/index";
 import Loadable from "./utils/loadable";
 import NotFoundPage from "./pages/NotFoundPage";
 

@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import {
-  Carousel,
   SearchInput,
   SearchSuggestions,
   FilterButtons,
   SearchResults,
+  Carousel,
 } from "../components/index";
 import { Coordinates } from "../context/contextApi";
 import { useSelector } from "react-redux";

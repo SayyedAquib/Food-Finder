@@ -14,15 +14,21 @@ const AddToCartBtn = ({ info, resInfo, handleIsDiffRes }) => {
 
   const handleAddToCart = () => {
     if (itemExists) {
-      toast.error("Item already in the cart");
+      toast.error("Item already in the cart", {
+        duration: 2000,
+      });
       return;
     }
 
     if (isSameRestaurant) {
       dispatch(addToCart({ info, resInfo }));
-      toast.success("Item added to the cart");
+      toast.success("Item added to the cart", {
+        duration: 2000,
+      });
     } else {
-      toast.error("Items from different restaurants cannot be added");
+      toast.error("Items from different restaurants cannot be added", {
+        duration: 2000,
+      });
       handleIsDiffRes();
     }
   };

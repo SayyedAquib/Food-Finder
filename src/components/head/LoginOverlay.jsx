@@ -15,7 +15,7 @@ const LoginOverlay = ({ visible, onClose }) => (
       }`}
     >
       <div className="m-3 w-full lg:w-[60%]">
-        <i className="fi fi-br-cross" onClick={onClose}></i>
+        <i className="fi fi-br-cross cursor-pointer" onClick={onClose}></i>
         <div className="my-10 flex justify-between items-center">
           <h2 className="font-bold text-3xl sm:text-4xl border-b-2 border-black pb-3 sm:pb-5">
             Login

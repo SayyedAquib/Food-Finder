@@ -10,7 +10,7 @@ export const extractSelectedRestaurantDish = (cards) => {
       return null;
     }
 
-    return selectedDishCard;
+    return selectedDishCard || null;
   } catch (error) {
     console.warn("Error extracting selected restaurant dish:", error);
     return null;
@@ -33,7 +33,7 @@ export const extractSimilarRestaurantDishes = (cards) => {
       return [];
     }
 
-    return dishes;
+    return dishes || [];
   } catch (error) {
     console.warn("Error extracting similar restaurant dishes:", error);
     return [];
@@ -61,7 +61,7 @@ export const extractDishesFromResponse = (cards) => {
       return [];
     }
 
-    return validDishes;
+    return validDishes || [];
   } catch (error) {
     console.warn("Error extracting dishes from response:", error);
     return [];
@@ -111,7 +111,7 @@ export const extractRestaurantsFromResponse = (cards) => {
       return [];
     }
 
-    return validRestaurants;
+    return validRestaurants || [];
   } catch (error) {
     console.warn("Error extracting restaurants from response:", error);
     return [];
@@ -162,7 +162,7 @@ export const extractMenuData = (cards) => {
       (card) => card?.card?.card?.itemCards || card?.card?.card?.categories
     );
 
-    return { topPicks, menuItems };
+    return { topPicks, menuItems } || { topPicks: null, menuItems: [] };
   } catch (error) {
     console.warn("Error extracting menu data:", error);
     return { topPicks: null, menuItems: [] };

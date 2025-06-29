@@ -19,10 +19,14 @@ const CartPage = () => {
       const newItems = [...cartItems];
       newItems.splice(index, 1);
       dispatch(deleteItem(newItems));
-      toast.success("Food removed");
+      toast.success("Food removed", {
+        duration: 2000,
+      });
     } else {
       clearCartHandler();
-      toast.success("Cart is cleared");
+      toast.success("Cart is cleared", {
+        duration: 2000,
+      });
     }
   };
 
@@ -32,11 +36,16 @@ const CartPage = () => {
 
   const placeOrderHandler = () => {
     if (!user) {
-      toast.error("Login required to place order");
+      toast.error("Login required to place order", {
+        duration: 2000,
+      });
       dispatch(toggleLogin());
       return;
     }
-    toast.success("Order placed successfully");
+    toast.success("Order placed successfully", {
+      duration: 2000,
+    });
+    clearCartHandler();
   };
 
   if (!cartItems.length) return <EmptyCart />;
