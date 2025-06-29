@@ -51,23 +51,18 @@ const Body = () => {
 
   return (
     <div className="w-full ">
-      {topRestaurantData?.length ? (
-        <div className="w-full px-10 sm:w-[90%] lg:w-[80%] mx-auto mt-3 overflow-hidden">
-          {onYourMindData.length && (
-            <>
-              <OnYourMind data={onYourMindData} />
-              <TopRestaurant data={topRestaurantData} title={topResTitle} />
-            </>
-          )}
+      <div className="w-full px-10 sm:w-[90%] lg:w-[80%] mx-auto mt-3 overflow-hidden">
+        {onYourMindData.length && <OnYourMind data={onYourMindData} />}
+        
+        {topRestaurantData?.length && (
+          <TopRestaurant data={topRestaurantData} title={topResTitle} />
+        )}
 
-          <OnlineFoodDelivery
-            data={filterVal ? filteredData : topRestaurantData}
-            title={onlineTitle}
-          />
-        </div>
-      ) : (
-        <BodyShimmer />
-      )}
+        <OnlineFoodDelivery
+          data={filterVal ? filteredData : topRestaurantData}
+          title={onlineTitle}
+        />
+      </div>
     </div>
   );
 };
