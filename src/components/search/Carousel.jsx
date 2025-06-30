@@ -8,7 +8,7 @@ const Carousel = ({ data }) => {
 
   return (
     <section className="my-6">
-      {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
+      {title && <h2 className="text-xl font-bold ml-2 mb-4">{title}</h2>}
 
       <div className="flex gap-4 overflow-x-auto">
         {items.map(({ imageId }, index) => (

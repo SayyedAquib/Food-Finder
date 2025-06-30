@@ -11,7 +11,7 @@ const FilterButtons = ({
   if (selectedResDish || visible) return null;
 
   return (
-    <div className="my-7 flex flex-wrap gap-3">
+    <div className="my-7 ml-2 md:ml-0 flex flex-wrap gap-3">
       {filterOptions.map((filterName, i) => (
         <FilterButton
           key={i}
