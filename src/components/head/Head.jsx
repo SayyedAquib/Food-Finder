@@ -2,26 +2,28 @@ import { useContext, useState } from "react";
 import { Coordinates } from "../../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toggleSearchBar } from "../../redux/slices/toggleSlice";
-import useSearchLocation from "../../hooks/useSearchLocation";
 import { LoginOverlay, Navbar, SearchOverlay } from "../index";
+import useSearchAutocomplete from "../../hooks/useSearchAutocomplete";
+import usePlaceDetails from "../../hooks/usePlaceDetails";
 
 const Head = () => {
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
   const [address, setAddress] = useState("Pune, Maharashtra, India");
-  const [searchResult, setSearchResult] = useState([]);
 
   const visible = useSelector((state) => state.toggleSlice.searchBarToggle);
   const loginVisible = useSelector((state) => state.toggleSlice.loginToggle);
-  const dispatch = useDispatch();
   const { setCoord } = useContext(Coordinates);
 
   const handleVisibility = () => dispatch(toggleSearchBar());
   const handleLogin = () => dispatch(toggleLogin());
 
-  const { searchResultFun, fetchLatAndLng } = useSearchLocation({
-    setSearchResult,
-    setAddress,
+  const searchResult = useSearchAutocomplete(query);
+
+  const { fetchCoordinates } = usePlaceDetails({
     setCoord,
-    handleVisibility,
+    setAddress,
+    handleClose: handleVisibility,
   });
 
   return (
@@ -29,9 +31,9 @@ const Head = () => {
       <SearchOverlay
         visible={visible}
         onClose={handleVisibility}
-        onSearch={searchResultFun}
         searchResult={searchResult}
-        onPlaceSelect={fetchLatAndLng}
+        onSearch={(val) => setQuery(val)}
+        onPlaceSelect={fetchCoordinates}
       />
 
       <LoginOverlay visible={loginVisible} onClose={handleLogin} />
