@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import useRestaurantMenuData from "../hooks/useRestaurantMenuData";
+import useRestaurantMenu from "../hooks/useRestaurantMenu";
 import {
   Breadcrumb,
   RestaurantDetails,
@@ -19,7 +19,7 @@ const RestaurantMenuPage = () => {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
-  useRestaurantMenuData(lat, lng, mainId);
+  useRestaurantMenu(lat, lng, mainId);
 
   const { resInfo, menuData, discountData, topPicksData } = useSelector(
     (state) => state.restaurantMenuSlice
@@ -45,4 +45,4 @@ const RestaurantMenuPage = () => {
   );
 };
 
-export default RestaurantMenuPage;  
+export default RestaurantMenuPage;

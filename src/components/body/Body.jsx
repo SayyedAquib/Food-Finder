@@ -6,7 +6,7 @@ import {
 } from "./index";
 import { BodyShimmer } from "../shimmer/index";
 import { useSelector } from "react-redux";
-import useRestaurantsData from "../../hooks/useRestaurantsData";
+import useRestaurants from "../../hooks/useRestaurants";
 
 const Body = () => {
   const [
@@ -16,7 +16,7 @@ const Body = () => {
     onYourMindData,
     data,
     status,
-  ] = useRestaurantsData();
+  ] = useRestaurants();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);
 
   const filteredData = Array.isArray(topRestaurantData)
@@ -53,7 +53,7 @@ const Body = () => {
     <div className="w-full ">
       <div className="w-full px-10 sm:w-[90%] lg:w-[80%] mx-auto mt-3 overflow-hidden">
         {onYourMindData.length && <OnYourMind data={onYourMindData} />}
-        
+
         {topRestaurantData?.length && (
           <TopRestaurant data={topRestaurantData} title={topResTitle} />
         )}

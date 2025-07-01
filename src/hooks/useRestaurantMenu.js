@@ -8,7 +8,7 @@ import {
   extractRestaurantInfo,
 } from "../utils/helper";
 
-const useRestaurantMenuData = (lat, lng, mainId) => {
+const useRestaurantMenu = (lat, lng, mainId) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -67,4 +67,4 @@ const useRestaurantMenuData = (lat, lng, mainId) => {
   }, [lat, lng, mainId, dispatch]);
 };
 
-export default useRestaurantMenuData;
+export default useRestaurantMenu;

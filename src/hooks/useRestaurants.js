@@ -8,7 +8,7 @@ import {
 } from "../redux/slices/restaurantSlice";
 import { CACHE, BASE_URL } from "../utils/constants";
 
-const useRestaurantsData = () => {
+const useRestaurants = () => {
   const dispatch = useDispatch();
   const {
     topRestaurantData,
@@ -91,4 +91,4 @@ const useRestaurantsData = () => {
   ];
 };
 
-export default useRestaurantsData;
+export default useRestaurants;

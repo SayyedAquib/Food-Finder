@@ -2,7 +2,7 @@ export { default as useCart } from "./useCart";
 export { default as useDebounce } from "./useDebounce";
 export { default as usePlaceDetails } from "./usePlaceDetails";
 export { default as usePopularCuisines } from "./usePopularCuisines";
-export { default as useRestaurantMenuData } from "./useRestaurantMenuData";
+export { default as useRestaurantMenu } from "./useRestaurantMenu";
 export { default as useRestaurantData } from "./useRestaurantData";
 export { default as useSearchAutocomplete } from "./useSearchAutocomplete";
 export { default as useSearchData } from "./useSearchData";
