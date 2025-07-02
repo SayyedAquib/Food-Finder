@@ -3,8 +3,10 @@ import { Coordinates } from "../../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toggleSearchBar } from "../../redux/slices/toggleSlice";
 import { LoginOverlay, Navbar, SearchOverlay } from "../index";
-import useSearchAutocomplete from "../../hooks/useSearchAutocomplete";
-import usePlaceDetails from "../../hooks/usePlaceDetails";
+import {
+  usePlaceDetails,
+  useSearchAutocomplete,
+} from "../../hooks";
 
 const Head = () => {
   const dispatch = useDispatch();

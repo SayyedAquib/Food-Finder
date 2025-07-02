@@ -8,10 +8,12 @@ import {
 } from "../components/index";
 import { Coordinates } from "../context/contextApi";
 import { useSelector } from "react-redux";
-import useSearchSuggestions from "../hooks/useSearchSuggestions";
-import useSearchData from "../hooks/useSearchData";
-import useSimilarDishes from "../hooks/useSimilarDishes";
-import usePopularCuisines from "../hooks/usePopularCuisines";
+import {
+  useSearchSuggestions,
+  useSearchData,
+  useSimilarDishes,
+  usePopularCuisines,
+} from "../hooks";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { BASE_URL, CACHE } from "../utils/constants";
 import { generateTrackingId } from "../utils/helper";
-import useDebounce from "./useDebounce";
+import { useDebounce } from "./index";
 
 const useSearchSuggestions = (searchQuery, lat, lng) => {
   const [searchSuggestions, setSearchSuggestions] = useState([]);

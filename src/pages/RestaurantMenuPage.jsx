@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import useRestaurantMenu from "../hooks/useRestaurantMenu";
+import { useRestaurantMenu } from "../hooks";
 import {
   Breadcrumb,
   RestaurantDetails,

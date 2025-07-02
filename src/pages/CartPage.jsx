@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { toggleLogin } from "../redux/slices/toggleSlice";
 import toast from "react-hot-toast";
 import { IMAGE_URL } from "../utils/constants";
-import useCart from "../hooks/useCart";
+import { useCart } from "../hooks";
 import { calculateTotalPrice } from "../utils/helper";
 import { EmptyCart, CartItem } from "../components/index";
 import { clearCart, deleteItem } from "../redux/slices/cartSlice";

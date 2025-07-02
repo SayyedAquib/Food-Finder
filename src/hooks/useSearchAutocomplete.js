@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BASE_URL, CACHE } from "../utils/constants";
-import useDebounce from "./useDebounce";
+import { useDebounce } from "./index";
 
 const useSearchAutocomplete = (query) => {
   const [results, setResults] = useState([]);
