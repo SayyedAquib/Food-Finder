@@ -1,32 +1,24 @@
 import { useRef, useState, useEffect } from "react";
 import { RestaurantCard } from "../index";
-
-function throttle(fn, wait) {
-  let lastTime = 0;
-  return (...args) => {
-    const now = Date.now();
-    if (now - lastTime >= wait) {
-      lastTime = now;
-      fn(...args);
-    }
-  };
-}
+import { useThrottle } from "../../hooks";
 
 const TopRestaurant = ({ data = [], title }) => {
   const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [scrollState, setScrollState] = useState({
+    scrollLeft: 0,
+    scrollWidth: 0,
+    clientWidth: 0,
+  });
 
-  // Scroll amount in pixels (adjust as needed)
   const SCROLL_AMOUNT = 300;
 
-  const handleScroll = () => {
+  // ✅ Throttle scroll state
+  const throttledScrollState = useThrottle(scrollState, 100);
+
+  const updateScrollState = () => {
     if (!scrollRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    const left = scrollLeft > 0;
-    const right = scrollLeft + clientWidth < scrollWidth - 5;
-    setCanScrollLeft((prev) => (prev !== left ? left : prev));
-    setCanScrollRight((prev) => (prev !== right ? right : prev));
+    setScrollState({ scrollLeft, scrollWidth, clientWidth });
   };
 
   const handleNext = () => {
@@ -40,24 +32,21 @@ const TopRestaurant = ({ data = [], title }) => {
   };
 
   useEffect(() => {
-    handleScroll(); // Initialize scroll states
-    const el = scrollRef.current;
-    if (el) {
-      el.addEventListener("scroll", handleScroll);
-      return () => el.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
-
-  // Throttle the scroll handler to run at most every 100ms
-  useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const throttledScroll = throttle(handleScroll, 100);
-    el.addEventListener("scroll", throttledScroll);
-    // Call once to initialize
-    throttledScroll();
-    return () => el.removeEventListener("scroll", throttledScroll);
+
+    // Run initially
+    updateScrollState();
+
+    // Listen for scroll and update raw state
+    el.addEventListener("scroll", updateScrollState);
+    return () => el.removeEventListener("scroll", updateScrollState);
   }, []);
+
+  // ✅ Use throttled scroll state for controlling buttons
+  const { scrollLeft, scrollWidth, clientWidth } = throttledScrollState;
+  const canScrollLeft = scrollLeft > 0;
+  const canScrollRight = scrollLeft + clientWidth < scrollWidth - 5;
 
   return (
     <div className="mt-14 w-full">
@@ -102,7 +91,7 @@ const TopRestaurant = ({ data = [], title }) => {
           <div
             key={info.id}
             className="flex-shrink-0 hover:scale-95 duration-300 scroll-snap-start"
-            style={{ minWidth: "150px" }} // adjust based on your card size
+            style={{ minWidth: "150px" }}
           >
             <RestaurantCard {...info} link={link} />
           </div>
