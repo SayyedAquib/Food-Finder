@@ -12,7 +12,6 @@ const TopRestaurant = ({ data = [], title }) => {
 
   const SCROLL_AMOUNT = 300;
 
-  // ✅ Throttle scroll state
   const throttledScrollState = useThrottle(scrollState, 100);
 
   const updateScrollState = () => {
@@ -35,15 +34,12 @@ const TopRestaurant = ({ data = [], title }) => {
     const el = scrollRef.current;
     if (!el) return;
 
-    // Run initially
     updateScrollState();
 
-    // Listen for scroll and update raw state
     el.addEventListener("scroll", updateScrollState);
     return () => el.removeEventListener("scroll", updateScrollState);
   }, []);
 
-  // ✅ Use throttled scroll state for controlling buttons
   const { scrollLeft, scrollWidth, clientWidth } = throttledScrollState;
   const canScrollLeft = scrollLeft > 0;
   const canScrollRight = scrollLeft + clientWidth < scrollWidth - 5;
