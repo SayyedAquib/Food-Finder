@@ -24,6 +24,9 @@ const LoginOverlay = ({ visible, onClose }) => (
             className="w-24 sm:w-28"
             src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
             alt="LOGIN"
+            loading="lazy"
+            width={112}
+            height={112}
           />
         </div>
         <SigninBtn />

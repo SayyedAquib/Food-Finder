@@ -42,6 +42,9 @@ const DetailMenuCard = ({ info, resInfo }) => {
                 ? "Vegetarian"
                 : "Non-Vegetarian"
             }
+            width={20}
+            height={20}
+            loading="lazy"
           />
           <h2 className="font-bold text-lg">{name}</h2>
           <p className="font-bold text-lg">
@@ -72,8 +75,11 @@ const DetailMenuCard = ({ info, resInfo }) => {
         <div className="w-[40%] md:w-[20%] relative h-full">
           <img
             className="rounded -xl aspect-square"
-            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${imageId}`}
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_auto,h_auto,c_fit/${imageId}`}
             alt={name}
+            width={300}
+            height={300}
+            loading="lazy"
           />
           <AddToCartBtn
             info={info}

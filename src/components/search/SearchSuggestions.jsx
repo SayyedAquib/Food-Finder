@@ -28,6 +28,9 @@ const SearchSuggestions = ({
               src={`${IMAGE_URL}${suggestion.cloudinaryId}`}
               alt={suggestion.text}
               className="object-cover w-full h-full rounded"
+              width={64}
+              height={64}
+              loading="lazy"
             />
           </div>
 

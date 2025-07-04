@@ -9,6 +9,9 @@ const BodyShimmer = () => {
             className="w-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
             src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/icecream_wwomsa`}
             alt="Loading Icon"
+            width={40}
+            height={40}
+            loading="lazy"
           />
           <span className="loader "></span>
         </div>

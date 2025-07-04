@@ -23,6 +23,9 @@ const ImageCard = React.memo(
           className={`w-full h-full rounded-xl object-cover ${aspectRatio}`}
           src={imageSrc}
           alt={alt}
+          width={width}
+          height={height}
+          loading="lazy"
         />
         {overlayContent}
       </div>

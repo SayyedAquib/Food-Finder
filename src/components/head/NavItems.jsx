@@ -30,6 +30,9 @@ const NavItems = ({ onLoginClick }) => {
                 className="w-8 h-8 rounded-full"
                 src={userData.photo}
                 alt="User"
+                fetchPriority="high"
+                width={32}
+                height={32}
               />
             ) : (
               common

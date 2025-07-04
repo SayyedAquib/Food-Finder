@@ -17,6 +17,9 @@ const Carousel = ({ data }) => {
               src={`${IMAGE_URL}${imageId}`}
               alt={`carousel-item-${index}`}
               className="rounded-lg w-full object-cover"
+              width={100}
+              height={100}
+              loading="lazy"
             />
           </div>
         ))}

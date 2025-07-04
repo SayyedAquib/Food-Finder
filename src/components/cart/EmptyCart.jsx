@@ -7,6 +7,9 @@ const EmptyCart = () => (
       className="w-72"
       src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0`}
       alt="empty cart"
+      loading="lazy"
+      width={288}
+      height={288}
     />
     <h1 className="text-xl mt-4">Your cart is empty</h1>
     <p className="text-gray-500">Please add some items to your cart</p>

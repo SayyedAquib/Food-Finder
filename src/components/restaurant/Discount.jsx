@@ -7,8 +7,11 @@ const Discount = ({
 }) => (
   <div className="flex gap-2 min-w-[328px] border p-3 h-[76px] rounded-2xl">
     <img
-      src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_96,h_96/${offerLogo}`}
+      src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_auto,h_auto/${offerLogo}`}
       alt="offer logo"
+      width={96}
+      height={96}
+      loading="lazy"
     />
     <div>
       <h2 className="font-bold text-xl">{header}</h2>

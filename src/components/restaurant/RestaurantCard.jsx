@@ -10,16 +10,18 @@ const RestaurantCard = React.memo(
     avgRating,
     sla,
     locality,
-    aggregatedDiscountInfoV3,
+    aggregatedDiscountInfoV3: { header, subHeader } = {},
   }) => {
     const restaurantId = useMemo(() => link.split("/").at(-1), [link]);
 
     const discountText = useMemo(
       () =>
-        aggregatedDiscountInfoV3
-          ? `${aggregatedDiscountInfoV3.header} ${aggregatedDiscountInfoV3.subHeader}`
+        header
+          ? `${header} ${
+              subHeader && subHeader !== "null" ? `${subHeader}` : ""
+            }`
           : "",
-      [aggregatedDiscountInfoV3]
+      [header, subHeader]
     );
 
     const cuisinesText = useMemo(() => cuisines.join(", "), [cuisines]);
