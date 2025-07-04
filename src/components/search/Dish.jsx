@@ -108,6 +108,7 @@ const Dish = React.memo(
                   info={info}
                   resInfo={resInfo}
                   handleIsDiffRes={handleIsDiffRes}
+                  aria-label={`Add ${name} to cart`}
                 />
               </div>
             }

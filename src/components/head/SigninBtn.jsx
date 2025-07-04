@@ -40,7 +40,7 @@ const SigninBtn = () => {
       ) : (
         <button
           onClick={handleAuth}
-          className="my-5 w-full text-2xl p-5 bg-[#fc8019] text-white cursor-pointer"
+          className="my-5 w-full text-2xl p-5 bg-[#d85c00] text-white cursor-pointer"
         >
           Login with GOOGLE
         </button>

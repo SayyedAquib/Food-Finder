@@ -32,6 +32,7 @@ const OnlineFoodDelivery = ({ data, title }) => {
             isActive={activeBtn === filterName}
             onClick={handleFilterBtn}
             showCrossIcon={true}
+            aria-label={`Filter by ${filterName}`}
           />
         ))}
       </div>

@@ -50,7 +50,10 @@ const RestaurantCard = React.memo(
     );
 
     return (
-      <LinkWrapper to={`/restaurantMenu/${restaurantId}`}>
+      <LinkWrapper
+        to={`/restaurantMenu/${restaurantId}`}
+        aria-label={`View details for ${name}`}
+      >
         <div>
           <ImageCard
             imageId={cloudinaryImageId}

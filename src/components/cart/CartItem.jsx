@@ -48,6 +48,7 @@ const CartItem = ({ item, index, onRemove }) => {
         <button
           onClick={() => onRemove(index)}
           className="bg-white absolute bottom-[-20px] left-1/2 -translate-x-1/2 text-base text-red-500 font-bold rounded-xl border px-5 py-2 drop-shadow"
+          aria-label={`Remove ${name} from cart`}
         >
           Remove
         </button>

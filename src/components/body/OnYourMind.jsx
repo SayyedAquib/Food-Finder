@@ -81,6 +81,7 @@ const OnYourMind = ({ data = [] }) => {
           <button
             onClick={handlePrev}
             disabled={!canGoPrev}
+            aria-label="Scroll left"
             className={`cursor-pointer rounded-full w-8 h-8 md:w-9 md:h-9 flex justify-center items-center transition-colors ${
               !canGoPrev
                 ? "bg-gray-100 cursor-not-allowed"
@@ -96,6 +97,7 @@ const OnYourMind = ({ data = [] }) => {
           <button
             onClick={handleNext}
             disabled={!canGoNext}
+            aria-label="Scroll right"
             className={`cursor-pointer rounded-full w-8 h-8 md:w-9 md:h-9 flex justify-center items-center transition-colors ${
               !canGoNext
                 ? "bg-gray-100 cursor-not-allowed"

@@ -51,23 +51,23 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-2">Follow Us</h3>
           <div className="flex space-x-4 text-gray-400">
-            <a href="#">
+            <a href="#" aria-label="Facebook">
               <i className="fab fa-facebook-f hover:text-white"></i>
             </a>
-            <a href="#">
+            <a href="#" aria-label="Instagram">
               <i className="fab fa-instagram hover:text-white"></i>
             </a>
-            <a href="#">
+            <a href="#" aria-label="Twitter">
               <i className="fab fa-twitter hover:text-white"></i>
             </a>
-            <a href="#">
+            <a href="#" aria-label="LinkedIn">
               <i className="fab fa-linkedin-in hover:text-white"></i>
             </a>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-xs">
+      <div className="border-t border-gray-700 mt-8 pt-4 text-center text-gray-300 text-xs">
         © {new Date().getFullYear()} FoodFinder by Aquib Sayyed. All rights
         reserved.
       </div>

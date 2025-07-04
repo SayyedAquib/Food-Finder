@@ -17,7 +17,10 @@ const TopPickCard = React.memo(({ creativeId, defaultPrice, price }) => {
       <img className="w-full h-full" src={imageSrc} alt="Top Pick Item" />
       <div className="absolute bottom-4 text-white flex justify-between w-full px-5">
         <p>₹{displayPrice}</p>
-        <button className="px-10 py-2 font-bold text-green-400 bg-white rounded-xl">
+        <button
+          className="px-10 py-2 font-bold text-green-400 bg-white rounded-xl"
+          aria-label="Add top pick to cart"
+        >
           Add
         </button>
       </div>

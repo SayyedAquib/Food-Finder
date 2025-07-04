@@ -48,6 +48,7 @@ const AddToCartBtn = ({ info, resInfo, handleIsDiffRes }) => {
       onClick={handleAddToCart}
       className={`absolute bottom-[-20px] left-1/2 -translate-x-1/2 text-lg font-bold rounded-xl border px-10 py-2 drop-shadow transition-all duration-200 ${getButtonStyle()}`}
       disabled={itemExists}
+      aria-label={itemExists ? "Already added to cart" : "Add to cart"}
     >
       {itemExists ? "Added" : "Add"}
     </button>

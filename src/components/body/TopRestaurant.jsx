@@ -49,8 +49,10 @@ const TopRestaurant = ({ data = [], title }) => {
       <div className="flex justify-between items-center mt-5">
         <h1 className="font-bold text-2xl">{title}</h1>
         <div className="flex gap-3">
-          <div
+          <button
             onClick={handlePrev}
+            aria-label="Scroll left"
+            disabled={!canScrollLeft}
             className={`cursor-pointer rounded-full w-9 h-9 flex justify-center items-center ${
               canScrollLeft ? "bg-gray-200" : "bg-gray-100"
             }`}
@@ -60,9 +62,11 @@ const TopRestaurant = ({ data = [], title }) => {
                 canScrollLeft ? "text-gray-800" : "text-gray-300"
               }`}
             ></i>
-          </div>
-          <div
+          </button>
+          <button
             onClick={handleNext}
+            aria-label="Scroll right"
+            disabled={!canScrollRight}
             className={`cursor-pointer rounded-full w-9 h-9 flex justify-center items-center ${
               canScrollRight ? "bg-gray-200" : "bg-gray-100"
             }`}
@@ -72,7 +76,7 @@ const TopRestaurant = ({ data = [], title }) => {
                 canScrollRight ? "text-gray-800" : "text-gray-300"
               }`}
             ></i>
-          </div>
+          </button>
         </div>
       </div>
 
