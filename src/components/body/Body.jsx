@@ -6,8 +6,7 @@ import {
 } from "./index";
 import { BodyShimmer } from "../shimmer/index";
 import { useSelector } from "react-redux";
-import { useRestaurants, useOnlineStatus } from "../../hooks";
-import OfflinePage from "../../pages/OfflinePage";
+import { useRestaurants } from "../../hooks";
 
 const Body = () => {
   const [
@@ -19,7 +18,6 @@ const Body = () => {
     status,
   ] = useRestaurants();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);
-  const isOnline = useOnlineStatus();
 
   const filteredData = Array.isArray(topRestaurantData)
     ? topRestaurantData.filter((item) => {
@@ -49,10 +47,6 @@ const Body = () => {
 
   if (status === "loading") {
     return <BodyShimmer />;
-  }
-
-  if (!isOnline) { 
-    return <OfflinePage />;
   }
 
   return (
