@@ -5,7 +5,7 @@ const EmptyCart = () => (
   <div className="h-[80vh] flex flex-col items-center justify-center">
     <img
       className="w-72"
-      src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0`}
+      src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_288,h_288/2xempty_cart_yfxml0`}
       alt="empty cart"
       loading="lazy"
       width={288}

@@ -22,7 +22,7 @@ const LoginOverlay = ({ visible, onClose }) => (
           </h2>
           <img
             className="w-24 sm:w-28"
-            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/Image-login_btpq7r`}
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_112,h_112/Image-login_btpq7r`}
             alt="LOGIN"
             loading="lazy"
             width={112}

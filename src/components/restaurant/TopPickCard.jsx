@@ -3,7 +3,7 @@ import { IMAGE_URL } from "../../utils/constants";
 
 const TopPickCard = React.memo(({ creativeId, defaultPrice, price }) => {
   const imageSrc = useMemo(
-    () => `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_auto,h_auto/${creativeId}`,
+    () => `${IMAGE_URL}fl_lossy,f_auto,q_auto,w_400,h_400/${creativeId}`,
     [creativeId]
   );
 

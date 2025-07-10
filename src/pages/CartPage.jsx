@@ -57,7 +57,7 @@ const CartPage = () => {
           <div className="my-10 flex gap-5">
             <img
               className="rounded-xl w-40 aspect-square"
-              src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_auto,h_auto,c_fit/${resInfo.cloudinaryImageId}`}
+              src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${resInfo.cloudinaryImageId}`}
               alt={resInfo.name}
               width={300}
               height={300}

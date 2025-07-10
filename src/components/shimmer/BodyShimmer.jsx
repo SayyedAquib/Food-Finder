@@ -7,7 +7,7 @@ const BodyShimmer = () => {
         <div className="relative flex items-start">
           <img
             className="w-10 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto/icecream_wwomsa`}
+            src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_40,h_40/icecream_wwomsa`}
             alt="Loading Icon"
             width={40}
             height={40}

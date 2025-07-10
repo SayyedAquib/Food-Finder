@@ -16,18 +16,22 @@ const HomePage = Loadable(
   lazy(() => import("./pages/HomePage")),
   BodyShimmer
 );
+
 const Body = Loadable(
   lazy(() => import("./components/body/Body")),
   BodyShimmer
 );
+
 const SearchPage = Loadable(
   lazy(() => import("./pages/SearchPage")),
   SearchShimmer
 );
+
 const CartPage = Loadable(
   lazy(() => import("./pages/CartPage")),
   CartShimmer
 );
+
 const RestaurantMenuPage = Loadable(
   lazy(() => import("./pages/RestaurantMenuPage")),
   MenuShimmer

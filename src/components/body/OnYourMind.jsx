@@ -129,7 +129,7 @@ const OnYourMind = ({ data = [] }) => {
               <div className="cursor-pointer group">
                 <img
                   className="w-full max-w-32 sm:max-w-36 md:max-w-40 mx-auto group-hover:scale-105 transition-transform duration-200"
-                  src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_auto,h_auto/${item.imageId}`}
+                  src={`${IMAGE_URL}fl_lossy,f_auto,q_auto,w_200,h_200/${item.imageId}`}
                   alt={item?.action?.text || "Food category"}
                   fetchpriority="high"
                   width={200}
