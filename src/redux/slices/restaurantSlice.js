@@ -19,12 +19,19 @@ const restaurantSlice = createSlice({
       state.error = null;
     },
     fetchSuccess: (state, action) => {
+      const {
+        topRestaurantData,
+        topResTitle,
+        onlineTitle,
+        onYourMindData,
+        data,
+      } = action.payload;
       state.status = "succeeded";
-      state.topRestaurantData = action.payload.topRestaurantData;
-      state.topResTitle = action.payload.topResTitle;
-      state.onlineTitle = action.payload.onlineTitle;
-      state.onYourMindData = action.payload.onYourMindData;
-      state.data = action.payload.data;
+      state.topRestaurantData = topRestaurantData;
+      state.topResTitle = topResTitle;
+      state.onlineTitle = onlineTitle;
+      state.onYourMindData = onYourMindData;
+      state.data = data;
     },
     fetchFailure: (state, action) => {
       state.status = "failed";

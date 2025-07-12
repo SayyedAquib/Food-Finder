@@ -9,14 +9,14 @@ import { useSelector } from "react-redux";
 import { useRestaurants } from "../../hooks";
 
 const Body = () => {
-  const [
+  const {
     topRestaurantData,
     topResTitle,
     onlineTitle,
     onYourMindData,
     data,
     status,
-  ] = useRestaurants();
+ } = useRestaurants();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);
 
   const filteredData = Array.isArray(topRestaurantData)

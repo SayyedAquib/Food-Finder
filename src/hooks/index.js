@@ -3,7 +3,7 @@ export { default as useDebounce } from "./useDebounce";
 export { default as useOnlineStatus } from "./useOnlineStatus";
 export { default as usePlaceDetails } from "./usePlaceDetails";
 export { default as usePopularCuisines } from "./usePopularCuisines";
-export { default as useRestaurantMenu } from "./useRestaurantMenu";
+export { default as useMenu } from "./useMenu";
 export { default as useRestaurants } from "./useRestaurants";
 export { default as useSearchAutocomplete } from "./useSearchAutocomplete";
 export { default as useSearchData } from "./useSearchData";

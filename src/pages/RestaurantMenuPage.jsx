@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useRestaurantMenu } from "../hooks";
+import { useMenu } from "../hooks";
 import {
   Breadcrumb,
   RestaurantDetails,
@@ -19,15 +19,19 @@ const RestaurantMenuPage = () => {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
-  useRestaurantMenu(lat, lng, mainId);
+  useMenu(lat, lng, mainId);
 
-  const { resInfo, menuData, discountData, topPicksData } = useSelector(
-    (state) => state.restaurantMenuSlice
+  const { status, resInfo, menuData, discountData, topPicksData } = useSelector(
+    (state) => state.menuSlice
   );
+
+  if (status === "loading") {
+    return <MenuShimmer />;
+  }
 
   return (
     <div className="w-full">
-      {menuData.length ? (
+      {menuData.length > 0 && (
         <div className="w-[95%] md:w-[800px] mx-auto pt-8">
           <Breadcrumb resInfo={resInfo} />
           <RestaurantDetails resInfo={resInfo} />
@@ -38,8 +42,6 @@ const RestaurantMenuPage = () => {
             resInfo={resInfo}
           />
         </div>
-      ) : (
-        <MenuShimmer />
       )}
     </div>
   );

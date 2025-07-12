@@ -80,7 +80,7 @@ const useRestaurants = () => {
     if (lat && lng) fetchRestaurantData();
   }, [lat, lng]);
 
-  return [
+  return {
     topRestaurantData,
     topResTitle,
     onlineTitle,
@@ -88,7 +88,7 @@ const useRestaurants = () => {
     data,
     status,
     error,
-  ];
+  };
 };
 
 export default useRestaurants;
