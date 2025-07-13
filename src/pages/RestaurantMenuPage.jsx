@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Coordinates } from "../context/contextApi";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useMenu } from "../hooks";
 import {
   Breadcrumb,
@@ -19,10 +18,10 @@ const RestaurantMenuPage = () => {
     coord: { lat, lng },
   } = useContext(Coordinates);
 
-  useMenu(lat, lng, mainId);
-
-  const { status, resInfo, menuData, discountData, topPicksData } = useSelector(
-    (state) => state.menuSlice
+  const { resInfo, menuData, discountData, topPicksData, status } = useMenu(
+    lat,
+    lng,
+    mainId
   );
 
   if (status === "loading") {

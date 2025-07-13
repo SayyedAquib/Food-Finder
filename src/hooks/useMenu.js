@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchStart,
   fetchSuccess,
@@ -14,6 +14,8 @@ import {
 
 const useMenu = (lat, lng, mainId) => {
   const dispatch = useDispatch();
+  const { resInfo, menuData, discountData, topPicksData, error, status } =
+    useSelector((state) => state.menuSlice);
 
   const fetchRestaurantMenu = async () => {
     if (!lat || !lng || !mainId) {
@@ -72,7 +74,7 @@ const useMenu = (lat, lng, mainId) => {
     fetchRestaurantMenu();
   }, [lat, lng, mainId, dispatch]);
 
-  return []
+  return { resInfo, menuData, discountData, topPicksData, error, status };
 };
 
 export default useMenu;
