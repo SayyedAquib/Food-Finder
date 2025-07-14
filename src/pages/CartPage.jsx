@@ -1,52 +1,17 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { toggleLogin } from "../redux/slices/toggleSlice";
-import toast from "react-hot-toast";
 import { IMAGE_URL } from "../utils/constants";
 import { useCart } from "../hooks";
-import { calculateTotalPrice } from "../utils/helper";
 import { EmptyCart, CartItem } from "../components/index";
-import { clearCart, deleteItem } from "../redux/slices/cartSlice";
 
 const CartPage = () => {
-  const dispatch = useDispatch();
-  const { cartItems, resInfo, user } = useCart();
-
-  const totalPrice = calculateTotalPrice(cartItems);
-
-  const removeItemHandler = (index) => {
-    if (cartItems.length > 1) {
-      const newItems = [...cartItems];
-      newItems.splice(index, 1);
-      dispatch(deleteItem(newItems));
-      toast.success("Food removed", {
-        duration: 2000,
-      });
-    } else {
-      clearCartHandler();
-      toast.success("Cart is cleared", {
-        duration: 2000,
-      });
-    }
-  };
-
-  const clearCartHandler = () => {
-    dispatch(clearCart());
-  };
-
-  const placeOrderHandler = () => {
-    if (!user) {
-      toast.error("Login required to place order", {
-        duration: 2000,
-      });
-      dispatch(toggleLogin());
-      return;
-    }
-    toast.success("Order placed successfully", {
-      duration: 2000,
-    });
-    clearCartHandler();
-  };
+  const {
+    cartItems,
+    resInfo,
+    totalPrice,
+    removeItemHandler,
+    clearCartHandler,
+    placeOrderHandler,
+  } = useCart();
 
   if (!cartItems.length) return <EmptyCart />;
 
@@ -86,7 +51,7 @@ const CartPage = () => {
         </div>
 
         <h1 className="text-2xl">
-          Total - <span className="font-bold">₹{totalPrice}</span>
+          Total - <span className="font-bold">₹{Math.round(totalPrice)}</span>
         </h1>
 
         <div className="flex justify-between">
