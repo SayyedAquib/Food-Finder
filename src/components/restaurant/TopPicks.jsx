@@ -1,10 +1,12 @@
-import { TopPickCard } from "../index";
+import { TopPickCard, HorizontalScroller } from "../index";
 
-const TopPicks = ({ topPicksData }) => (
-  <div className="w-full overflow-hidden">
-    <h1 className="font-bold text-xl">{topPicksData?.card?.card?.title}</h1>
-    <div className="flex gap-4 mt-5">
-      {topPicksData?.card?.card?.carousel?.map(
+const TopPicks = ({ topPicksData }) => {
+  const title = topPicksData?.card?.card?.title;
+  const items = topPicksData?.card?.card?.carousel || [];
+
+  return (
+    <HorizontalScroller title={title}>
+      {items.map(
         ({
           creativeId,
           dish: {
@@ -19,8 +21,8 @@ const TopPicks = ({ topPicksData }) => (
           />
         )
       )}
-    </div>
-  </div>
-);
+    </HorizontalScroller>
+  );
+};
 
 export default TopPicks;
