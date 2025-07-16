@@ -3,7 +3,7 @@ import { AddToCartBtn, CartConflictModal } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSimilarResDish,
-  toggleDiffRes,
+  toggleIsDifferentRestaurant,
 } from "../../redux/slices/toggleSlice";
 import { clearCart } from "../../redux/slices/cartSlice";
 import {
@@ -43,14 +43,13 @@ const Dish = React.memo(
       [resLocation, id]
     );
 
-    const handleIsDiffRes = useCallback(
-      () => dispatch(toggleDiffRes()),
-      [dispatch]
-    );
+    const handleIsDiffRes = useCallback(() => {
+      dispatch(toggleIsDifferentRestaurant());
+    }, [dispatch]);
 
     const handleClearCart = useCallback(() => {
       dispatch(clearCart());
-      dispatch(toggleDiffRes());
+      dispatch(toggleIsDifferentRestaurant());
     }, [dispatch]);
 
     const handleSameRes = useCallback(() => {

@@ -1,27 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  searchBarToggle: false,
+  loginToggle: false,
+  isDiffRes: false,
+  similarResDish: {
+    isSimilarResDishes: false,
+    city: "",
+    resLocation: "",
+    resId: "",
+    itemId: "",
+  },
+};
+
 const toggleSlice = createSlice({
   name: "toggleSlice",
-  initialState: {
-    searchBarToggle: false,
-    loginToggle: false,
-    isDiffRes: false,
-    similarResDish: {
-      isSimilarResDishes: false,
-      city: "",
-      resLocation: "",
-      resId: "",
-      itemId: "",
-    },
-  },
+  initialState,
   reducers: {
-    toggleSearchBar: (state, action) => {
+    toggleSearchBar: (state) => {
       state.searchBarToggle = !state.searchBarToggle;
     },
     toggleLogin: (state) => {
       state.loginToggle = !state.loginToggle;
     },
-    toggleDiffRes: (state) => {
+    toggleIsDifferrentRes: (state) => {
       state.isDiffRes = !state.isDiffRes;
     },
     setSimilarResDish: (state, action) => {
@@ -42,7 +44,7 @@ const toggleSlice = createSlice({
 export const {
   toggleSearchBar,
   toggleLogin,
-  toggleDiffRes,
+  toggleIsDifferentRestaurant,
   setSimilarResDish,
   resetSimilarResDish,
 } = toggleSlice.actions;
