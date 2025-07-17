@@ -3,47 +3,55 @@ import { Coordinates } from "../../context/contextApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLogin, toggleSearchBar } from "../../redux/slices/toggleSlice";
 import { LoginOverlay, Navbar, SearchOverlay } from "../index";
-import {
-  usePlaceDetails,
-  useSearchAutocomplete,
-} from "../../hooks";
+import { usePlaceDetails, useSearchAutocomplete } from "../../hooks";
 
 const Head = () => {
   const dispatch = useDispatch();
+
   const [query, setQuery] = useState("");
   const [address, setAddress] = useState("Pune, Maharashtra, India");
 
-  const visible = useSelector((state) => state.toggleSlice.searchBarToggle);
-  const loginVisible = useSelector((state) => state.toggleSlice.loginToggle);
   const { setCoord } = useContext(Coordinates);
 
-  const handleVisibility = () => dispatch(toggleSearchBar());
-  const handleLogin = () => dispatch(toggleLogin());
+  const isSearchOpen = useSelector(
+    (state) => state.toggleSlice.searchBarToggle
+  );
+  const isLoginOpen = useSelector((state) => state.toggleSlice.loginToggle);
 
-  const searchResult = useSearchAutocomplete(query);
+  const toggleSearch = () => dispatch(toggleSearchBar());
+  const toggleLogin = () => dispatch(toggleLogin());
+
+  const { results, setResults } = useSearchAutocomplete(query);
+
+  const handlePlaceSelect = async (placeId) => {
+    await fetchCoordinates(placeId);
+    setQuery("");
+    setResults([]);
+  };
 
   const { fetchCoordinates } = usePlaceDetails({
     setCoord,
     setAddress,
-    handleClose: handleVisibility,
+    handleClose: toggleSearch,
   });
 
   return (
     <>
       <SearchOverlay
-        visible={visible}
-        onClose={handleVisibility}
-        searchResult={searchResult}
-        onSearch={(val) => setQuery(val)}
-        onPlaceSelect={fetchCoordinates}
+        visible={isSearchOpen}
+        onClose={toggleSearch}
+        searchResult={results}
+        onSearch={setQuery}
+        onPlaceSelect={handlePlaceSelect}
+        query={query}
       />
 
-      <LoginOverlay visible={loginVisible} onClose={handleLogin} />
+      <LoginOverlay visible={isLoginOpen} onClose={toggleLogin} />
 
       <Navbar
         address={address}
-        onAddressClick={handleVisibility}
-        onLoginClick={handleLogin}
+        onAddressClick={toggleSearch}
+        onLoginClick={toggleLogin}
       />
     </>
   );

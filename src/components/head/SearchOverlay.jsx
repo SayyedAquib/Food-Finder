@@ -4,6 +4,7 @@ const SearchOverlay = ({
   onSearch,
   searchResult,
   onPlaceSelect,
+  query,
 }) => (
   <div className="w-full">
     <div
@@ -22,6 +23,7 @@ const SearchOverlay = ({
         <input
           type="text"
           className="border p-4 w-full rounded-md focus:outline-none focus:shadow-lg"
+          value={query}
           onChange={(e) => onSearch(e.target.value)}
           placeholder="Search for area, street name..."
         />

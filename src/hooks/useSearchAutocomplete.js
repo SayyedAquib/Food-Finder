@@ -34,7 +34,7 @@ const useSearchAutocomplete = (query) => {
 
   useDebounce(fetchSuggestions, [query]);
 
-  return results;
+  return { results, setResults };
 };
 
 export default useSearchAutocomplete;
