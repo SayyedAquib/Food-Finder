@@ -19,7 +19,7 @@ const Head = () => {
   const isLoginOpen = useSelector((state) => state.toggleSlice.loginToggle);
 
   const toggleSearch = () => dispatch(toggleSearchBar());
-  const toggleLogin = () => dispatch(toggleLogin());
+  const handleLogin = () => dispatch(toggleLogin());
 
   const { results, setResults } = useSearchAutocomplete(query);
 
@@ -46,12 +46,12 @@ const Head = () => {
         query={query}
       />
 
-      <LoginOverlay visible={isLoginOpen} onClose={toggleLogin} />
+      <LoginOverlay visible={isLoginOpen} onClose={handleLogin} />
 
       <Navbar
         address={address}
         onAddressClick={toggleSearch}
-        onLoginClick={toggleLogin}
+        onLoginClick={handleLogin}
       />
     </>
   );
