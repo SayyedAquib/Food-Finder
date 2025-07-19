@@ -12,7 +12,7 @@ const useRestaurants = () => {
   const dispatch = useDispatch();
   const {
     topRestaurantData,
-    topResTitle,
+    topRestaurantTitle,
     onlineTitle,
     onYourMindData,
     data,
@@ -62,7 +62,7 @@ const useRestaurants = () => {
 
       const payload = {
         topRestaurantData: topBrands || restaurantGrid || [],
-        topResTitle: cards[1]?.card?.card?.header?.title || "",
+        topRestaurantTitle: cards[1]?.card?.card?.header?.title || "",
         onlineTitle: cards[2]?.card?.card?.title || "",
         onYourMindData: whatsOnMind || [],
         data: result.data,
@@ -82,7 +82,7 @@ const useRestaurants = () => {
 
   return {
     topRestaurantData,
-    topResTitle,
+    topRestaurantTitle,
     onlineTitle,
     onYourMindData,
     data,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
-import { resetSimilarResDish } from "../redux/slices/toggleSlice";
+import { resetSimilarRestaurantDish } from "../redux/slices/toggleSlice";
 import {
   extractSelectedRestaurantDish,
   extractSimilarRestaurantDishes,
@@ -19,7 +19,7 @@ const useSimilarDishes = (
   itemId
 ) => {
   const [selectedResDish, setSelectedResDish] = useState(null);
-  const [similarResDishes, setSimilarResDishes] = useState([]);
+  const [similarResDishes, setSimilarRestaurantDishes] = useState([]);
   const dispatch = useDispatch();
 
   const fetchSimilarRestaurantDishes = async () => {
@@ -86,13 +86,13 @@ const useSimilarDishes = (
       setSelectedResDish(selectedDish);
 
       const similarDishes = extractSimilarRestaurantDishes(cards);
-      setSimilarResDishes(similarDishes);
+      setSimilarRestaurantDishes(similarDishes);
 
-      dispatch(resetSimilarResDish());
+      dispatch(resetSimilarRestaurantDish());
     } catch (error) {
       console.error("Error fetching similar restaurant dishes:", error);
       setSelectedResDish(null);
-      setSimilarResDishes([]);
+      setSimilarRestaurantDishes([]);
     }
   };
 

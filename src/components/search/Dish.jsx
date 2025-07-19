@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { AddToCartBtn, CartConflictModal } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setSimilarResDish,
+  setSimilarRestaurantDish,
   toggleIsDifferentRestaurant,
 } from "../../redux/slices/toggleSlice";
 import { clearCart } from "../../redux/slices/cartSlice";
@@ -55,7 +55,7 @@ const Dish = React.memo(
     const handleSameRes = useCallback(() => {
       if (cartResId == id || !cartResId) {
         dispatch(
-          setSimilarResDish({
+          setSimilarRestaurantDish({
             isSimilarResDishes: true,
             city,
             resLocation,

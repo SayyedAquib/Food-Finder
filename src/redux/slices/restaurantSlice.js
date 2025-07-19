@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   topRestaurantData: [],
-  topResTitle: "",
+  topRestaurantTitle: "",
   onlineTitle: "",
   onYourMindData: [],
   data: {},
@@ -21,14 +21,14 @@ const restaurantSlice = createSlice({
     fetchSuccess: (state, action) => {
       const {
         topRestaurantData,
-        topResTitle,
+        topRestaurantTitle,
         onlineTitle,
         onYourMindData,
         data,
       } = action.payload;
       state.status = "succeeded";
       state.topRestaurantData = topRestaurantData;
-      state.topResTitle = topResTitle;
+      state.topRestaurantTitle = topRestaurantTitle;
       state.onlineTitle = onlineTitle;
       state.onYourMindData = onYourMindData;
       state.data = data;

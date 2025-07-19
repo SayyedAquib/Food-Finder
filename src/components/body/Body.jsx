@@ -11,12 +11,12 @@ import { useRestaurants } from "../../hooks";
 const Body = () => {
   const {
     topRestaurantData,
-    topResTitle,
+    topRestaurantTitle,
     onlineTitle,
     onYourMindData,
     data,
     status,
- } = useRestaurants();
+  } = useRestaurants();
   const filterVal = useSelector((state) => state?.filterSlice?.filterVal);
 
   const filteredData = Array.isArray(topRestaurantData)
@@ -55,7 +55,7 @@ const Body = () => {
         {onYourMindData.length && <OnYourMind data={onYourMindData} />}
 
         {topRestaurantData?.length && (
-          <TopRestaurant data={topRestaurantData} title={topResTitle} />
+          <TopRestaurant data={topRestaurantData} title={topRestaurantTitle} />
         )}
 
         <OnlineFoodDelivery
